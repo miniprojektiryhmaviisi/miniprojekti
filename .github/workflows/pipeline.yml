@@ -1,0 +1,29 @@
+name: Pipeline
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4.1.1
+    - name: Set up Python
+      uses: actions/setup-python@v4.7.1
+      with:
+        python-version: 3.10
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install --user pipx
+        python3 -m pipx ensurepath
+        pipx install poetry
+        poetry install
+    - name: Analysing the code with pylint
+      run: |
+        poetry run pylint src
+    - name: Running unit tests
+      run: |
+        poetry run pytest src
+    - name: Running robot tests
+      run: |
+        poetry run robot src/tests

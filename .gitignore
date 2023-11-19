@@ -7,3 +7,4 @@ htmlcov
 /log.html
 /report.html
 /output.xml
+*.swp

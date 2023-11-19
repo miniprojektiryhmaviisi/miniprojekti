@@ -1,7 +1,6 @@
-from src import dummy
+import dummy
 
-# pylint: disable=invalid-name
-class dummy_library:
+class DummyLibrary:
     def __init__(self):
         self._dummy = dummy.Calculator()
 

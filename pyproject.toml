@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "miniprojekti"
+version = "0.1.0"
+description = ""
+authors = ["Ville Salmela <villesalmela@users.noreply.github.com>", "Antti Hyytiäinen <hyytant@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[tool.poetry.group.dev.dependencies]
+robot = "^20071211"
+pytest = "^7.4.3"
+coverage = "^7.3.2"
+pylint = "^3.0.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

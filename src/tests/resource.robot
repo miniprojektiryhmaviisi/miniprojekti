@@ -1,2 +1,2 @@
 *** Settings *** 
-Library  ../DummyLibrary.py
+Library  ../dummy_library.py

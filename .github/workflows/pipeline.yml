@@ -26,4 +26,4 @@ jobs:
         poetry run pytest src
     - name: Running robot tests
       run: |
-        poetry run robot src/tests
+        poetry run python3 -m robot src/tests

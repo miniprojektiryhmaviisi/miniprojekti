@@ -20,7 +20,7 @@ jobs:
         poetry install
     - name: Analysing the code with pylint
       run: |
-        # poetry run pylint src
+        poetry run pylint src
     - name: Running unit tests
       run: |
         poetry run pytest src

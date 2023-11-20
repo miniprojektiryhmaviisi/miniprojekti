@@ -14,6 +14,22 @@ class References:
     def welcome(self):
         print("Welcome to MyReferences!")
         sleep(1)
+        print("Type in 0 or 1: ")
+        sleep(1)
+        print("0 for Add a reference")
+        sleep(1)
+        print("1 for View my references")
+        sleep(1)
+        command = input("What do you want to do? ")
+        if command == "0":
+            self.add()
+        if command == "1":
+            print("Not finished, directing you back to the start")
+            sleep(2)
+            self.welcome()
+    
+    def add(self):
+        sleep(1)
         while True:
             reftype = input(
                 "Is your source a book or an internet article? Type in book or article: ")

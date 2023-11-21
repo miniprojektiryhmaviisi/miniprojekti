@@ -1,18 +1,17 @@
 from time import sleep
-from entities.book import Book
 # ainostaan book toimii. haluammeko kodakoodata bookform-metodin niin kuin on tehty alhaalla,
 # eli mitkä fieldit on pakollisia jne (vai halutaanko me hakea tämä tieto jostain tiedostosta esim mitkä fieldit
 # paikollisia dokumenttilähteille, mitkä kirjoille).
 
 
 class References:
-    def __init__(self,io):
-        self.book = Book()
+    def __init__(self,io,service):
         self.io=io
-        self.welcome(io)
+        self.service=service
+        self.welcome(io,service)
 
 
-    def welcome(self,io):
+    def welcome(self,io,service):
         io.write("Welcome to MyReferences!")
         sleep(1)
         io.write("Type in 0 or 1: ")
@@ -23,22 +22,22 @@ class References:
         sleep(1)
         command = io.read("What do you want to do? ")
         if command == "0":
-            self.add(io)
+            self.add(io,service)
         if command == "1":
             print("Not finished, directing you back to the start")
             sleep(2)
-            self.welcome(io)
+            self.welcome(io,service)
 
-    def add(self,io):
+    def add(self,io,service):
         sleep(1)
         while True:
             reftype = io.read(
                 "Is your source a book or an internet article? Type in book or article: ")
             if reftype.lower() == "book":
-                self.bookform()
+                self.bookform(service)
                 break
             elif reftype.lower() == "article":
-                self.articleform()
+                self.articleform(service)
                 break
 
     def ask_for_input(self, prompt, optional=False, input_type=str):
@@ -56,27 +55,27 @@ class References:
 
 # jos on optional ja pitäis olla int nii antaa mennä läpi vaikka ei pitäis.
 
-    def bookform(self):
-        self.book.title = self.ask_for_input(
+    def bookform(self,service):
+        book_title = self.ask_for_input(
             "What is the title of your book? ")
-        self.book.author = self.ask_for_multiple_inputs(
+        book_author = self.ask_for_multiple_inputs(
             "Who is the author/editor of your book? ")
-        self.book.publisher = self.ask_for_input(
+        book_publisher = self.ask_for_input(
             "What is the publisher of your book? ")
-        self.book.year = self.ask_for_input(
+        book_year = self.ask_for_input(
             "What is the publication year of your book? ", input_type=int)
-        self.book.volume = self.ask_for_input(
+        book_volume = self.ask_for_input(
             "Optional: What is the volume of your book? ", optional=True, input_type=int)
-        self.book.number = self.ask_for_input(
+        book_number = self.ask_for_input(
             "Optional: What is the book number of your source? ", optional=True, input_type=int)
-        self.book.pages = self.ask_for_input(
+        book_pages = self.ask_for_input(
             "Optional: What are the pages of your book? ", optional=True)
-        self.book.month = self.ask_for_input(
+        book_month = self.ask_for_input(
             "Optional: What is the month your book was published in? ", optional=True, input_type=int)
-        self.book.note = self.ask_for_input(
+        book_note = self.ask_for_input(
             "Optional: Any notes? ", optional=True)
-        self.print_book()
-
+        book=service.config_reference(book_title,book_author,book_publisher,book_year,book_volume,book_number,book_pages, book_month,book_note)
+        print(str(service.return_book()))
     def ask_for_multiple_inputs(self, prompt):
         authors = []
         first_author = self.ask_for_input(prompt)
@@ -89,6 +88,3 @@ class References:
             else:
                 break
         return authors
-
-    def print_book(self):
-        print(str(self.book))

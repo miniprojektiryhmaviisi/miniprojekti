@@ -1,6 +1,6 @@
 class ConsoleIO:
     def write(self, message):
-        print(value)
+        print(message)
+    def read(self, message):
+        return input(message)
 
-    def read(self, question):
-        return input(question)

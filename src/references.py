@@ -1,37 +1,38 @@
 from time import sleep
 from book import Book
-
 # ainostaan book toimii. haluammeko kodakoodata bookform-metodin niin kuin on tehty alhaalla,
 # eli mitkä fieldit on pakollisia jne (vai halutaanko me hakea tämä tieto jostain tiedostosta esim mitkä fieldit
 # paikollisia dokumenttilähteille, mitkä kirjoille).
 
 
 class References:
-    def __init__(self):
+    def __init__(self,io):
         self.book = Book()
-        self.welcome()
+        self.io=io
+        self.welcome(io)
 
-    def welcome(self):
-        print("Welcome to MyReferences!")
+
+    def welcome(self,io):
+        io.write("Welcome to MyReferences!")
         sleep(1)
-        print("Type in 0 or 1: ")
+        io.write("Type in 0 or 1: ")
         sleep(1)
-        print("0 for Add a reference")
+        io.write("0 for Add a reference")
         sleep(1)
-        print("1 for View my references")
+        io.write("1 for View my references")
         sleep(1)
-        command = input("What do you want to do? ")
+        command = io.read("What do you want to do? ")
         if command == "0":
-            self.add()
+            self.add(io)
         if command == "1":
             print("Not finished, directing you back to the start")
             sleep(2)
-            self.welcome()
-    
-    def add(self):
+            self.welcome(io)
+
+    def add(self,io):
         sleep(1)
         while True:
-            reftype = input(
+            reftype = io.read(
                 "Is your source a book or an internet article? Type in book or article: ")
             if reftype.lower() == "book":
                 self.bookform()

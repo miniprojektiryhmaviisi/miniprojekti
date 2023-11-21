@@ -25,20 +25,27 @@ class References:
             self.add(io,service)
         if command == "1":
             print("Not finished, directing you back to the start")
+        else: 
+            print("Invalid input. Please enter '0' or '1'.")
             sleep(2)
             self.welcome(io,service)
 
-    def add(self,io,service):
+    def add(self, io, service):
         sleep(1)
         while True:
             reftype = io.read(
                 "Is your source a book or an internet article? Type in book or article: ")
             if reftype.lower() == "book":
                 self.bookform(service)
-                break
+                #break
             elif reftype.lower() == "article":
                 self.articleform(service)
-                break
+                #break
+            else:
+                print("Invalid input. Please enter 'book' or 'article'.")
+
+    def articleform(service):
+        print("to be done")
 
     def ask_for_input(self, prompt, optional=False, input_type=str):
         while True:
@@ -47,13 +54,13 @@ class References:
                 try:
                     return input_type(user_input)
                 except ValueError:
-                    print(f"Please enter a valid {input_type.__name__}.")
+                    print(f"Please enter a valid integer.")
             elif not user_input and not optional:
                 print(f"Field cannot be empty. Please provide a valid input.")
             elif optional:
                 return user_input
 
-# jos on optional ja pitäis olla int nii antaa mennä läpi vaikka ei pitäis.
+# jos on optional ja int niin antaa mennä läpi vaikka ei olisi int.
 
     def bookform(self,service):
         book_title = self.ask_for_input(

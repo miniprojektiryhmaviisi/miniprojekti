@@ -10,6 +10,5 @@ def init():
     refe_services = Services(book_repo)
     final_reference = (console_io, refe_services)
 
-
 if __name__ == "__main__":
     init()

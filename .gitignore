@@ -8,3 +8,5 @@ htmlcov
 /report.html
 /output.xml
 *.swp
+coverage.xml
+.DS_Store

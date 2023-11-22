@@ -26,7 +26,13 @@ jobs:
         poetry run pylint src
     - name: Running unit tests
       run: |
-        poetry run pytest src
+        poetry run pytest --cov=src --cov-branch --cov-report=xml
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        fail_ci_if_error: true
+        files: src/coverage.xml
+        verbose: true
     - name: Running robot tests
       run: |
         poetry run robot src/tests

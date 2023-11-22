@@ -1,4 +1,6 @@
 # OHTU miniproject
+[![Pipeline](https://github.com/miniprojektiryhmaviisi/miniprojekti/actions/workflows/pipeline.yml/badge.svg)](https://github.com/miniprojektiryhmaviisi/miniprojekti/actions/workflows/pipeline.yml)
+[![codecov](https://codecov.io/gh/miniprojektiryhmaviisi/miniprojekti/graph/badge.svg?token=I1MPE3DZNF)](https://codecov.io/gh/miniprojektiryhmaviisi/miniprojekti)
 
 ## Product backlog
 - [Product backlog](https://docs.google.com/spreadsheets/d/1JvMNbB3Pf6gLMOIwofjEcqaUdB0R7BNAem1QfK49YM4/edit#gid=0)

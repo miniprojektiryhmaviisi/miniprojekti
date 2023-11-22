@@ -12,4 +12,4 @@ class Services:
         self.book_repo.add_month(month)
         self.book_repo.add_note(note)
     def return_book(self):
-        return f"{self.book_repo.title} {self.book_repo.author} {self.book_repo.publisher} {self.book_repo.year} {self.book_repo.volume} {self.book_repo.number} {self.book_repo.pages} {self.book_repo.month} {self.book_repo.note}"
+        return f"{self.book_repo.title}, {self.book_repo.author}, {self.book_repo.publisher}, {self.book_repo.year}, {self.book_repo.volume}, {self.book_repo.number}, {self.book_repo.pages}, {self.book_repo.month}, {self.book_repo.note}"

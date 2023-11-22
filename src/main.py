@@ -9,11 +9,6 @@ def init():
     book_repo = Book()
     refe_services = Services(book_repo)
     final_reference = References(console_io, refe_services)
-    console_io = ConsoleIO()
-    book_repo = Book()
-    refe_services = Services(book_repo)
-    final_reference = References(console_io, refe_services)
-
 
 if __name__ == "__main__":
     init()

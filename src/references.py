@@ -1,10 +1,8 @@
 from time import sleep
-import sys
 # ainostaan book toimii. haluammeko kodakoodata bookform-metodin niin kuin on tehty alhaalla,
 # eli mitkä fieldit on pakollisia jne
 # (vai halutaanko me hakea tämä tieto jostain tiedostosta esim mitkä fieldit
 # paikollisia dokumenttilähteille, mitkä kirjoille).
-
 
 class References:
     def __init__(self, io, service):
@@ -26,15 +24,15 @@ class References:
             self.add(io, service)
             self.welcome(io, service)
         elif command == "1":
-            print("Not finished, directing you back to the start")
+            io.write("Not finished, directing you back to the start")
             sleep(2)
             self.welcome(io, service)
         elif command == "2":
-            print("Exiting...")
+            io.write("Exiting...")
             sleep(1)
-            sys.exit()
-        if command != 2 and command != 0 and command != 3:
-            print("Invalid input. Please enter '0', '1' or '2'.")
+            return
+        else:
+            io.write("Invalid input. Please enter '0', '1' or '2'.")
             sleep(2)
             self.welcome(io, service)
 
@@ -50,7 +48,7 @@ class References:
                 self.articleform(service)
                 break
             else:
-                print("Invalid input. Please enter 'book' or 'article'.")
+                io.write("Invalid input. Please enter 'book' or 'article'.")
 
     def articleform(self, service):
         print("Not finished, directing you back to the start")
@@ -58,14 +56,14 @@ class References:
 
     def ask_for_input(self, prompt, optional=False, input_type=str):
         while True:
-            user_input = input(prompt)
+            user_input = self.io.read(prompt)
             if not user_input and not optional:
-                print("Field cannot be empty. Please provide a valid input.")
+                self.io.write("Field cannot be empty. Please provide a valid input.")
             elif user_input and input_type:
                 try:
                     return input_type(user_input)
                 except ValueError:
-                    print(f"Please enter a valid interger.")
+                    self.io.write(f"Please enter a valid interger.")
             else:
                 return user_input
 
@@ -74,7 +72,6 @@ class References:
             "What is the title of your book? ")
         book_author = self.ask_for_multiple_inputs(
             "Who is the author/editor of your book? ")
-        book_author = ", ".join(book_author)
         book_publisher = self.ask_for_input(
             "What is the publisher of your book? ")
         book_year = self.ask_for_input(
@@ -92,7 +89,7 @@ class References:
         print("Your entry has been saved: ")
         book = service.config_reference(book_title, book_author, book_publisher,
                                         book_year, book_volume, book_number, book_pages, book_month, book_note)
-        print(str(service.return_book()))
+        self.io.write(str(service.return_book()))
         sleep(2)
 
     def ask_for_multiple_inputs(self, prompt):
@@ -101,7 +98,7 @@ class References:
         authors.append(first_author)
 
         while True:
-            more_authors = input("Next author? Press enter to skip ")
+            more_authors = self.io.read("Next author? Press enter to skip ")
             if more_authors:
                 authors.append(more_authors)
             else:

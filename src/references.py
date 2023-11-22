@@ -33,7 +33,7 @@ class References:
             print("Exiting...")
             sleep(1)
             sys.exit()
-        else:
+        if command != 2 and command != 0 and command != 3:
             print("Invalid input. Please enter '0', '1' or '2'.")
             sleep(2)
             self.welcome(io, service)
@@ -53,7 +53,8 @@ class References:
                 print("Invalid input. Please enter 'book' or 'article'.")
 
     def articleform(self, service):
-        print("to be done")
+        print("Not finished, directing you back to the start")
+        sleep(2)
 
     def ask_for_input(self, prompt, optional=False, input_type=str):
         while True:
@@ -92,6 +93,7 @@ class References:
         book = service.config_reference(book_title, book_author, book_publisher,
                                         book_year, book_volume, book_number, book_pages, book_month, book_note)
         print(str(service.return_book()))
+        sleep(2)
 
     def ask_for_multiple_inputs(self, prompt):
         authors = []

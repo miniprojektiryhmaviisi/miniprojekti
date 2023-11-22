@@ -1,53 +1,52 @@
-class App:
-    def __init__(self, user_sevice, io):
-        self.user_sevice = user_sevice
-        self.io = io
+# class App:
+#     def __init__(self, user_sevice, io):
+#         self.user_sevice = user_sevice
+#         self.io = io
 
-    def run(self):
-        while True:
-            command = self.io.read("Command (new or login): ")
+#     def run(self):
+#         while True:
+#             command = self.io.read("Command (new or login): ")
 
-            if not command:
-                break
+#             if not command:
+#                 break
 
-            if command == "new":
-                (username, password) = self._read_credentials()
+#             if command == "new":
+#                 (username, password) = self._read_credentials()
 
-                try:
-                    self.user_sevice.create_user(username, password)
-                    self.io.write("New user registered")
-                except Exception as error:
-                    self.io.write(str(error))
-            elif command == "login":
-                (username, password) = self._read_credentials()
+#                 try:
+#                     self.user_sevice.create_user(username, password)
+#                     self.io.write("New user registered")
+#                 except Exception as error:
+#                     self.io.write(str(error))
+#             elif command == "login":
+#                 (username, password) = self._read_credentials()
 
-                try:
-                    self.user_sevice.check_credentials(username, password)
-                    self.io.write("Logged in")
-                except Exception as error:
-                    self.io.write(str(error))
+#                 try:
+#                     self.user_sevice.check_credentials(username, password)
+#                     self.io.write("Logged in")
+#                 except Exception as error:
+#                     self.io.write(str(error))
 
-    def _read_credentials(self):
-        username = self.io.read("Username: ")
-        password = self.io.read("Password: ")
+#     def _read_credentials(self):
+#         username = self.io.read("Username: ")
+#         password = self.io.read("Password: ")
 
-        return (username, password)
+#         return (username, password)
 
 from time import sleep
-from entities.book import Book
+from repositories.book import Book
 # ainostaan book toimii. haluammeko kodakoodata bookform-metodin niin kuin on tehty alhaalla,
 # eli mitkä fieldit on pakollisia jne (vai halutaanko me hakea tämä tieto jostain tiedostosta esim mitkä fieldit
 # paikollisia dokumenttilähteille, mitkä kirjoille).
 
 
 class References:
-    def __init__(self,io):
+    def __init__(self, io):
         self.book = Book()
-        self.io=io
+        self.io = io
         self.welcome(io)
 
-
-    def welcome(self,io):
+    def welcome(self, io):
         io.write("Welcome to MyReferences!")
         sleep(1)
         io.write("Type in 0 or 1: ")
@@ -64,7 +63,7 @@ class References:
             sleep(2)
             self.welcome(io)
 
-    def add(self,io):
+    def add(self, io):
         sleep(1)
         while True:
             reftype = io.read(

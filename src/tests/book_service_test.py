@@ -22,4 +22,4 @@ class TestBookService(unittest.TestCase):
     def test_service_returns_book_reference_correctly(self):
         self.assertEqual(
             self.reference_service.return_book(),
-            "Operating Systems Stallings MacMillan 1991 682 1 100-107 10 ")
+            "Operating Systems, Stallings, MacMillan, 1991, 682, 1, 100-107, 10, ")

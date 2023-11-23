@@ -1,2 +1,2 @@
-*** Settings *** 
-Library  dummy_library.DummyLibrary
+# *** Settings *** 
+# Library  ../DummyLibrary.py

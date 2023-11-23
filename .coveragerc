@@ -1,0 +1,8 @@
+[report]
+omit = 
+    */tests/*
+    console_io.py
+    stub_io.py
+    main.py
+    app.py
+

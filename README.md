@@ -13,3 +13,9 @@
 
 ## Installation instructions & user manual
 *...*
+
+## Käyttöohje
+- Käynnistä sovellus komennolla python3 src/main.py
+- Valitse referenssin muoto syöttämällä 0 tai 1
+- Antaa referenssin kirjan/artikelin nimi,kirjoittaja,julkaisija, julkaisuaika, kirjan volume, kirjanumero, kijan sivunumero ja julkaisukuukausi ohjeen mukaan
+- Sulke sovellus painamalla 2.

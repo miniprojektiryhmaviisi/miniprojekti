@@ -12,12 +12,10 @@
 *The requirement has been analyzed (acceptance criteria created), planned (divided into technical tasks), programmed, tested (with minimum coverage of 80%), testing automated (CI-pipeline), documented (with Readme file) and merged into main production branch.*
 
 ## Installation instructions & user manual
-*...*
 
-## Instructions
-- Install all dependencies with command poetry install 
-- Move into virtual environment with command poetry shell
-- Start the application with command python3 src/main.py
+- Install dependencies with command `poetry install` 
+- Move into virtual environment with command `poetry shell`
+- Start the application with command `python3 src/main.py`
 - Select the format of the reference by entering 0 or 1
-- Give reference book/article name, author, publisher, publication date, book volume, book number, page number and month of publication according to the instructions
+- Give reference book/article name, author, publisher, publication date, book volume, book source number, page number and month of publication according to the instructions
 - Press 2 to close the application.

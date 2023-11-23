@@ -1,12 +1,12 @@
 from references import References
 from console_io import ConsoleIO
-from repositories.book import Book
+from repositories.referencesrepository import ReferencesRepository
 from services.reference_service import Services
 
 
 def init():
     console_io = ConsoleIO()
-    book_repo = Book()
+    book_repo = ReferencesRepository()
     refe_services = Services(book_repo)
     final_reference = References(console_io, refe_services)
 

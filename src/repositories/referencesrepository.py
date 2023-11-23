@@ -1,4 +1,4 @@
-class Book:
+class ReferencesRepository:
     def __init__(self):
         self.title = ""
         self.author = []

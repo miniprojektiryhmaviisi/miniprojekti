@@ -1,10 +1,10 @@
 import unittest
-from repositories.book import Book
+from repositories.referencesrepository import ReferencesRepository
 from services.reference_service import Services
 
 class TestBookService(unittest.TestCase):
     def setUp(self):
-        self.book = Book()
+        self.book = ReferencesRepository()
         self.reference_service = Services(self.book)
         self.reference_service.config_reference(
             "Operating Systems", ['Stallings'], "MacMillan", 1991, 682, 1, "100-107", 10, "")

@@ -1,5 +1,5 @@
 import unittest
-from repositories.book import Book
+from repositories.referencesrepository import ReferencesRepository
 from services.reference_service import Services
 from references import References
 from unittest.mock import Mock, ANY, patch
@@ -17,7 +17,7 @@ class StubIO:
 
 class TestReferences(unittest.TestCase):
     def setUp(self):
-        self.book = Book()
+        self.book = ReferencesRepository()
         self.reference_service = Services(self.book)
 
     # poistaa sleep-metodin aiheuttama paussi

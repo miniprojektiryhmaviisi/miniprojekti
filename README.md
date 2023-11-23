@@ -14,8 +14,10 @@
 ## Installation instructions & user manual
 *...*
 
-## Käyttöohje
-- Käynnistä sovellus komennolla python3 src/main.py
-- Valitse referenssin muoto syöttämällä 0 tai 1
-- Antaa referenssin kirjan/artikelin nimi,kirjoittaja,julkaisija, julkaisuaika, kirjan volume, kirjanumero, kijan sivunumero ja julkaisukuukausi ohjeen mukaan
-- Sulke sovellus painamalla 2.
+## Instructions
+- Install all dependencies with command poetry install 
+- Move into virtual environment with command poetry shell
+- Start the application with command python3 src/main.py
+- Select the format of the reference by entering 0 or 1
+- Give reference book/article name, author, publisher, publication date, book volume, book number, page number and month of publication according to the instructions
+- Press 2 to close the application.

@@ -19,3 +19,8 @@
 - Select the format of the reference by entering 0 or 1
 - Give reference book/article name, author, publisher, publication date, book volume, book source number, page number and month of publication according to the instructions
 - Press 2 to close the application.
+
+## Feature list
+- *User can store references from books*
+- *Programs gives warnings if reference information is given incorrectly*
+

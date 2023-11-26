@@ -1,12 +1,10 @@
-[MASTER]
-
+[MAIN]
 ignore=src/tests
 
 [BASIC]
 include-naming-hint=True
 
 [MESSAGE CONTROL]
-
 disable=raw-checker-failed,
         bad-inline-option,
         locally-disabled,

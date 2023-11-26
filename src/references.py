@@ -4,66 +4,70 @@ from time import sleep
 # (vai halutaanko me hakea tämä tieto jostain tiedostosta esim mitkä fieldit
 # paikollisia dokumenttilähteille, mitkä kirjoille).
 
-class References:
-    def __init__(self, io, service):
-        self.io = io
-        self.service = service
-        self.welcome(io, service)
 
-    def welcome(self, io, service):
-        io.write("Welcome to MyReferences!")
+class References:
+    def __init__(self, io_handler, service):
+        self.io_handler = io_handler
+        self.service = service
+        self.welcome(io_handler, service)
+
+    def welcome(self, io_handler, service):
+        io_handler.write("Welcome to MyReferences!")
         sleep(1)
-        io.write("Type 0 for Add a reference")
+        io_handler.write("Type 0 for Add a reference")
         sleep(1)
-        io.write("Type 1 for View my references")
+        io_handler.write("Type 1 for View my references")
         sleep(1)
-        io.write("Type 2 to Exit")
+        io_handler.write("Type 2 to Exit")
         sleep(1)
-        command = io.read("What do you want to do? ")
+        command = io_handler.read("What do you want to do? ")
         if command == "0":
-            self.add(io, service)
-            self.welcome(io, service)
+            self.add(io_handler, service)
+            self.welcome(io_handler, service)
         elif command == "1":
-            io.write("Not finished, directing you back to the start")
+            io_handler.write("Not finished, directing you back to the start")
             sleep(2)
-            self.welcome(io, service)
+            self.welcome(io_handler, service)
         elif command == "2":
-            io.write("Exiting...")
+            io_handler.write("Exiting...")
             sleep(1)
             return
         else:
-            io.write("Invalid input. Please enter '0', '1' or '2'.")
+            io_handler.write("Invalid input. Please enter '0', '1' or '2'.")
             sleep(2)
-            self.welcome(io, service)
+            self.welcome(io_handler, service)
 
-    def add(self, io, service):
+    def add(self, io_handler, service):
         sleep(1)
         while True:
-            reftype = io.read(
+            reftype = io_handler.read(
                 "Is your source a book or an internet article? Type in book or article: ")
             if reftype.lower() == "book":
                 self.bookform(service)
                 break
-            elif reftype.lower() == "article":
+            if reftype.lower() == "article":
                 self.articleform(service)
                 break
-            else:
-                io.write("Invalid input. Please enter 'book' or 'article'.")
+            io_handler.write("Invalid input. Please enter 'book' or 'article'.")
 
+    # pylint: disable=fixme
+    # FIXME: do something with the service
+    # pylint: disable=unused-argument
     def articleform(self, service):
         print("Not finished, directing you back to the start")
         sleep(2)
 
     def ask_for_input(self, prompt, optional=False, input_type=str):
         while True:
-            user_input = self.io.read(prompt)
+            user_input = self.io_handler.read(prompt)
             if not user_input and not optional:
-                self.io.write("Field cannot be empty. Please provide a valid input.")
+                self.io_handler.write(
+                    "Field cannot be empty. Please provide a valid input.")
             elif user_input and input_type:
                 try:
                     return input_type(user_input)
                 except ValueError:
-                    self.io.write(f"Please enter a valid interger.")
+                    self.io_handler.write("Please enter a valid interger.")
             else:
                 return user_input
 
@@ -87,9 +91,13 @@ class References:
         book_note = self.ask_for_input(
             "Optional: Any notes? ", optional=True)
         print("Your entry has been saved: ")
-        book = service.config_reference(book_title, book_author, book_publisher,
-                                        book_year, book_volume, book_number, book_pages, book_month, book_note)
-        self.io.write(str(service.return_book()))
+
+        # pylint: disable=fixme
+        # FIXME: do something with the book
+        # pylint: disable=unused-variable
+        book = service.config_reference(book_title, book_author, book_publisher, book_year,
+            book_volume, book_number, book_pages, book_month, book_note)
+        self.io_handler.write(str(service.return_book()))
         sleep(2)
 
     def ask_for_multiple_inputs(self, prompt):
@@ -98,7 +106,7 @@ class References:
         authors.append(first_author)
 
         while True:
-            more_authors = self.io.read("Next author? Press enter to skip ")
+            more_authors = self.io_handler.read("Next author? Press enter to skip ")
             if more_authors:
                 authors.append(more_authors)
             else:

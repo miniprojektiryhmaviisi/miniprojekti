@@ -6,11 +6,10 @@ class StubIO:
     def write(self, value):
         self.outputs.append(value)
 
-    def read(self, prompt):
+    def read(self, _):
         if len(self.inputs) > 0:
             return self.inputs.pop(0)
-        else:
-            return ""
+        return ""
 
     def add_input(self, value):
         self.inputs.append(value)

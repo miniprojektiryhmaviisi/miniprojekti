@@ -4,6 +4,12 @@ from time import sleep
 # (vai halutaanko me hakea tämä tieto jostain tiedostosta esim mitkä fieldit
 # paikollisia dokumenttilähteille, mitkä kirjoille).
 
+class References:
+    def __init__(self, io, service, storage_api):
+        self.io = io
+        self.service = service
+        self.welcome(io, service)
+        self.storage_api = storage_api
 
 class References:
     def __init__(self, io_handler, service):

@@ -45,19 +45,18 @@ class ReferencesRepository:
 
     def add_journal(self, journal):
         self.journal = journal
-    
+
     def add_booktitle(self, booktitle):
         self.booktitle = booktitle
 
     def add_editor(self, editor):
         self.editor = editor
-    
+
     def add_series(self, series):
         self.series = series
 
     def add_address(self, address):
-        self.add_address = address
+        self.address = address
 
     def add_organization(self, organization):
         self.organization = organization
-

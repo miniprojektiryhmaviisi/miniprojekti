@@ -18,5 +18,5 @@ disable=raw-checker-failed,
         missing-class-docstring
 
 [DESIGN]
-max-attributes=10
+max-attributes=16
 max-args=10

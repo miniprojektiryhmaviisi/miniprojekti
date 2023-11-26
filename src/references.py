@@ -5,17 +5,11 @@ from time import sleep
 # paikollisia dokumenttilähteille, mitkä kirjoille).
 
 class References:
-    def __init__(self, io, service, storage_api):
-        self.io = io
-        self.service = service
-        self.welcome(io, service)
-        self.storage_api = storage_api
-
-class References:
-    def __init__(self, io_handler, service):
+    def __init__(self, io_handler, service, storage_api):
         self.io_handler = io_handler
         self.service = service
         self.welcome(io_handler, service)
+        self.storage_api = storage_api
 
     def welcome(self, io_handler, service):
         io_handler.write("Welcome to MyReferences!")

@@ -24,35 +24,35 @@ class TestReferences(unittest.TestCase):
     @patch('references.sleep')
     def test_user_can_add_book_reference_with_correct_input(self, mock_sleep):
         mock_sleep.return_value = None
-        io = StubIO(
+        io_handler = StubIO(
             ["0", "book", "Operating Systems", "Stallings", "", "MacMillan", "1991", "", "", "", "", "", "2"]
             )
         reference_service_mock = Mock()
 
         self.assertEqual(reference_service_mock.config_reference.call_count, 0)
-        References(io, reference_service_mock, None)
+        References(io_handler, reference_service_mock, None)
         self.assertEqual(reference_service_mock.config_reference.call_count, 1)
     
     @patch('references.sleep')
     def test_user_has_to_enter_all_non_optional_information(self, mock_sleep):
         mock_sleep.return_value = None
-        io = StubIO(
+        io_handler = StubIO(
             ["0", "book", "", "Operating Systems", "", "Stallings", "", "", "MacMillan", "", "1991", "", "", "", "", "", "2", "2"]
             )
-        References(io, self.reference_service, None)
+        References(io_handler, self.reference_service, None)
         
         self.assertEqual(
-            io.outputs.count("Field cannot be empty. Please provide a valid input."),
+            io_handler.outputs.count("Field cannot be empty. Please provide a valid input."),
             4
             )
 
     @patch('references.sleep')
     def test_user_can_add_multiple_authors(self, mock_sleep):
         mock_sleep.return_value = None
-        io = StubIO(
+        io_handler = StubIO(
             ["0", "book", "Operating Systems", "Stallings", "William", "Jarmo", "", "MacMillan", "1991", "", "", "", "", "", "2"]
             )
-        References(io, self.reference_service, None)
+        References(io_handler, self.reference_service, None)
 
         first_author, second_author, third_author = self.book.author
         self.assertEqual(first_author, "Stallings")

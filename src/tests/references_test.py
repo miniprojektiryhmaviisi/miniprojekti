@@ -10,12 +10,10 @@ class StubIO:
         self.outputs = []
 
     def read(self, message):
-        print(self.inputs)
         return self.inputs.pop(0)
 
     def write(self, message):
         self.outputs.append(message)
-        print(self.outputs)
 
     def add_input(self, value):
         self.inputs.append(value)
@@ -30,19 +28,19 @@ class TestReferences(unittest.TestCase):
     def test_user_can_add_book_reference_with_correct_input(self, mock_sleep):
         mock_sleep.return_value = None
         io_handler = StubIO(
-            ["0", "0", "somekey", "Operating Systems", "Stallings", "", "MacMillan", "1991", "", "", "", "", "", "2"]
+            ["0", "A", "somekey", "Operating Systems", "Stallings", "", "MacMillan", "1991", "", "", "", "", "", "2"]
             )
         reference_service_mock = Mock()
 
-        self.assertEqual(reference_service_mock.config_reference.call_count, 0)
+        self.assertEqual(reference_service_mock.config_book_reference.call_count, 0)
         References(io_handler, reference_service_mock, None)
-        self.assertEqual(reference_service_mock.config_reference.call_count, 1)
+        self.assertEqual(reference_service_mock.config_book_reference.call_count, 1)
     
     @patch('references.sleep')
     def test_user_has_to_enter_all_non_optional_information(self, mock_sleep):
         mock_sleep.return_value = None
         io_handler = StubIO(
-            ["0", "0", "somekey", "", "Operating Systems", "", "Stallings", "", "", "MacMillan", "", "1991", "", "", "", "", "", "2", "2"]
+            ["0", "A", "somekey", "", "Operating Systems", "", "Stallings", "", "", "MacMillan", "", "1991", "", "", "", "", "", "2", "2"]
             )
         References(io_handler, self.reference_service, None)
         
@@ -55,7 +53,7 @@ class TestReferences(unittest.TestCase):
     def test_user_can_add_multiple_authors(self, mock_sleep):
         mock_sleep.return_value = None
         io_handler = StubIO(
-            ["0", "0", "somekey", "Operating Systems", "Stallings", "William", "Jarmo", "", "MacMillan", "1991", "", "", "", "", "", "2"]
+            ["0", "A", "somekey", "Operating Systems", "Stallings", "William", "Jarmo", "", "MacMillan", "1991", "", "", "", "", "", "2"]
             )
         References(io_handler, self.reference_service, None)
 

@@ -1,3 +1,5 @@
+import traceback
+
 class StubIO:
     def __init__(self, inputs=None):
         self.inputs = inputs or []
@@ -10,8 +12,7 @@ class StubIO:
         if len(self.inputs) > 0:
             try:
                 return self.inputs.pop(0)
-            except:
-                import traceback
+            except IndexError:
                 print(traceback.format_exc())
         return ""
 

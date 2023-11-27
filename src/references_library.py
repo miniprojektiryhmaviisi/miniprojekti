@@ -1,7 +1,6 @@
 from references import References
 from repositories.referencesrepository import ReferencesRepository
 from services.reference_service import Services
-from unittest.mock import Mock, ANY, patch
 from tests.references_test import StubIO
 
 class ReferencesLibrary:
@@ -17,7 +16,7 @@ class ReferencesLibrary:
         #self._references.articleform()
 
     #def ask_inproceedingsform(self):
-        #self._references.inproceedingsform() 
+        #self._references.inproceedingsform()
 
     def input(self, value):
         self._io.add_input(value)

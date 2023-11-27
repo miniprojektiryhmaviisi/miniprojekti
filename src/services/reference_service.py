@@ -1,5 +1,4 @@
 class Services:
-
     def __init__(self, ref_repo,database_interface):
         self.ref_repo=ref_repo
         self.database_interface=database_interface
@@ -49,7 +48,8 @@ class Services:
         self.ref_repo.add_address(address)
 
     # FIXME: deprecate this function
-    def return_book(self):
-        return f"{self.ref_repo.key}, {self.ref_repo.title}, {self.ref_repo.author}, \
-{self.ref_repo.publisher}, {self.ref_repo.year}, {self.ref_repo.volume}, {self.ref_repo.number}, \
-{self.ref_repo.pages}, {self.ref_repo.month}, {self.ref_repo.notes}"
+    # def return_book(self):
+    #     return f"{self.ref_repo.key}, {self.ref_repo.title}, {self.ref_repo.author}, \
+    #             {self.ref_repo.publisher}, {self.ref_repo.year}, {self.ref_repo.volume}, \
+    #             {self.ref_repo.number}, {self.ref_repo.pages}, {self.ref_repo.month}, \
+    #             {self.ref_repo.note}"

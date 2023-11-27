@@ -4,19 +4,21 @@ Test Setup      Input Add Reference Command
 
 *** Test Cases ***
 Add Book Reference with valid input
+    Input Book Command
     Book Input Credentials
     ...    somekey
-    ...    Stallings
-    ...    ${EMPTY}
     ...    Operating Systems
-    ...    1991
+    ...    Stallings
     ...    MacMillan
+    ...    1991
     ...    682
     ...    1
     ...    100-108
-    ...    October
+    ...    12
     ...    ${EMPTY}
-    Output Should Contain    Your entry has been saved
+    Input Exit Command
+    Ask Bookform
+    Output Should Contain    New reference added!
 
 # Login With Incorrect Password
 #    Input Credentials    kalle    kalle12369

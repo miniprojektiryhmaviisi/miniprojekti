@@ -1,39 +1,40 @@
 *** Settings ***
-Library  ../ReferencesLibrary.py
+Library  references_library.ReferencesLibrary
 
 *** Keywords ***
 Input Add Reference Command
-    Input    "0"
+    Input    0
 
 Input Book Command
-    Input    a
+    Input    A
 
 Input Article Command
-    Input    b
+    Input    B
 
 Input Inproceedings Command
-    Input    c
+    Input    C
 
+Input Exit Command
+    Input    2
 
 Book Input Credentials
     [Arguments]
     ...    ${key}
-    ...    ${author}
-    ...    ${space}
     ...    ${title}
-    ...    ${year}
+    ...    ${author}
     ...    ${publisher}
+    ...    ${year}
     ...    ${volume}
     ...    ${number}
     ...    ${pages}
     ...    ${month}
     ...    ${note}
     Input    ${key}
-    Input    ${author}
-    Input    ${space}
     Input    ${title}
-    Input    ${year}
+    Input    ${author}
+    Input    ${EMPTY}
     Input    ${publisher}
+    Input    ${year}
     Input    ${volume}
     Input    ${number}
     Input    ${pages}

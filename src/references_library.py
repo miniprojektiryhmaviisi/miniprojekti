@@ -6,22 +6,21 @@ from tests.references_test import StubIO
 
 class ReferencesLibrary:
     def __init__(self):
-        self._io = StubIO()
         self.repo = ReferencesRepository()
         self.reference_service = Services(self.repo)
-        self._references = References(self._io, self.reference_service, None)
+        self._io = StubIO()
 
     def ask_bookform(self):
-        self._references.bookform()
+        self._references = References(self._io, self.reference_service, None)
 
-    def ask_articleform(self):
-        self._references.articleform()
+    #def ask_articleform(self):
+        #self._references.articleform()
 
-    def ask_inproceedingsform(self):
-        self._references.inproceedingsform()
+    #def ask_inproceedingsform(self):
+        #self._references.inproceedingsform() 
 
     def input(self, value):
-        self._io.write(value)
+        self._io.add_input(value)
 
     def output_should_contain(self, value):
         outputs = self._io.outputs

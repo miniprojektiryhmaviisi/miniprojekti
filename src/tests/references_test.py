@@ -5,7 +5,7 @@ from references import References
 from unittest.mock import Mock, ANY, patch
 
 class StubIO:
-    def __init__(self, inputs=["0", "0", "somekey", "Operating Systems", "Stallings", "", "MacMillan", "1991", "", "", "", "", "", "2"]):
+    def __init__(self, inputs=[]):
         self.inputs = inputs
         self.outputs = []
 
@@ -16,6 +16,9 @@ class StubIO:
     def write(self, message):
         self.outputs.append(message)
         print(self.outputs)
+
+    def add_input(self, value):
+        self.inputs.append(value)
 
 class TestReferences(unittest.TestCase):
     def setUp(self):

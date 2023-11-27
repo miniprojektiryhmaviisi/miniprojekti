@@ -15,9 +15,10 @@ Input Inproceedings Command
     Input  c
 
 Book Input Credentials
-    [Arguments]  ${key}  ${author}  ${title}  ${year}  ${publisher}  ${volume}  ${number}  ${pages}  ${month}  ${note}
+    [Arguments]  ${key}  ${author}  ${space}  ${title}  ${year}  ${publisher}  ${volume}  ${number}  ${pages}  ${month}  ${note}
     Input  ${key}
     Input  ${author}
+    Input  ${space}
     Input  ${title}
     Input  ${year}
     Input  ${publisher}

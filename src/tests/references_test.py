@@ -10,6 +10,7 @@ class StubIO:
         self.outputs = []
 
     def read(self, message):
+        print(self.inputs)
         return self.inputs.pop(0)
 
     def write(self, message):

@@ -8,8 +8,8 @@ from storage_interface import StorageInterface
 def init():
     console_io = ConsoleIO()
     ref_repo = ReferencesRepository()
-    refe_services = Services(ref_repo)
     storage_interface = StorageInterface(db)
+    refe_services = Services(ref_repo,storage_interface)
     References(console_io, refe_services, storage_interface)
     connection.close()
 

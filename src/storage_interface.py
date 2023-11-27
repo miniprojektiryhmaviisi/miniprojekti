@@ -38,3 +38,9 @@ class StorageInterface:
         query = "SELECT * FROM BReferences, AReferences, IReferences"
         res = self.db.execute(query).fetchall()
         return res
+    def find_key(self,key,table):
+        query = f"SELECT dbkey FROM BReferences WHERE dbkey={key}"
+        exist= self.db.execute(query).fetchall()
+        if len(exist)!=0:
+            return False
+        return True

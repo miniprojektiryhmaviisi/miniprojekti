@@ -73,7 +73,11 @@ class References:
                 except ValueError:
                     self.io_handler.write("Please enter a valid interger.")
             else:
+
                 return {prompt: user_input}
+
+
+
 
     def ask_for_multiple_inputs(self, prompt):
         items = []

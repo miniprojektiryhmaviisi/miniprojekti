@@ -4,7 +4,7 @@ class StorageInterface:
 
     def store_bookref(self, bookref):
         query = f"INSERT INTO BReferences VALUES \
-                ({bookref.author}, {bookref.title}, \
+                ({bookref.key}, {bookref.author}, {bookref.title}, \
                 {bookref.publisher}, {bookref.year}, \
                 {bookref.volume}, {bookref.number}, \
                 {bookref.pages}, {bookref.month}, \
@@ -14,7 +14,7 @@ class StorageInterface:
 
     def store_articleref(self, articleref):
         query = f"INSERT INTO BReferences VALUES \
-                ({articleref.author}, {articleref.title}, \
+                ({articleref.key}, {articleref.author}, {articleref.title}, \
                 {articleref.journal}, {articleref.year}, \
                 {articleref.volume}, {articleref.number}, \
                 {articleref.pages}, {articleref.month}, \
@@ -24,7 +24,7 @@ class StorageInterface:
 
     def store_inproref(self, inproref):
         query = f"INSERT INTO BReferences VALUES \
-                ({inproref.author}, {inproref.title}, \
+                ({inproref.key}, {inproref.author}, {inproref.title}, \
                 {inproref.booktitle}, {inproref.year}, \
                 {inproref.editor}, {inproref.volume}, \
                 {inproref.number}, {inproref.series}, \

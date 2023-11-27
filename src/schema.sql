@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS BReferences (
-    id SERIAL PRIMARY KEY,
+    dbkey TEXT PRIMARY KEY,
     author TEXT,
     title TEXT,
     publisher TEXT,
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS BReferences (
 );
 
 CREATE TABLE IF NOT EXISTS AReferences (
-    id SERIAL PRIMARY KEY,
+    dbkey TEXT PRIMARY KEY,
     author TEXT,
     title TEXT,
     journal TEXT,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS AReferences (
 );
 
 CREATE TABLE IF NOT EXISTS IReferences (
-    id SERIAL PRIMARY KEY,
+    dbkey TEXT PRIMARY KEY,
     author TEXT,
     title TEXT,
     booktitle TEXT,

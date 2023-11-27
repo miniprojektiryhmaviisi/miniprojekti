@@ -1,3 +1,4 @@
+from unittest.mock import Mock
 from references import References
 from repositories.referencesrepository import ReferencesRepository
 from services.reference_service import Services
@@ -6,11 +7,12 @@ from tests.references_test import StubIO
 class ReferencesLibrary:
     def __init__(self):
         self.repo = ReferencesRepository()
-        self.reference_service = Services(self.repo)
+        self.storage_interface = Mock()
+        self.reference_service = Services(self.repo, self.storage_interface)
         self._io = StubIO()
 
     def ask_bookform(self):
-        self._references = References(self._io, self.reference_service, None)
+        self._references = References(self._io, self.reference_service, self.storage_interface)
 
     #def ask_articleform(self):
         #self._references.articleform()

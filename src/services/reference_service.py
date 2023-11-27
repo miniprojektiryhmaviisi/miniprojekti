@@ -1,5 +1,5 @@
 class Services:
-    def __init__(self, ref_repo,database_interface):
+    def __init__(self, ref_repo, database_interface):
         self.ref_repo=ref_repo
         self.database_interface=database_interface
     def config_book_reference(self, key, title,author,publisher,year,volume="",number="",pages="",

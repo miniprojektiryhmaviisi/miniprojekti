@@ -5,7 +5,8 @@ from services.reference_service import Services
 class TestBookService(unittest.TestCase):
     def setUp(self):
         self.bookref = ReferencesRepository()
-        self.reference_service = Services(self.bookref)
+        self.storage_interface = unittest.mock.Mock()
+        self.reference_service = Services(self.bookref, self.storage_interface)
         self.reference_service.config_book_reference(
             "somekey", "Operating Systems", ['Stallings'], "MacMillan", 1991, 682, 1, "100-107", 10, "")
 

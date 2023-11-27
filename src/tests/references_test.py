@@ -21,7 +21,8 @@ class StubIO:
 class TestReferences(unittest.TestCase):
     def setUp(self):
         self.book = ReferencesRepository()
-        self.reference_service = Services(self.book)
+        self.storage_interface = Mock()
+        self.reference_service = Services(self.book, self.storage_interface)
 
     # poistaa sleep-metodin aiheuttama paussi
     @patch('references.sleep')

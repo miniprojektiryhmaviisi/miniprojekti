@@ -1,11 +1,12 @@
 *** Settings ***
 Resource  resource.robot
-Test Setup  Input book Command
+Test Setup  Input 0 Command
 
 *** Test Cases ***
 Saved 
     Input Credentials  kalle  kalle123
     Output Should Contain  Logged in
+
 
 Login With Incorrect Password
     Input Credentials  kalle  kalle12369
@@ -14,6 +15,7 @@ Login With Incorrect Password
 Login With Nonexistent Username
     Input Credentials  Nonexistent  kalle123
     Output Should Contain  Invalid username or password
+
 
 *** Keywords ***
 Create User And Input Login Command

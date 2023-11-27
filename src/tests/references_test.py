@@ -15,6 +15,7 @@ class StubIO:
 
     def write(self, message):
         self.outputs.append(message)
+        print(self.outputs)
 
 class TestReferences(unittest.TestCase):
     def setUp(self):
@@ -26,7 +27,7 @@ class TestReferences(unittest.TestCase):
     def test_user_can_add_book_reference_with_correct_input(self, mock_sleep):
         mock_sleep.return_value = None
         io_handler = StubIO(
-            ["0", "book", "Operating Systems", "Stallings", "", "MacMillan", "1991", "", "", "", "", "", "2"]
+            ["0", "0", "somekey", "Operating Systems", "Stallings", "", "MacMillan", "1991", "", "", "", "", "", "2"]
             )
         reference_service_mock = Mock()
 
@@ -38,7 +39,7 @@ class TestReferences(unittest.TestCase):
     def test_user_has_to_enter_all_non_optional_information(self, mock_sleep):
         mock_sleep.return_value = None
         io_handler = StubIO(
-            ["0", "book", "", "Operating Systems", "", "Stallings", "", "", "MacMillan", "", "1991", "", "", "", "", "", "2", "2"]
+            ["0", "0", "somekey", "", "Operating Systems", "", "Stallings", "", "", "MacMillan", "", "1991", "", "", "", "", "", "2", "2"]
             )
         References(io_handler, self.reference_service, None)
         
@@ -51,7 +52,7 @@ class TestReferences(unittest.TestCase):
     def test_user_can_add_multiple_authors(self, mock_sleep):
         mock_sleep.return_value = None
         io_handler = StubIO(
-            ["0", "book", "Operating Systems", "Stallings", "William", "Jarmo", "", "MacMillan", "1991", "", "", "", "", "", "2"]
+            ["0", "0", "somekey", "Operating Systems", "Stallings", "William", "Jarmo", "", "MacMillan", "1991", "", "", "", "", "", "2"]
             )
         References(io_handler, self.reference_service, None)
 

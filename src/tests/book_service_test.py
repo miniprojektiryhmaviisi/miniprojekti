@@ -7,7 +7,7 @@ class TestBookService(unittest.TestCase):
         self.book = ReferencesRepository()
         self.reference_service = Services(self.book)
         self.reference_service.config_reference(
-            "Operating Systems", ['Stallings'], "MacMillan", 1991, 682, 1, "100-107", 10, "")
+            "somekey", "Operating Systems", ['Stallings'], "MacMillan", 1991, 682, 1, "100-107", 10, "")
 
     def test_service_can_set_book_reference(self):
         self.assertEqual(self.book.title, "Operating Systems")
@@ -22,4 +22,4 @@ class TestBookService(unittest.TestCase):
     def test_service_returns_book_reference_correctly(self):
         self.assertEqual(
             self.reference_service.return_book(),
-            "Operating Systems, ['Stallings'], MacMillan, 1991, 682, 1, 100-107, 10, ")
+            "somekey, Operating Systems, ['Stallings'], MacMillan, 1991, 682, 1, 100-107, 10, ")

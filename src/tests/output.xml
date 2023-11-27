@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.10.12 on linux)" generated="20231120 16:14:11.304" rpa="false" schemaversion="4">
+<suite id="s1" name="Tests" source="/home/hyxhyx/ohtu/miniprojekti/src/tests">
+<suite id="s1-s1" name="Dummy" source="/home/hyxhyx/ohtu/miniprojekti/src/tests/dummy.robot">
+<test id="s1-s1-t1" name="Increase Counter Once" line="5">
+<kw name="Value Should Be">
+<arg>0</arg>
+<msg timestamp="20231120 16:14:11.317" level="FAIL">No keyword with name 'Value Should Be' found.</msg>
+<status status="FAIL" starttime="20231120 16:14:11.317" endtime="20231120 16:14:11.317"/>
+</kw>
+<kw name="Add">
+<arg>1</arg>
+<status status="NOT RUN" starttime="20231120 16:14:11.318" endtime="20231120 16:14:11.318"/>
+</kw>
+<kw name="Value Should Be">
+<arg>1</arg>
+<status status="NOT RUN" starttime="20231120 16:14:11.319" endtime="20231120 16:14:11.319"/>
+</kw>
+<status status="FAIL" starttime="20231120 16:14:11.316" endtime="20231120 16:14:11.319">No keyword with name 'Value Should Be' found.</status>
+</test>
+<test id="s1-s1-t2" name="Increase Counter Once By Two And Multiply By Four" line="10">
+<kw name="Value Should Be">
+<arg>0</arg>
+<msg timestamp="20231120 16:14:11.320" level="FAIL">No keyword with name 'Value Should Be' found.</msg>
+<status status="FAIL" starttime="20231120 16:14:11.320" endtime="20231120 16:14:11.320"/>
+</kw>
+<kw name="Add">
+<arg>2</arg>
+<status status="NOT RUN" starttime="20231120 16:14:11.321" endtime="20231120 16:14:11.321"/>
+</kw>
+<kw name="Multiply">
+<arg>4</arg>
+<status status="NOT RUN" starttime="20231120 16:14:11.322" endtime="20231120 16:14:11.322"/>
+</kw>
+<kw name="Value Should Be">
+<arg>8</arg>
+<status status="NOT RUN" starttime="20231120 16:14:11.322" endtime="20231120 16:14:11.322"/>
+</kw>
+<status status="FAIL" starttime="20231120 16:14:11.319" endtime="20231120 16:14:11.322">No keyword with name 'Value Should Be' found.</status>
+</test>
+<status status="FAIL" starttime="20231120 16:14:11.315" endtime="20231120 16:14:11.323"/>
+</suite>
+<status status="FAIL" starttime="20231120 16:14:11.305" endtime="20231120 16:14:11.323"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="2" skip="0" id="s1" name="Tests">Tests</stat>
+<stat pass="0" fail="2" skip="0" id="s1-s1" name="Dummy">Tests.Dummy</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20231120 16:14:11.316" level="ERROR">Error in file '/home/hyxhyx/ohtu/miniprojekti/src/tests/resource.robot' on line 2: Importing library 'dummy_library.DummyLibrary' failed: ModuleNotFoundError: No module named 'dummy_library'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /home/hyxhyx/.cache/pypoetry/virtualenvs/miniprojekti-00v1dD3v-py3.10/bin
+  /usr/lib/python310.zip
+  /usr/lib/python3.10
+  /usr/lib/python3.10/lib-dynload
+  /home/hyxhyx/.cache/pypoetry/virtualenvs/miniprojekti-00v1dD3v-py3.10/lib/python3.10/site-packages</msg>
+</errors>
+</robot>

@@ -72,6 +72,8 @@ class References:
                 return user_input
 
     def bookform(self, service):
+        book_key = self.ask_for_input(
+            "What is the cite key in your paper? ")
         book_title = self.ask_for_input(
             "What is the title of your book? ")
         book_author = self.ask_for_multiple_inputs(
@@ -95,7 +97,7 @@ class References:
         # pylint: disable=fixme
         # FIXME: do something with the book
         # pylint: disable=unused-variable
-        book = service.config_reference(book_title, book_author, book_publisher, book_year,
+        book = service.config_reference(book_key, book_title, book_author, book_publisher, book_year,
             book_volume, book_number, book_pages, book_month, book_note)
         self.io_handler.write(str(service.return_book()))
         sleep(2)

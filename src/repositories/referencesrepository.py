@@ -1,5 +1,6 @@
 class ReferencesRepository:
     def __init__(self):
+        self.key = ""
         self.title = ""
         self.author = []
         self.publisher = ""
@@ -15,6 +16,9 @@ class ReferencesRepository:
         self.series = ""
         self.address = ""
         self.organization = ""
+
+    def add_key(self, key):
+        self.key = key
 
     def add_title(self, title):
         self.title = title

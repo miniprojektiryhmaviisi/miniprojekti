@@ -1,5 +1,5 @@
 *** Settings ***
-Library  ../CounterLibrary.py
+Library  ../ReferencesLibrary.py
 
 *** Keywords ***
 Input Add Reference Command
@@ -14,7 +14,7 @@ Input Article Command
 Input Article Command
     Input  c
 
-Input Credentials
+Book Input Credentials
     [Arguments]  ${key} ${author} ${title} ${year} ${publisher} ${volume} ${number} ${pages} ${month} ${note}
     Input  ${key}
     Input  ${author}

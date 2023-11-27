@@ -11,11 +11,11 @@ Input Book Command
 Input Article Command
     Input  b 
 
-Input Article Command
+Input Inproceedings Command
     Input  c
 
 Book Input Credentials
-    [Arguments]  ${key} ${author} ${title} ${year} ${publisher} ${volume} ${number} ${pages} ${month} ${note}
+    [Arguments]  ${key}  ${author}  ${title}  ${year}  ${publisher}  ${volume}  ${number}  ${pages}  ${month}  ${note}
     Input  ${key}
     Input  ${author}
     Input  ${title}
@@ -26,7 +26,3 @@ Book Input Credentials
     Input  ${pages}
     Input  ${month}
     Input  ${note}
-
-    Run Application
-
-

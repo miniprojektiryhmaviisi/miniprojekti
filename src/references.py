@@ -39,16 +39,31 @@ class References:
 
     def add(self, io_handler, service):
         sleep(1)
+        io_handler.write("What type of reference?")
+        sleep(1)
+        io_handler.write("Type 0 to Add a book")
+        sleep(1)
+        io_handler.write("Type 1 to Add an article")
+        sleep(1)
+        io_handler.write("Type 2 to Add inproceedings")
+        sleep(1)
+        io_handler.write("Type 3 to Return")
+        sleep(1)
         while True:
-            reftype = io_handler.read(
-                "Is your source a book or an internet article? Type in book or article: ")
-            if reftype.lower() == "book":
+            command = io_handler.read("Input: ")
+            if command == "0":
                 self.bookform(service)
                 break
-            if reftype.lower() == "article":
+            elif command == "1":
                 self.articleform(service)
                 break
-            io_handler.write("Invalid input. Please enter 'book' or 'article'.")
+            elif command == "2":
+                break
+                self.inproceedingsform(service)
+            elif command == "3":
+                break
+            else:
+                io_handler.write("Invalid input.")
 
     # pylint: disable=fixme
     # FIXME: do something with the service

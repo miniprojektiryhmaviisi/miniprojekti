@@ -1,6 +1,6 @@
 class Services:
-<<<<<<< HEAD
-    def __init__(self, ref_repo):
+
+    def __init__(self, ref_repo,database_interface):
         self.ref_repo=ref_repo
         self.database_interface=database_interface
     def config_book_reference(self, key, title,author,publisher,year,volume="",number="",pages="",
@@ -50,14 +50,6 @@ class Services:
 
     # FIXME: deprecate this function
     def return_book(self):
-<<<<<<< HEAD
         return f"{self.ref_repo.key}, {self.ref_repo.title}, {self.ref_repo.author}, \
 {self.ref_repo.publisher}, {self.ref_repo.year}, {self.ref_repo.volume}, {self.ref_repo.number}, \
 {self.ref_repo.pages}, {self.ref_repo.month}, {self.ref_repo.notes}"
-=======
-        return f"{self.book_repo.key}, {self.book_repo.title},\
-{self.book_repo.author}, {self.book_repo.publisher}, \
-{self.book_repo.year}, {self.book_repo.volume}, {self.book_repo.number}, \
-{self.book_repo.pages}, {self.book_repo.month}, {self.book_repo.note}"
-
->>>>>>> 08bacb1 (database toiminnat lisätty)

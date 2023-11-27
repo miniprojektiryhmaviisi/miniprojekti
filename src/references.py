@@ -4,6 +4,7 @@ from time import sleep
 # (vai halutaanko me hakea tämä tieto jostain tiedostosta esim mitkä fieldit
 # paikollisia dokumenttilähteille, mitkä kirjoille).
 
+
 class References:
     def __init__(self, io_handler, service, storage_api):
         self.io_handler = io_handler
@@ -13,13 +14,13 @@ class References:
 
     def welcome(self, io_handler, service):
         io_handler.write("Welcome to MyReferences!")
-        sleep(1)
+        # sleep(1)
         io_handler.write("Type 0 for Add a reference")
-        sleep(1)
+        # sleep(1)
         io_handler.write("Type 1 for View my references")
-        sleep(1)
+        # sleep(1)
         io_handler.write("Type 2 to Exit")
-        sleep(1)
+        # sleep(1)
         command = io_handler.read("What do you want to do? ")
         if command == "0":
             self.add(io_handler, service)
@@ -38,94 +39,125 @@ class References:
             self.welcome(io_handler, service)
 
     def add(self, io_handler, service):
-        sleep(1)
+        # sleep(1)
         io_handler.write("What type of reference?")
-        sleep(1)
-        io_handler.write("Type 0 to Add a book")
-        sleep(1)
-        io_handler.write("Type 1 to Add an article")
-        sleep(1)
-        io_handler.write("Type 2 to Add inproceedings")
-        sleep(1)
-        io_handler.write("Type 3 to Return")
-        sleep(1)
+        # sleep(1)
+        io_handler.write("Type A to Add a book")
+        # sleep(1)
+        io_handler.write("Type B to Add an article")
+        # sleep(1)
+        io_handler.write("Type C to Add inproceedings")
+        # sleep(1)
+        io_handler.write("Type Q to Return")
+        # sleep(1)
         while True:
             command = io_handler.read("Input: ")
-            if command == "0":
-                self.bookform(service)
+            if command in ["A", "B", "C"]:
+                self.form(service, command)
                 break
-            elif command == "1":
-                self.articleform(service)
+            if command == "Q":
                 break
-            elif command == "2":
-                break
-                self.inproceedingsform(service)
-            elif command == "3":
-                break
-            else:
-                io_handler.write("Invalid input.")
 
-    # pylint: disable=fixme
-    # FIXME: do something with the service
-    # pylint: disable=unused-argument
-    def articleform(self, service):
-        print("Not finished, directing you back to the start")
-        sleep(2)
+            io_handler.write("Invalid input.")
 
     def ask_for_input(self, prompt, optional=False, input_type=str):
         while True:
-            user_input = self.io_handler.read(prompt)
+            prefix = "(Optional) " if optional else ""
+            user_input = self.io_handler.read(prefix + prompt + ": ")
             if not user_input and not optional:
                 self.io_handler.write(
                     "Field cannot be empty. Please provide a valid input.")
             elif user_input and input_type:
                 try:
-                    return input_type(user_input)
+                    return {prompt: input_type(user_input)}
                 except ValueError:
                     self.io_handler.write("Please enter a valid interger.")
             else:
-                return user_input
-
-    def bookform(self, service):
-        book_key = self.ask_for_input(
-            "What is the cite key in your paper? ")
-        book_title = self.ask_for_input(
-            "What is the title of your book? ")
-        book_author = self.ask_for_multiple_inputs(
-            "Who is the author/editor of your book? ")
-        book_publisher = self.ask_for_input(
-            "What is the publisher of your book? ")
-        book_year = self.ask_for_input(
-            "What is the publication year of your book? ", input_type=int)
-        book_volume = self.ask_for_input(
-            "Optional: What is the volume of your book? ", optional=True, input_type=int)
-        book_number = self.ask_for_input(
-            "Optional: What is the book number of your source? ", optional=True, input_type=int)
-        book_pages = self.ask_for_input(
-            "Optional: What are the pages of your book? ", optional=True)
-        book_month = self.ask_for_input(
-            "Optional: What month was your book published in? ", optional=True, input_type=int)
-        book_note = self.ask_for_input(
-            "Optional: Any notes? ", optional=True)
-        print("Your entry has been saved: ")
-
-        # pylint: disable=fixme
-        # FIXME: do something with the book
-        # pylint: disable=unused-variable
-        book = service.config_reference(book_key, book_title, book_author, book_publisher, book_year,
-            book_volume, book_number, book_pages, book_month, book_note)
-        self.io_handler.write(str(service.return_book()))
-        sleep(2)
+                return {prompt: user_input}
 
     def ask_for_multiple_inputs(self, prompt):
-        authors = []
-        first_author = self.ask_for_input(prompt)
-        authors.append(first_author)
+        items = []
+        first_item = self.ask_for_input(prompt)[prompt]
+        items.append(first_item)
 
         while True:
-            more_authors = self.io_handler.read("Next author? Press enter to skip ")
-            if more_authors:
-                authors.append(more_authors)
+            more_items = self.io_handler.read(
+                f"Next {prompt}? Press enter to skip ")
+            if more_items:
+                items.append(more_items)
             else:
                 break
-        return authors
+
+        return {prompt: items}
+
+    @staticmethod
+    def get_form_data(ref_type):
+        if ref_type == "A":
+            form = {
+                "mandatory": [("key", str, False), ("title", str, False),
+                              ("author", str, True), ("publisher", str, False),
+                              ("year", int, False)],
+                "optional": [("volume", int, False), ("number", int, False),
+                             ("pages", str, False), ("month", int, False),
+                             ("notes", str, False)]
+            }
+
+        elif ref_type == "B":
+            form = {
+                "mandatory": [("key", str, False), ("title", str, False),
+                              ("author", str, True), ("journal", str, False),
+                              ("year", int, False)],
+                "optional": [("volume", int, False), ("number", int, False),
+                             ("pages", str, False), ("month", int, False),
+                             ("notes", str, False)]
+            }
+
+        elif ref_type == "C":
+            form = {
+                "mandatory": [("key", str, False), ("title", str, False),
+                              ("booktitle", str, False),
+                              ("author", str, True),
+                              ("year", int, False)],
+                "optional": [("volume", int, False), ("number", int, False),
+                             ("series", str, False), ("pages",
+                                                      str, False), ("address", str, False),
+                             ("month", int, False),
+                             ("organization", str, False), ("publisher", str, False),
+                             ("notes", str, False)]
+            }
+        else:
+            raise NotImplementedError
+
+        return form
+
+    def form(self, service, ref_type):
+
+        form = self.get_form_data(ref_type)
+
+        ref_items = {}
+        for item in form["mandatory"]:
+            if item[2]:
+                user_input = self.ask_for_multiple_inputs(item[0])
+            else:
+                user_input = self.ask_for_input(item[0], False, item[1])
+            ref_items.update(user_input)
+
+        for item in form["optional"]:
+            if item[2]:
+                user_input = self.ask_for_multiple_inputs(item[0])
+            else:
+                user_input = self.ask_for_input(item[0], True, item[1])
+            ref_items.update(user_input)
+
+        if ref_type == "A":
+            service.config_book_reference(**ref_items)
+        elif ref_type == "B":
+            service.config_article_reference(**ref_items)
+        elif ref_type == "C":
+            service.config_inpro_reference(**ref_items)
+        else:
+            raise NotImplementedError
+
+        self.io_handler.write("New reference added!")
+
+        sleep(2)

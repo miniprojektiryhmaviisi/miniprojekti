@@ -19,4 +19,4 @@ disable=raw-checker-failed,
 
 [DESIGN]
 max-attributes=16
-max-args=10
+max-args=16

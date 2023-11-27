@@ -1,10 +1,9 @@
 *** Settings ***
-Library     ../ReferencesLibrary.py
-
+Library  ../ReferencesLibrary.py
 
 *** Keywords ***
 Input Add Reference Command
-    Input    0
+    Input    "0"
 
 Input Book Command
     Input    a
@@ -14,6 +13,7 @@ Input Article Command
 
 Input Inproceedings Command
     Input    c
+
 
 Book Input Credentials
     [Arguments]

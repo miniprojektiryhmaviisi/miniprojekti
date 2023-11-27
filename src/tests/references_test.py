@@ -5,7 +5,7 @@ from references import References
 from unittest.mock import Mock, ANY, patch
 
 class StubIO:
-    def __init__(self, inputs=[]):
+    def __init__(self, inputs=["0", "0", "somekey", "Operating Systems", "Stallings", "", "MacMillan", "1991", "", "", "", "", "", "2"]):
         self.inputs = inputs
         self.outputs = []
 

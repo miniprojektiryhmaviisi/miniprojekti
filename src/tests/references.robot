@@ -1,22 +1,21 @@
 *** Settings ***
 Resource        resource.robot
-
 Test Setup      Input Add Reference Command
-
 
 *** Test Cases ***
 Add Book Reference with valid input
     Book Input Credentials
     ...    somekey
     ...    Stallings
-    ...    Nonexistent
+    ...    ${EMPTY}
     ...    Operating Systems
     ...    1991
     ...    MacMillan
     ...    682
     ...    1
     ...    100-108
-    ...    October Nonexistent
+    ...    October
+    ...    ${EMPTY}
     Output Should Contain    Your entry has been saved
 
 # Login With Incorrect Password

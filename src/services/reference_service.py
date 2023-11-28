@@ -1,7 +1,11 @@
+from storage_interface import refe_interface
+
 class Services:
-    def __init__(self, ref_repo, database_interface):
+
+    def __init__(self, ref_repo):
+
         self.ref_repo=ref_repo
-        self.database_interface=database_interface
+        self.database_interface=refe_interface
     def config_book_reference(self, key, title,author,publisher,year,volume="",number="",pages="",
                               month="",notes=""):
         self.ref_repo.add_key(key)

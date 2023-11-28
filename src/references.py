@@ -6,11 +6,10 @@ from time import sleep
 
 
 class References:
-    def __init__(self, io_handler, service, storage_api):
+    def __init__(self, io_handler, service):
         self.io_handler = io_handler
         self.service = service
         self.welcome(io_handler, service)
-        self.storage_api = storage_api
 
     def welcome(self, io_handler, service):
         io_handler.write("Welcome to MyReferences!")

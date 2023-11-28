@@ -27,8 +27,21 @@ class References:
         elif command == "1":
             #io_handler.write("Not finished, directing you back to the start")
             for entry in self.service.get_all_books():
-                for line in entry:
-                    io_handler.write(line)
+                io_handler.write("Cite Key  : " + entry[0])
+                io_handler.write("Author    : " + entry[1])
+                io_handler.write("Title     : " + entry[2])
+                io_handler.write("Publisher : " + entry[3])
+                io_handler.write("Year      : " + str(entry[4]))
+                if entry[5] != "":
+                    io_handler.write("Volume    : " + str(entry[5]))
+                if entry[6] != "":
+                    io_handler.write("Number    : " + str(entry[6]))
+                if entry[7] != "":
+                    io_handler.write("Pages     : " + entry[7])
+                if entry[8] != "":
+                    io_handler.write("Month     : " + str(entry[8]))
+                if entry[9] != "":
+                    io_handler.write("Notes     : " + entry[9])
                 io_handler.write("---------------")
             sleep(2)
             self.welcome(io_handler, service)

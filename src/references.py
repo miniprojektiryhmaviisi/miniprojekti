@@ -27,7 +27,8 @@ class References:
         elif command == "1":
             #io_handler.write("Not finished, directing you back to the start")
             for entry in self.service.get_all_books():
-                io_handler.write(entry)
+                for line in entry:
+                    io_handler.write(line)
             sleep(2)
             self.welcome(io_handler, service)
         elif command == "2":

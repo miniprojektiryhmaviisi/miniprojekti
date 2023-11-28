@@ -55,5 +55,8 @@ class Services:
     # def return_book(self):
     #     return f"{self.ref_repo.key}, {self.ref_repo.title}, {self.ref_repo.author}, \
     #             {self.ref_repo.publisher}, {self.ref_repo.year}, {self.ref_repo.volume}, \
-    #             {self.ref_repo.number}, {self.ref_repo.pages}, {self.ref_repo.month}, \
-    #             {self.ref_repo.note}"
+    #            {self.ref_repo.number}, {self.ref_repo.pages}, {self.ref_repo.month}, \
+    #            {self.ref_repo.note}"
+
+    def get_all_books(self):
+        return self.database_interface.get_all_from_bookref()

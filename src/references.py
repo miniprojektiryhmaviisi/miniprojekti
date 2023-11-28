@@ -29,6 +29,7 @@ class References:
             for entry in self.service.get_all_books():
                 for line in entry:
                     io_handler.write(line)
+                io_handler.write("---------------")
             sleep(2)
             self.welcome(io_handler, service)
         elif command == "2":

@@ -10,7 +10,23 @@ class StorageInterface:
         self._connection3=connection3
     def store_bookref(self, bookref):
         db_connection=self._connection1.cursor()
-        db_connection.execute("INSERT INTO BReferences(dbkey,author,title,publisher,year,volume,number,pages,month,note) VALUES (?,?,?,?,?,?,?,?,?,?)",("ww","ww","ss","ss",22,22,22,"2",2,"no"))
+        #db_connection.execute("INSERT INTO \
+        #BReferences(dbkey,author,title,publisher,year,volume,number,pages,month,note) \
+        #VALUES (?,?,?,?,?,?,?,?,?,?)\
+        #,(bookref.key,bookref.author,,bookref.titile,bookref.publisher,bookref.year,\
+        #bookref.volume,bookref.number,bookref.pages,bookref.month,bookref.note))
+        #query = f"INSERT INTO BReferences VALUES \
+        #        ({bookref.key}, {bookref.author}, {bookref.title}, \
+        #        {bookref.publisher}, {bookref.year}, \
+        #        {bookref.volume}, {bookref.number}, \
+        #        {bookref.pages}, {bookref.month}, \
+        #{bookref.note})"
+        #db_connection.execute(query)
+        db_connection.execute("INSERT INTO BReferences\
+        (dbkey,author,title,publisher,year,volume,number,pages,month,note) \
+        VALUES (?,?,?,?,?,?,?,?,?,?)",(bookref.key,bookref.author[0],\
+        bookref.title,bookref.publisher,bookref.year,bookref.volume,\
+        bookref.number,bookref.pages,bookref.month,bookref.note))
         self._connection1.commit()
 
     def store_articleref(self, articleref):

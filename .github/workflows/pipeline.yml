@@ -21,6 +21,7 @@ jobs:
         python3 -m pipx ensurepath
         pipx install poetry
         poetry install
+        poetry add python-dotenv
     - name: Analysing the code with pylint
       run: |
         poetry run pylint src

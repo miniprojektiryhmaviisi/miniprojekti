@@ -19,7 +19,8 @@ disable=raw-checker-failed,
         f-string-without-interpolation,
         too-many-branches,
         too-many-statements,
-        attribute-defined-outside-init
+        attribute-defined-outside-init,
+        invalid-name
 [DESIGN]
 max-attributes=16
 max-args=16

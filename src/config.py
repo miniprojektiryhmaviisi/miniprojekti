@@ -19,4 +19,3 @@ DATABASE_FILE_PATH1 = os.path.join(dirname, "..", "data", DATABASE_FILENAME1)
 DATABASE_FILENAME2  = os.getenv(
     "DATABASE_FILENAME2") or "irefdatabase.sqlite"
 DATABASE_FILE_PATH2 = os.path.join(dirname, "..", "data", DATABASE_FILENAME2)
-

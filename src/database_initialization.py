@@ -1,9 +1,8 @@
-
 from database_connection import get_bookref_connection
 from database_connection import get_aref_connection
 from database_connection import get_iref_connection
 
-def create_BReferences(get):
+def create_book_references(get):
     db_connection=get.cursor()
 
     db_connection.execute(
@@ -21,7 +20,8 @@ def create_BReferences(get):
         f");"
     )
     get.commit()
-def create_AReferences(get):
+
+def create_article_references(get):
     db_connection=get.cursor()
 
     db_connection.execute(
@@ -39,7 +39,8 @@ def create_AReferences(get):
         f");"
     )
     get.commit()
-def create_IReferences(get):
+
+def create_inproceedings_references(get):
     db_connection=get.cursor()
     db_connection.execute(
         f"CREATE TABLE IF NOT EXISTS IReferences ("
@@ -61,11 +62,11 @@ def create_IReferences(get):
         f");"
     )
     get.commit()
+
 def initialize_database():
     get = get_bookref_connection()
     get1 = get_aref_connection()
     get2=get_iref_connection()
-    create_BReferences(get)
-    create_AReferences(get1)
-    create_IReferences(get2)
-
+    create_book_references(get)
+    create_article_references(get1)
+    create_inproceedings_references(get2)

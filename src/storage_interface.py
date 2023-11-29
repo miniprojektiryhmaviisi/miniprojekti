@@ -1,4 +1,3 @@
-import sqlite3
 from database_connection import get_bookref_connection
 from database_connection import get_aref_connection
 from database_connection import get_iref_connection
@@ -17,8 +16,8 @@ class StorageInterface:
             VALUES (?,?,?,?,?,?,?,?,?,?)",(bookref.key,bookref.author[0],\
             bookref.title,bookref.publisher,bookref.year,bookref.volume,\
             bookref.number,bookref.pages,bookref.month,bookref.note))
-        except sqlite3.IntegrityError:
-            raise Exception("Cite key must be unique!")
+        except Exception as exc:
+            raise exc
         self._connection1.commit()
 
     def store_articleref(self, articleref):
@@ -29,8 +28,8 @@ class StorageInterface:
             VALUES (?,?,?,?,?,?,?,?,?,?)",(articleref.key,articleref.author[0],\
             articleref.title,articleref.journal,articleref.year,articleref.volume,\
             articleref.number,articleref.pages,articleref.month,articleref.note))
-        except sqlite3.IntegrityError:
-            raise Exception("Cite key must be unique!")
+        except Exception as exc:
+            raise exc
         self._connection2.commit()
 
     def store_inproref(self, inproref):
@@ -44,8 +43,8 @@ class StorageInterface:
             inproref.volume,inproref.number,inproref.series,inproref.pages,\
             inproref.address,inproref.month,inproref.organization,\
             inproref.publisher,inproref.note))
-        except sqlite3.IntegrityError:
-            raise Exception("Cite key must be unique!")
+        except Exception as exc:
+            raise exc
         self._connection3.commit()
 
     def get_all_from_bookref(self):
@@ -66,7 +65,7 @@ class StorageInterface:
         res = db_connection.execute(query).fetchall()
         return res
 
-    def find_key_from_bookref(self,key,table):
+    def find_key_from_bookref(self,key):
         db_connection=self._connection1.cursor()
         query = f"SELECT dbkey FROM BReferences WHERE dbkey={key}"
         exist=db_connection.execute(query).fetchall()
@@ -74,4 +73,6 @@ class StorageInterface:
             return False
         return True
 
-refe_interface=StorageInterface(get_bookref_connection(),get_aref_connection(),get_iref_connection())
+refe_interface=StorageInterface(
+    get_bookref_connection(),get_aref_connection(),get_iref_connection()
+)

@@ -4,7 +4,6 @@ from time import sleep
 # (vai halutaanko me hakea tämä tieto jostain tiedostosta esim mitkä fieldit
 # paikollisia dokumenttilähteille, mitkä kirjoille).
 
-
 class References:
     def __init__(self, io_handler, service):
         self.io_handler = io_handler
@@ -25,7 +24,7 @@ class References:
             self.add(io_handler, service)
             self.welcome(io_handler, service)
         elif command == "1":
-            io_handler.write("")            
+            io_handler.write("")
             io_handler.write("---------------")
             io_handler.write("Book references")
             io_handler.write("---------------\n ")
@@ -188,7 +187,7 @@ class References:
                               ("year", int, False)],
                 "optional": [("editor", str, False), ("volume", int, False),
                              ("number", int, False),
-                             ("series", str, False), ("pages", str, False), 
+                             ("series", str, False), ("pages", str, False),
                              ("address", str, False),
                              ("month", int, False),
                              ("organization", str, False), ("publisher", str, False),

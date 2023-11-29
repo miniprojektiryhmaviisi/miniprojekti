@@ -3,7 +3,6 @@ from console_io import ConsoleIO
 from repositories.referencesrepository import ReferencesRepository
 from services.reference_service import Services
 from build import build
-from storage_interface import StorageInterface
 
 def init():
     build()

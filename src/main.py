@@ -2,7 +2,7 @@ from references import References
 from console_io import ConsoleIO
 from repositories.referencesrepository import ReferencesRepository
 from services.reference_service import Services
-from build import build
+from db_build import build
 
 def init():
     build()

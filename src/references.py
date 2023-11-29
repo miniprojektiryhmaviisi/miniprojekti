@@ -25,13 +25,16 @@ class References:
             self.add(io_handler, service)
             self.welcome(io_handler, service)
         elif command == "1":
-            #io_handler.write("Not finished, directing you back to the start")
+            io_handler.write("")            
+            io_handler.write("---------------")
+            io_handler.write("Book references")
+            io_handler.write("---------------\n ")
             for entry in self.service.get_all_books():
-                io_handler.write("Cite Key  : " + entry[0])
-                io_handler.write("Author    : " + entry[1])
-                io_handler.write("Title     : " + entry[2])
-                io_handler.write("Publisher : " + entry[3])
-                io_handler.write("Year      : " + str(entry[4]))
+                io_handler.write("Cite Key   : " + entry[0])
+                io_handler.write("Author     : " + entry[1])
+                io_handler.write("Title      : " + entry[2])
+                io_handler.write("Publisher  : " + entry[3])
+                io_handler.write("Year       : " + str(entry[4]))
                 if entry[5] != "":
                     io_handler.write("Volume    : " + str(entry[5]))
                 if entry[6] != "":
@@ -42,6 +45,54 @@ class References:
                     io_handler.write("Month     : " + str(entry[8]))
                 if entry[9] != "":
                     io_handler.write("Notes     : " + entry[9])
+                io_handler.write("---------------")
+            io_handler.write("Article references")
+            io_handler.write("---------------\n ")
+            for entry in self.service.get_all_articles():
+                io_handler.write("Cite Key   : " + entry[0])
+                io_handler.write("Author     : " + entry[1])
+                io_handler.write("Title      : " + entry[2])
+                io_handler.write("Journal    : " + entry[3])
+                io_handler.write("Year       : " + str(entry[4]))
+                if entry[5] != "":
+                    io_handler.write("Volume    : " + str(entry[5]))
+                if entry[6] != "":
+                    io_handler.write("Number    : " + str(entry[6]))
+                if entry[7] != "":
+                    io_handler.write("Pages     : " + entry[7])
+                if entry[8] != "":
+                    io_handler.write("Month     : " + str(entry[8]))
+                if entry[9] != "":
+                    io_handler.write("Notes     : " + entry[9])
+                io_handler.write("---------------")
+            io_handler.write("Inproceedings references")
+            io_handler.write("---------------\n ")
+            for entry in self.service.get_all_inproceedings():
+                io_handler.write("Cite Key   : " + entry[0])
+                io_handler.write("Author     : " + entry[1])
+                io_handler.write("Title      : " + entry[2])
+                io_handler.write("Book Title : " + entry[3])
+                io_handler.write("Year       : " + str(entry[4]))
+                if entry[5] != "":
+                    io_handler.write("Editor    : " + entry[5])
+                if entry[6] != "":
+                    io_handler.write("Volume    : " + str(entry[6]))
+                if entry[7] != "":
+                    io_handler.write("Number    : " + str(entry[7]))
+                if entry[8] != "":
+                    io_handler.write("Series    : " + str(entry[8]))
+                if entry[9] != "":
+                    io_handler.write("Pages     : " + entry[9])
+                if entry[10] != "":
+                    io_handler.write("Address   : " + entry[10])
+                if entry[11] != "":
+                    io_handler.write("Month     : " + str(entry[11]))
+                if entry[12] != "":
+                    io_handler.write("Organization: " + entry[12])
+                if entry[13] != "":
+                    io_handler.write("Publisher : " + entry[13])
+                if entry[14] != "":
+                    io_handler.write("Note      : " + entry[14])
                 io_handler.write("---------------")
             sleep(2)
             self.welcome(io_handler, service)
@@ -92,9 +143,6 @@ class References:
 
                 return {prompt: user_input}
 
-
-
-
     def ask_for_multiple_inputs(self, prompt):
         items = []
         first_item = self.ask_for_input(prompt)[prompt]
@@ -138,9 +186,10 @@ class References:
                               ("booktitle", str, False),
                               ("author", str, True),
                               ("year", int, False)],
-                "optional": [("volume", int, False), ("number", int, False),
-                             ("series", str, False), ("pages",
-                                                      str, False), ("address", str, False),
+                "optional": [("editor", str, False), ("volume", int, False),
+                             ("number", int, False),
+                             ("series", str, False), ("pages", str, False), 
+                             ("address", str, False),
                              ("month", int, False),
                              ("organization", str, False), ("publisher", str, False),
                              ("notes", str, False)]
@@ -177,7 +226,5 @@ class References:
             service.config_inpro_reference(**ref_items)
         else:
             raise NotImplementedError
-
         self.io_handler.write("New reference added!")
-
         sleep(2)

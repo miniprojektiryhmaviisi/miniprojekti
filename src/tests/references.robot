@@ -6,7 +6,7 @@ Test Setup      Input Add Reference Command
 Add Book Reference with valid input
     Input Book Command
     Book Input Credentials
-    ...    somekey
+    ...    somekeyy
     ...    Operating Systems
     ...    Stallings
     ...    MacMillan
@@ -19,6 +19,23 @@ Add Book Reference with valid input
     Input Exit Command
     Ask Bookform
     Output Should Contain    New reference added!
+
+# Add Book Reference with already used cite key
+#     Input Book Command
+#     Book Input Credentials
+#     ...    somekeyy
+#     ...    Operating Systems
+#     ...    Stallings
+#     ...    MacMillan
+#     ...    1991
+#     ...    682
+#     ...    1
+#     ...    100-108
+#     ...    12
+#     ...    ${EMPTY}
+#     Input Exit Command
+#     Ask Bookform
+#     Output Should Contain   Cite key must be unique!
 
 # Login With Incorrect Password
 #    Input Credentials    kalle    kalle12369

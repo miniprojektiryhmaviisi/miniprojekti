@@ -22,7 +22,7 @@ class TestReferences(unittest.TestCase):
     def setUp(self):
         self.book = ReferencesRepository()
         self.storage_interface = Mock()
-        self.reference_service = Services(self.book, self.storage_interface)
+        self.reference_service = Services(self.book)
 
     # poistaa sleep-metodin aiheuttama paussi
     @patch('references.sleep')
@@ -34,7 +34,7 @@ class TestReferences(unittest.TestCase):
         reference_service_mock = Mock()
 
         self.assertEqual(reference_service_mock.config_book_reference.call_count, 0)
-        References(io_handler, reference_service_mock, None)
+        References(io_handler, reference_service_mock)
         self.assertEqual(reference_service_mock.config_book_reference.call_count, 1)
     
     @patch('references.sleep')
@@ -43,7 +43,7 @@ class TestReferences(unittest.TestCase):
         io_handler = StubIO(
             ["0", "A", "somekey", "", "Operating Systems", "", "Stallings", "", "", "MacMillan", "", "1991", "", "", "", "", "", "2", "2"]
             )
-        References(io_handler, self.reference_service, None)
+        References(io_handler, self.reference_service)
         
         self.assertEqual(
             io_handler.outputs.count("Field cannot be empty. Please provide a valid input."),
@@ -56,7 +56,7 @@ class TestReferences(unittest.TestCase):
         io_handler = StubIO(
             ["0", "A", "somekey", "Operating Systems", "Stallings", "William", "Jarmo", "", "MacMillan", "1991", "", "", "", "", "", "2"]
             )
-        References(io_handler, self.reference_service, None)
+        References(io_handler, self.reference_service)
 
         first_author, second_author, third_author = self.book.author
         self.assertEqual(first_author, "Stallings")

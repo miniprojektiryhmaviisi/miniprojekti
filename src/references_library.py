@@ -8,11 +8,11 @@ class ReferencesLibrary:
     def __init__(self):
         self.repo = ReferencesRepository()
         self.storage_interface = Mock()
-        self.reference_service = Services(self.repo, self.storage_interface)
+        self.reference_service = Services(self.repo)
         self._io = StubIO()
 
     def ask_bookform(self):
-        self._references = References(self._io, self.reference_service, self.storage_interface)
+        self._references = References(self._io, self.reference_service)
 
     #def ask_articleform(self):
         #self._references.articleform()

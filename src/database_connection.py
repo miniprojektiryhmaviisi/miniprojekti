@@ -15,10 +15,8 @@ connection_iref.row_factory = sqlite3.Row
 def get_bookref_connection():
     return connection_bookref
 
-
 def get_aref_connection():
     return connection_aref
 
 def get_iref_connection():
-
     return connection_iref

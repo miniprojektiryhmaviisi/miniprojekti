@@ -14,11 +14,17 @@
 ## Installation instructions & user manual
 
 - Install dependencies in terminal:
-  ```poetry install```
+  ```
+  poetry install
+  ```
 - Move into virtual environment:
-   ```poetry shell```
+   ```
+  poetry shell
+   ```
 - Start the application:
-  ```python3 src/main.py```
+  ```
+  python3 src/main.py
+  ```
   
 - Select 0 to add a new reference, 1 to view your references.
 - Select the format of the reference by entering A, B or C for book, article or inproceedings reference.

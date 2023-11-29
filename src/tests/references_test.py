@@ -116,3 +116,23 @@ class TestReferences(unittest.TestCase):
         self.assertEqual(io_handler.outputs.count("Cite Key   : bookkey"), 1)
         self.assertEqual(io_handler.outputs.count("Cite Key   : articlekey"), 1)
         self.assertEqual(io_handler.outputs.count("Cite Key   : inprokey"), 1)
+    
+    @patch('references.sleep')
+    def test_user_gets_error_message_if_wrong_input_on_start(self, mock_sleep):
+        mock_sleep.return_value = None
+        io_handler = StubIO(
+            ["3", "2"]
+            )
+        References(io_handler, self.reference_service)
+
+        self.assertIn("Invalid input. Please enter '0', '1' or '2'.", io_handler.outputs)
+    
+    @patch('references.sleep')
+    def test_user_can_return_to_start(self, mock_sleep):
+        mock_sleep.return_value = None
+        io_handler = StubIO(
+            ["0", "Q", "2"]
+            )
+        References(io_handler, self.reference_service)
+
+        self.assertEqual("Type 2 to Exit", io_handler.outputs[-2])

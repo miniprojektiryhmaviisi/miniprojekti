@@ -1,12 +1,16 @@
 *** Settings ***
 Resource        resource.robot
+
 Test Setup      Input Add Reference Command
 
+
 *** Test Cases ***
-Add Book Reference with valid input
+Add Book Reference With Valid Input
+    ${key}=    Get Time    epoch
+    Log    Generated key: ${key}
     Input Book Command
     Book Input Credentials
-    ...    somekeyy
+    ...    ${key}
     ...    Operating Systems
     ...    Stallings
     ...    MacMillan
@@ -17,13 +21,59 @@ Add Book Reference with valid input
     ...    12
     ...    ${EMPTY}
     Input Exit Command
-    Ask Bookform
+    Ask Form
     Output Should Contain    New reference added!
 
-# Add Book Reference with already used cite key
+Add Article Reference With Valid Input
+    ${key}=    Get Time    epoch
+    Log    Generated key: ${key}
+    Input Article Command
+    Article Input Credentials
+    ...    ${key}
+    ...    Operating Systems
+    ...    Stallings
+    ...    MacMillan
+    ...    1991
+    ...    682
+    ...    1
+    ...    100-108
+    ...    12
+    ...    ${EMPTY}
+    Input Exit Command
+    Ask Form
+    Output Should Contain    New reference added!
+
+# Add Inproceedings Reference With Valid Input
+#     ${key}=    Get Time    epoch
+#     Log    Generated key: ${key}
+#     Input Inproceedings Command
+#     Inproceedings Input Credentials
+#     ...    ${key}
+#     ...    Operating Systems
+#     ...    Stallings
+#     ...    MacMillan
+#     ...    1991
+#     ...    682
+#     ...    1
+#     ...    100-108
+#     ...    123
+#     ...    123
+#     ...    123
+#     ...    123
+#     ...    123
+#     ...    123
+#     ...    123
+#     Input Exit Command
+#     Ask Form
+#     Output Should Contain    New reference added!
+
+# Add Empty Reference For Non-Optional Fields
+#     ${key}=    Get Time    epoch
+#     Log    Generated key: ${key}
 #     Input Book Command
-#     Book Input Credentials
-#     ...    somekeyy
+#     Book Input Credentials 
+#     #...    ${EMPTY}
+#     ...    key
 #     ...    Operating Systems
 #     ...    Stallings
 #     ...    MacMillan
@@ -34,8 +84,28 @@ Add Book Reference with valid input
 #     ...    12
 #     ...    ${EMPTY}
 #     Input Exit Command
-#     Ask Bookform
-#     Output Should Contain   Cite key must be unique!
+#     #tähän asti output on []
+#     Ask Form
+#     #jos pakollinen kenttä esim key kuten yllä, on tyhjä, tulee vaan "IndexError: pop from empty list" eikä se jatka siitä
+#     #eteenpäin, siihen kohtaan jossa kerrotaan että field empty jne.
+#     Output Should Contain    Field cannot be empty. Please provide a valid input.
+
+# Add Book Reference with already used cite key
+#    Input Book Command
+#    Book Input Credentials
+#    ...    somekeyy
+#    ...    Operating Systems
+#    ...    Stallings
+#    ...    MacMillan
+#    ...    1991
+#    ...    682
+#    ...    1
+#    ...    100-108
+#    ...    12
+#    ...    ${EMPTY}
+#    Input Exit Command
+#    Ask Form
+#    Output Should Contain    Cite key must be unique!
 
 # Login With Incorrect Password
 #    Input Credentials    kalle    kalle12369

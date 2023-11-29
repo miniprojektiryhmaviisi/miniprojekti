@@ -11,7 +11,7 @@ class ReferencesLibrary:
         self.reference_service = Services(self.repo)
         self._io = StubIO()
 
-    def ask_bookform(self):
+    def ask_form(self):
         self._references = References(self._io, self.reference_service)
 
     #def ask_articleform(self):

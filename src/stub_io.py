@@ -8,12 +8,18 @@ class StubIO:
     def write(self, value):
         self.outputs.append(value)
 
+    # def read(self, _):
+    #     if len(self.inputs) > 0:
+    #         try:
+    #             return self.inputs.pop(0)
+    #         except IndexError:
+    #             print(traceback.format_exc())
+    #     return ""
     def read(self, _):
-        if len(self.inputs) > 0:
-            try:
-                return self.inputs.pop(0)
-            except IndexError:
-                print(traceback.format_exc())
+        if self.inputs:
+            return self.inputs.pop(0)
+        else: 
+            print("Field cannot be empty. Please provide a valid input.")
         return ""
 
     def add_input(self, value):

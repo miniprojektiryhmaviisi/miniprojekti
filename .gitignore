@@ -10,3 +10,7 @@ htmlcov
 *.swp
 coverage.xml
 .DS_Store
+/src/*.html
+/src/*.xml
+/src/tests/*.html
+src/tests/*.xml

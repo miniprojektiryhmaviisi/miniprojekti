@@ -5,4 +5,7 @@ omit =
     stub_io.py
     main.py
     app.py
-
+    db_build.py
+    database_initialization.py
+    __init__.py
+    references_library.py

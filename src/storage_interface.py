@@ -87,7 +87,7 @@ class StorageInterface:
 
     def search_inpro_by_title(self, title):
         db_connection=self._connection3.cursor()
-        db_connection.execute("SELECT * FROM IReferences WHERE title=?", (title),)
+        db_connection.execute("SELECT * FROM IReferences WHERE title=?", (title,))
         res = db_connection.fetchall()
         return res
 

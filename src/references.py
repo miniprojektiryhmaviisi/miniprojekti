@@ -40,7 +40,7 @@ class References:
         elif command=="b":
             self.export_bibtex_file(io_handler, service)
         else:
-            io_handler.write("Invalid input. Please enter '0', '1', '2' or 'b'.")
+            io_handler.write("Invalid input. Please enter '0', '1', '2', '3' or 'b'.")
             sleep(2)
             self.welcome(io_handler, service)
 

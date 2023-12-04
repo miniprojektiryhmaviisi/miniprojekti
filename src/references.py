@@ -25,6 +25,7 @@ class References:
         io_handler.write("Type 'b' to make your existing references into bibtex form")
 
         io_handler.write("Type 's' to search for a reference")
+
         command = io_handler.read("What do you want to do? ")
         if command == "0":
             self.add(io_handler, service)
@@ -45,7 +46,7 @@ class References:
             self.reference_search()
             self.welcome(io_handler, service)
         else:
-            io_handler.write("Invalid input. Please enter '0', '1', '2', '3' or 'b'.")
+            io_handler.write("Invalid input. Please enter '0', '1', '2', '3', 'b' or 's'.")
             sleep(2)
             self.welcome(io_handler, service)
 
@@ -68,7 +69,6 @@ class References:
                 break
             if command == "Q":
                 break
-
             io_handler.write("Invalid input.")
 
     def ask_for_input(self, prompt, optional=False, input_type=str):
@@ -179,7 +179,6 @@ class References:
             sleep(2)
 
     def view_references(self, io_handler, service):
-        io_handler.write("")
         self.display_book_references(self.service.get_all_books())
         self.display_article_references(self.service.get_all_articles())
         self.display_inproceedings_references(self.service.get_all_inproceedings())
@@ -259,6 +258,7 @@ class References:
 
     def display_book_references(self, references):
         io_handler = self.io_handler
+        io_handler.write("")
         io_handler.write("---------------")
         io_handler.write("Book references")
         io_handler.write("---------------\n ")
@@ -278,11 +278,12 @@ class References:
                 io_handler.write("Month        : " + str(entry[8]))
             if entry[9] != "":
                 io_handler.write("Notes        : " + entry[9])
-        io_handler.write("")
-        io_handler.write("---------------")
+            io_handler.write("")
+            io_handler.write("---------------")
 
     def display_article_references(self, references):
         io_handler = self.io_handler
+        io_handler.write("---------------")
         io_handler.write("Article references")
         io_handler.write("---------------\n ")
         for entry in references:
@@ -306,6 +307,7 @@ class References:
 
     def display_inproceedings_references(self, references):
         io_handler = self.io_handler
+        io_handler.write("---------------")
         io_handler.write("Inproceedings references")
         io_handler.write("---------------\n ")
         for entry in references:
@@ -338,7 +340,7 @@ class References:
             io_handler.write("---------------")
 
     def reference_search(self):
-        self.io_handler.write("Type author name, title or both")
+        self.io_handler.write("Type author's name, title or both")
         author = self.ask_for_input("Author", optional = True)["Author"]
         if not author:
             title = self.ask_for_input("Title", optional = False)["Title"]
@@ -350,6 +352,10 @@ class References:
         book_refs = reference_dict["book"]
         article_refs = reference_dict["article"]
         inpro_refs = reference_dict["inproceedings"]
+        self.io_handler.write(f"\nWith author <{author}> and title <{title}> found "
+                            f"{len(book_refs)} book references,\n {len(article_refs)} "
+                            f"article references and {len(inpro_refs)} inproceedings "
+                            f"references")
         self.display_book_references(book_refs)
         self.display_article_references(article_refs)
         self.display_inproceedings_references(inpro_refs)

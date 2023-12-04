@@ -3,6 +3,8 @@ from repositories.referencesrepository import ReferencesRepository
 from services.reference_service import Services
 from references import References
 from unittest.mock import Mock, ANY, patch
+from db_build import build
+
 
 class StubIO:
     def __init__(self, inputs=[]):
@@ -24,6 +26,18 @@ class TestReferences(unittest.TestCase):
         self.reference_service = Services(self.refrepo)
         self.database_interface_mock = Mock()
         self.reference_service.database_interface = self.database_interface_mock
+    
+    def add_test_book_reference(self):
+        io_handler = StubIO(
+            ["0", "A", "somekey", "Operating Systems", "Stallings", "", "MacMillan", "1991", "", "",
+             "", "", "", "3"]
+            )
+        try:
+            build()
+            refservice = Services(self.refrepo)
+            References(io_handler, refservice)
+        except:
+            pass
 
     @patch('references.sleep')
     def test_user_can_add_book_reference_with_correct_input(self, mock_sleep):
@@ -125,7 +139,7 @@ class TestReferences(unittest.TestCase):
             )
         References(io_handler, self.reference_service)
 
-        self.assertIn("Invalid input. Please enter '0', '1', '2', '3' or 'b'.", io_handler.outputs)
+        self.assertIn("Invalid input. Please enter '0', '1', '2', '3', 'b' or 's'.", io_handler.outputs)
     
     @patch('references.sleep')
     def test_user_can_return_to_start(self, mock_sleep):
@@ -136,3 +150,48 @@ class TestReferences(unittest.TestCase):
         References(io_handler, self.reference_service)
 
         self.assertEqual("Type 3 to Exit", io_handler.outputs[-4])
+
+    @patch('references.sleep')
+    def test_user_can_search_for_existing_references_by_author(self, mock_sleep):
+        mock_sleep.return_value = None
+        self.add_test_book_reference()
+        io_handler = StubIO(
+            ["s", "Stallings", "", "3"]
+        )
+
+        build()
+        refservice = Services(self.refrepo)
+        References(io_handler, refservice)
+        self.assertIn("Cite Key     : somekey", io_handler.outputs)
+        self.assertIn("Author       : Stallings", io_handler.outputs)
+        self.assertIn("Title        : Operating Systems", io_handler.outputs)
+
+    @patch('references.sleep')
+    def test_user_can_search_for_existing_references_by_title(self, mock_sleep):
+        mock_sleep.return_value = None
+        self.add_test_book_reference()
+        io_handler = StubIO(
+            ["s", "", "Operating Systems", "3"]
+        )
+
+        build()
+        refservice = Services(self.refrepo)
+        References(io_handler, refservice)
+        self.assertIn("Cite Key     : somekey", io_handler.outputs)
+        self.assertIn("Author       : Stallings", io_handler.outputs)
+        self.assertIn("Title        : Operating Systems", io_handler.outputs)
+    
+    @patch('references.sleep')
+    def test_user_can_search_for_existing_references_by_author_and_title(self, mock_sleep):
+        mock_sleep.return_value = None
+        self.add_test_book_reference()
+        io_handler = StubIO(
+            ["s", "Stallings", "Operating Systems", "3"]
+        )
+
+        build()
+        refservice = Services(self.refrepo)
+        References(io_handler, refservice)
+        self.assertIn("Cite Key     : somekey", io_handler.outputs)
+        self.assertIn("Author       : Stallings", io_handler.outputs)
+        self.assertIn("Title        : Operating Systems", io_handler.outputs)

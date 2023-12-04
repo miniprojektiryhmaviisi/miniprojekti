@@ -256,8 +256,6 @@ class References:
                 file.write("}\n\n")
         sleep(2)
         self.welcome(io_handler, service)
-<<<<<<< HEAD
-=======
 
     def display_book_references(self, references):
         io_handler = self.io_handler
@@ -355,4 +353,3 @@ class References:
         # self.display_book_references(book_refs)
         # self.display_article_references(article_refs)
         # self.display_inproceedings_references(inpro_refs)
->>>>>>> fc08c5a (add search option to References class)

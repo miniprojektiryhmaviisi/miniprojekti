@@ -112,10 +112,10 @@ class TestReferences(unittest.TestCase):
             ["1", "3"]
             )
         References(io_handler, self.reference_service)
-        
-        self.assertEqual(io_handler.outputs.count("Cite Key   : bookkey"), 1)
-        self.assertEqual(io_handler.outputs.count("Cite Key   : articlekey"), 1)
-        self.assertEqual(io_handler.outputs.count("Cite Key   : inprokey"), 1)
+        print(io_handler.outputs)
+        self.assertEqual(io_handler.outputs.count("Cite Key     : bookkey"), 1)
+        self.assertEqual(io_handler.outputs.count("Cite Key     : articlekey"), 1)
+        self.assertEqual(io_handler.outputs.count("Cite Key     : inprokey"), 1)
     
     @patch('references.sleep')
     def test_user_gets_error_message_if_wrong_input_on_start(self, mock_sleep):
@@ -135,4 +135,4 @@ class TestReferences(unittest.TestCase):
             )
         References(io_handler, self.reference_service)
 
-        self.assertEqual("Type 3 to Exit", io_handler.outputs[-3])
+        self.assertEqual("Type 3 to Exit", io_handler.outputs[-4])

@@ -247,7 +247,7 @@ class References:
         self.welcome(io_handler, service)
 
     def export_bibtex_file(self, io_handler, service):
-        with open("file.bib", "w") as file:
+        with open("file.bib", "w", encoding="utf-8") as file:
             all_book_refs=self.service.get_all_books()
             for i in all_book_refs:
                 file.write("@book{" + i[0] + ",\n")
@@ -271,7 +271,7 @@ class References:
             for j in all_article_refs:
                 file.write("@article{" + j[0] + ",\n")
                 file.write("   author = {" + j[1] + "},\n")
-                file.write("   title = {{" + j[2] + "}},\n") 
+                file.write("   title = {{" + j[2] + "}},\n")
                 file.write("   year = {" + str(j[4]) + "},\n")
                 file.write("   journal = {" + j[3] + "},\n")
                 if j[5] != "":

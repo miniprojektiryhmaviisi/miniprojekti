@@ -1,10 +1,9 @@
+import secrets
 from unittest.mock import Mock
 from references import References
 from repositories.referencesrepository import ReferencesRepository
 from services.reference_service import Services
 from tests.references_test import StubIO
-import secrets
-from string import ascii_letters
 
 class ReferencesLibrary:
     def __init__(self):

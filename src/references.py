@@ -345,11 +345,11 @@ class References:
         else:
             title = self.ask_for_input("Title", optional = True)["Title"]
 
-        # reference_dict = self.service.reference_search(author, title)
+        reference_dict = self.service.search_reference(author, title)
 
-        # book_refs = reference_dict["book"]
-        # article_refs = reference_dict["article"]
-        # inpro_refs = reference_dict["inproceedings"]
-        # self.display_book_references(book_refs)
-        # self.display_article_references(article_refs)
-        # self.display_inproceedings_references(inpro_refs)
+        book_refs = reference_dict["book"]
+        article_refs = reference_dict["article"]
+        inpro_refs = reference_dict["inproceedings"]
+        self.display_book_references(book_refs)
+        self.display_article_references(article_refs)
+        self.display_inproceedings_references(inpro_refs)

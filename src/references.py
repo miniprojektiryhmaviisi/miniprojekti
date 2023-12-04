@@ -1,4 +1,5 @@
 from time import sleep
+from sqlite3 import IntegrityError
 # ainostaan book toimii. haluammeko kodakoodata bookform-metodin niin kuin on tehty alhaalla,
 # eli mitkä fieldit on pakollisia jne
 # (vai halutaanko me hakea tämä tieto jostain tiedostosta esim mitkä fieldit
@@ -156,16 +157,21 @@ class References:
                 user_input = self.ask_for_input(item[0], True, item[1])
             ref_items.update(user_input)
 
-        if ref_type == "A":
-            service.config_book_reference(**ref_items)
-        elif ref_type == "B":
-            service.config_article_reference(**ref_items)
-        elif ref_type == "C":
-            service.config_inpro_reference(**ref_items)
+        try:
+            if ref_type == "A":
+                service.config_book_reference(**ref_items)
+            elif ref_type == "B":
+                service.config_article_reference(**ref_items)
+            elif ref_type == "C":
+                service.config_inpro_reference(**ref_items)
+            else:
+                raise NotImplementedError
+        except IntegrityError as e:
+            self.io_handler.write(f"Failed to save new reference: {e}")
+            sleep(2)
         else:
-            raise NotImplementedError
-        self.io_handler.write("New reference added!")
-        sleep(2)
+            self.io_handler.write("New reference added!")
+            sleep(2)
 
     def view_references(self, io_handler, service):
         io_handler.write("")

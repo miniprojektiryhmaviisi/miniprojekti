@@ -16,9 +16,9 @@ Input Inproceedings Command
     Input    C
 
 Input Exit Command
-    Input    2
+    Input    3
 
-Book Input Credentials
+Book Input Details
     [Arguments]
     ...    ${key}
     ...    ${title}
@@ -42,7 +42,58 @@ Book Input Credentials
     Input    ${month}
     Input    ${note}
 
-Article Input Credentials
+Book Input Details Two Keys
+    [Arguments]
+    ...    ${key}
+    ...    ${key2}
+    ...    ${title}
+    ...    ${author}
+    ...    ${publisher}
+    ...    ${year}
+    ...    ${volume}
+    ...    ${number}
+    ...    ${pages}
+    ...    ${month}
+    ...    ${note}
+    Input    ${key}
+    Input    ${key2}
+    Input    ${title}
+    Input    ${author}
+    Input    ${EMPTY}
+    Input    ${publisher}
+    Input    ${year}
+    Input    ${volume}
+    Input    ${number}
+    Input    ${pages}
+    Input    ${month}
+    Input    ${note}
+
+Book Input Details Mandatory Empty
+    [Arguments]
+    ...    ${key}
+    ...    ${title}
+    ...    ${author}
+    ...    ${publisher}
+    ...    ${year}
+    ...    ${volume}
+    ...    ${number}
+    ...    ${pages}
+    ...    ${month}
+    ...    ${note}
+    Input    ${key}
+    Input    ${title}
+    Input    ${author}
+    Input    ${EMPTY}
+    Input    ${publisher}
+    Input    ${EMPTY}
+    Input    ${year}
+    Input    ${volume}
+    Input    ${number}
+    Input    ${pages}
+    Input    ${month}
+    Input    ${note}
+
+Article Input Details
     [Arguments]
     ...    ${key}
     ...    ${title}
@@ -66,11 +117,12 @@ Article Input Credentials
     Input    ${month}
     Input    ${note}
 
-Inproceedings Input Credentials
+Inproceedings Input Details
     [Arguments]
     ...    ${key}
-    ...    ${author}
     ...    ${title}
+    ...    ${author}
+    ...    ${publisher}
     ...    ${booktitle}
     ...    ${year}
     ...    ${editor}
@@ -81,14 +133,13 @@ Inproceedings Input Credentials
     ...    ${address}
     ...    ${month}
     ...    ${organization}
-    ...    ${publisher}
     ...    ${note}
 
     Input  ${key}
-    Input  ${author}
-    Input  ${EMPTY}
     Input  ${title}
     Input  ${booktitle}
+    Input  ${author}
+    Input  ${EMPTY}
     Input  ${year}
     Input  ${editor}
     Input  ${volume}

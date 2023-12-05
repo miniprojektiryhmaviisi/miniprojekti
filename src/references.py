@@ -235,7 +235,7 @@ class References:
                     file.write("   pages = {" + j[7] + "},\n")
                 if j[8] != "":
                     month_name = self.get_month_name(j[8])
-                    print(month_name)
+                    #print(month_name)
                     file.write("   month = {" + month_name + "},\n")
                 if j[9] != "":
                     file.write("   note = {" + j[9] + "},\n")
@@ -262,7 +262,7 @@ class References:
                     file.write("   address = {" + j[10] + "},\n")
                 if j[11] != "":
                     month_name = self.get_month_name(j[11])
-                    print(month_name)
+                    #print(month_name)
                     file.write("   month = {" + month_name + "},\n")
                 if j[12] != "":
                     file.write("   organization = {" + j[12] + "},\n")

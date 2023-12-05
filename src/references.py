@@ -23,7 +23,7 @@ class References:
         io_handler.write("Type 2 to Search")
         # sleep(1)
         io_handler.write(
-            "Type 3 to make your existing references into bibtex form")
+            "Type 3 to Make your existing references into bibtex form")
         # sleep(1)
         io_handler.write("Type 4 to Exit")
         # sleep(1)

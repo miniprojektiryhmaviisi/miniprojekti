@@ -6,6 +6,21 @@ Library     ../ReferencesLibrary.py
 Input Add Reference Command
     Input    0
 
+Input View Command
+    Input    1
+
+Input Search Command
+    Input    2
+
+Input Bibtex Command
+    Input    3
+
+Input Delete Command
+    Input    4
+
+Input Exit Command
+    Input    5
+
 Input Book Command
     Input    A
 
@@ -14,9 +29,6 @@ Input Article Command
 
 Input Inproceedings Command
     Input    C
-
-Input Exit Command
-    Input    5
 
 Book Input Details
     [Arguments]
@@ -152,4 +164,9 @@ Inproceedings Input Details
     Input  ${publisher}
     Input  ${note}
     
-
+Input Both Search Details
+    [Arguments]
+    ...    ${author}
+    ...    ${title}
+    Input    ${author}
+    Input    ${title}

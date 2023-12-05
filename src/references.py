@@ -374,13 +374,23 @@ class References:
         book_refs = reference_dict["book"]
         article_refs = reference_dict["article"]
         inpro_refs = reference_dict["inproceedings"]
+
+        if len(book_refs) == 0 and len(article_refs) == 0 and len(inpro_refs) == 0:
+            self.io_handler.write("")
+            self.io_handler.write("No references found!")
+            self.io_handler.write("")
+            return
+
         self.io_handler.write(f"\nWith author <{author}> and title <{title}> found "
                               f"{len(book_refs)} book references,\n {len(article_refs)} "
                               f"article references and {len(inpro_refs)} inproceedings "
                               f"references")
-        self.display_book_references(book_refs)
-        self.display_article_references(article_refs)
-        self.display_inproceedings_references(inpro_refs)
+        if len(book_refs) != 0:
+            self.display_book_references(book_refs)
+        if len(article_refs) != 0:
+            self.display_article_references(article_refs)
+        if len(inpro_refs) != 0:
+            self.display_inproceedings_references(inpro_refs)
 
     def reset_all(self):
         self.service.delete_all()

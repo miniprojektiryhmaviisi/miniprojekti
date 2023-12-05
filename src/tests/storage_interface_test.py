@@ -85,3 +85,18 @@ class TestStorageInterface(unittest.TestCase):
 
         self.assertIsNotNone(result)
 
+    def test_store_articleref_failure(self):
+        mock_articleref = Mock(
+            key="mock_key1", author=["Author"], title="Mock Title", journal="MockPublisher1",
+            year=2023, volume=1, number=1, pages="1-10", month="January", note="Mock Note"
+        )
+
+
+        self.mock_connection2.cursor().execute.side_effect = Exception("Test exception")
+
+
+        with self.assertRaises(Exception):
+            self.storage_interface.store_articleref(mock_articleref)
+
+
+        self.mock_connection2.commit.assert_not_called()

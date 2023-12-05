@@ -16,18 +16,17 @@ class References:
     def welcome(self, io_handler, service):
         io_handler.write("Welcome to MyReferences!")
         # sleep(1)
-        io_handler.write("Type 0 for Add a reference")
+        io_handler.write("Type 0 to Add a reference")
         # sleep(1)
-        io_handler.write("Type 1 for View my references")
+        io_handler.write("Type 1 to View my references")
         # sleep(1)
         io_handler.write("Type 2 to Search")
         # sleep(1)
-        io_handler.write("Type 3 to Exit")
-        # sleep(1)
         io_handler.write(
-            "Type 'b' to make your existing references into bibtex form")
-
-        io_handler.write("Type 's' to search for a reference")
+            "Type 3 to make your existing references into bibtex form")
+        # sleep(1)
+        io_handler.write("Type 4 to Exit")
+        # sleep(1)
 
         command = io_handler.read("What do you want to do? ")
         if command == "0":
@@ -36,21 +35,17 @@ class References:
         elif command == "1":
             self.view_references(io_handler, service)
         elif command == "2":
-            io_handler.write("Not yet implemented")
-            sleep(1)
+            self.reference_search()
             self.welcome(io_handler, service)
         elif command == "3":
+            self.export_bibtex_file(io_handler, service)
+        elif command == "4":
             io_handler.write("Exiting...")
             sleep(1)
             return
-        elif command == "b":
-            self.export_bibtex_file(io_handler, service)
-        elif command == "s":
-            self.reference_search()
-            self.welcome(io_handler, service)
         else:
             io_handler.write(
-                "Invalid input. Please enter '0', '1', '2', '3', 'b' or 's'.")
+                "Invalid input. Please enter '0', '1', '2', '3' or '4'.")
             sleep(2)
             self.welcome(io_handler, service)
 

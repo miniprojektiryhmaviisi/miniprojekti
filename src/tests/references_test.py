@@ -30,7 +30,7 @@ class TestReferences(unittest.TestCase):
     def add_test_book_reference(self):
         io_handler = StubIO(
             ["0", "A", "somekey", "Operating Systems", "Stallings", "", "MacMillan", "1991", "", "",
-             "", "", "", "3"]
+             "", "", "", "4"]
             )
         try:
             build()
@@ -44,7 +44,7 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         io_handler = StubIO(
             ["0", "A", "somekey", "Operating Systems", "Stallings", "", "MacMillan", "1991", "", "",
-             "", "", "", "3"]
+             "", "", "", "4"]
             )
         reference_service_mock = Mock()
 
@@ -57,7 +57,7 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         io_handler = StubIO(
             ["0", "B", "somekey", "testtitle", "testauthor", "", "testjournal", "1991", "700", "1",
-             "105-108", "10", "testnote", "3"]
+             "105-108", "10", "testnote", "4"]
             )
         reference_service_mock = Mock()
 
@@ -71,7 +71,7 @@ class TestReferences(unittest.TestCase):
         io_handler = StubIO(
             ["0", "C", "somekey", "testtitle", "testbooktitle", "testauthor", "", "2023", "testeditor",
              "700", "1", "1", "105-108", "testaddress", "2", "testorganization", "testpublisher",
-             "testnote", "3"]
+             "testnote", "4"]
             )
         reference_service_mock = Mock()
 
@@ -84,7 +84,7 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         io_handler = StubIO(
             ["0", "A", "somekey", "", "Operating Systems", "", "Stallings", "", "", "MacMillan", "",
-             "1991", "", "", "", "", "", "2", "3"]
+             "1991", "", "", "", "", "", "5", "4"]
             )
         References(io_handler, self.reference_service)
         
@@ -98,7 +98,7 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         io_handler = StubIO(
             ["0", "A", "somekey", "Operating Systems", "Stallings", "William", "Jarmo", "",
-             "MacMillan", "1991", "", "", "", "", "", "3"]
+             "MacMillan", "1991", "", "", "", "", "", "4"]
             )
         References(io_handler, self.reference_service)
 
@@ -123,7 +123,7 @@ class TestReferences(unittest.TestCase):
             "inproaddress", 7, "inproorganization", "inpropublisher", "inpronote"
         ]]
         io_handler = StubIO(
-            ["1", "3"]
+            ["1", "4"]
             )
         References(io_handler, self.reference_service)
         print(io_handler.outputs)
@@ -135,28 +135,28 @@ class TestReferences(unittest.TestCase):
     def test_user_gets_error_message_if_wrong_input_on_start(self, mock_sleep):
         mock_sleep.return_value = None
         io_handler = StubIO(
-            ["INVALID", "3"]
+            ["INVALID", "4"]
             )
         References(io_handler, self.reference_service)
 
-        self.assertIn("Invalid input. Please enter '0', '1', '2', '3', 'b' or 's'.", io_handler.outputs)
+        self.assertIn("Invalid input. Please enter '0', '1', '2', '3' or '4'.", io_handler.outputs)
     
     @patch('references.sleep')
     def test_user_can_return_to_start(self, mock_sleep):
         mock_sleep.return_value = None
         io_handler = StubIO(
-            ["0", "Q", "3"]
+            ["0", "Q", "4"]
             )
         References(io_handler, self.reference_service)
 
-        self.assertEqual("Type 3 to Exit", io_handler.outputs[-4])
+        self.assertEqual("Type 4 to Exit", io_handler.outputs[-2])
 
     @patch('references.sleep')
     def test_user_can_search_for_existing_references_by_author(self, mock_sleep):
         mock_sleep.return_value = None
         self.add_test_book_reference()
         io_handler = StubIO(
-            ["s", "Stallings", "", "3"]
+            ["2", "Stallings", "", "4"]
         )
 
         build()
@@ -171,7 +171,7 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         self.add_test_book_reference()
         io_handler = StubIO(
-            ["s", "", "Operating Systems", "3"]
+            ["2", "", "Operating Systems", "4"]
         )
 
         build()
@@ -186,7 +186,7 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         self.add_test_book_reference()
         io_handler = StubIO(
-            ["s", "Stallings", "Operating Systems", "3"]
+            ["2", "Stallings", "Operating Systems", "4"]
         )
 
         build()

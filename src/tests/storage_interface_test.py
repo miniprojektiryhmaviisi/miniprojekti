@@ -59,3 +59,30 @@ class TestStorageInterface(unittest.TestCase):
 
         self.assertIsNotNone(result)
 
+    def test_store_inproref(self):
+
+        mock_inproref = Mock(
+            key="mock_key2", author=["Author"], title="Mock Title", booktitle="MockPublisher1",
+            year=2023, editor="hddhd",volume=1, number=1,series=7, pages="1-10",address=3, month="January",organization="xx",publisher="dd", note="Mock Note"
+        )
+
+        self.storage_interface.store_inproref(mock_inproref)
+
+        self.mock_connection3.cursor().execute.assert_called_once_with("INSERT INTO IReferences\
+            (dbkey,author,title,booktitle,year,editor,volume,number,series,pages,\
+            address,month,organization,publisher,note)\
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",("mock_key2", "Author",\
+            "Mock Title", "MockPublisher1", 2023,"hddhd",\
+            1,1,7, "1-10",\
+            3,"January","xx",\
+            "dd", "Mock Note"))
+
+
+        self.mock_connection3.commit.assert_called_once()
+
+
+        query = f"SELECT * FROM IReferences WHERE dbkey='mock_key1'"
+        result = self.mock_connection3.cursor().execute(query).fetchone()
+
+        self.assertIsNotNone(result)
+

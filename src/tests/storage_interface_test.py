@@ -87,7 +87,7 @@ class TestStorageInterface(unittest.TestCase):
 
     def test_store_articleref_failure(self):
         mock_articleref = Mock(
-            key="mock_key1", author=["Author"], title="Mock Title", journal="MockPublisher1",
+            key="mock_key2", author=["Author"], title="Mock Title", journal="MockPublisher1",
             year=2023, volume=1, number=1, pages="1-10", month="January", note="Mock Note"
         )
 
@@ -100,3 +100,19 @@ class TestStorageInterface(unittest.TestCase):
 
 
         self.mock_connection2.commit.assert_not_called()
+    def test_store_inproref_failure(self):
+        mock_inproref = Mock(
+            key="mock_key2", author=["Author"], title="Mock Title", booktitle="MockPublisher1",
+            year=2023, editor="hddhd",volume=1, number=1,series=7, pages="1-10",address=3, month="January",organization="xx",publisher="dd", note="Mock Note"
+        )
+
+
+        self.mock_connection3.cursor().execute.side_effect = Exception("Test exception")
+
+
+
+        with self.assertRaises(Exception):
+            self.storage_interface.store_inproref(mock_inproref)
+
+
+        self.mock_connection3.commit.assert_not_called()

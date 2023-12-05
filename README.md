@@ -35,4 +35,4 @@
 - *User can store book, article and inproceedings references*
 - *Programs informs the user of invalid inputs*
 - *User can view their saved references in a list*
-
+- *User can create a .bib file in BibTex format containig all the references added*

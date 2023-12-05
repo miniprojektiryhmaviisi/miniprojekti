@@ -125,3 +125,11 @@ class TestStorageInterface(unittest.TestCase):
 
 
         self.mock_connection1.cursor().execute.assert_called_once_with("SELECT dbkey FROM BReferences WHERE dbkey=existing_key")
+    def test_find_key_from_bookref_key_not_exists(self):
+        self.mock_connection1.cursor().execute.return_value.fetchall.return_value = []
+
+        result = self.storage_interface.find_key_from_bookref('non_existing_key')
+        self.assertTrue(result)
+
+        self.mock_connection1.cursor().execute.assert_called_once_with("SELECT dbkey FROM BReferences WHERE dbkey=non_existing_key")
+

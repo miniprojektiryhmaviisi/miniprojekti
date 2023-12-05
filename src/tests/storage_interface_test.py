@@ -7,7 +7,6 @@ class TestStorageInterface(unittest.TestCase):
         self.mock_connection1 = Mock()
         self.mock_connection2 = Mock()
         self.mock_connection3 = Mock()
-
         self.storage_interface = StorageInterface(
             self.mock_connection1, self.mock_connection2, self.mock_connection3
         )
@@ -41,8 +40,10 @@ class TestStorageInterface(unittest.TestCase):
             key="mock_key1", author=["Author"], title="Mock Title", journal="MockPublisher1",
             year=2023, volume=1, number=1, pages="1-10", month="January", note="Mock Note"
         )
-
-        self.storage_interface.store_articleref(mock_articleref)
+        try:
+            self.storage_interface.store_articleref(mock_articleref)
+        except Exception as exc:
+            self.fail(f"store_articleref failed with exception: {exc}")
 
         self.mock_connection2.cursor().execute.assert_called_once_with("INSERT INTO AReferences\
             (dbkey,author,title,journal,year,volume,number,pages,month,note) \
@@ -52,8 +53,6 @@ class TestStorageInterface(unittest.TestCase):
 
 
         self.mock_connection2.commit.assert_called_once()
-
-
         query = f"SELECT * FROM AReferences WHERE dbkey='mock_key1'"
         result = self.mock_connection2.cursor().execute(query).fetchone()
 

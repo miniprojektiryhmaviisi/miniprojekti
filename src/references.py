@@ -1,9 +1,11 @@
 from time import sleep
 from sqlite3 import IntegrityError
+import os
 # ainostaan book toimii. haluammeko kodakoodata bookform-metodin niin kuin on tehty alhaalla,
 # eli mitkä fieldit on pakollisia jne
 # (vai halutaanko me hakea tämä tieto jostain tiedostosta esim mitkä fieldit
 # paikollisia dokumenttilähteille, mitkä kirjoille).
+
 
 class References:
     def __init__(self, io_handler, service):
@@ -22,7 +24,8 @@ class References:
         # sleep(1)
         io_handler.write("Type 3 to Exit")
         # sleep(1)
-        io_handler.write("Type 'b' to make your existing references into bibtex form")
+        io_handler.write(
+            "Type 'b' to make your existing references into bibtex form")
 
         io_handler.write("Type 's' to search for a reference")
 
@@ -40,13 +43,14 @@ class References:
             io_handler.write("Exiting...")
             sleep(1)
             return
-        elif command=="b":
+        elif command == "b":
             self.export_bibtex_file(io_handler, service)
         elif command == "s":
             self.reference_search()
             self.welcome(io_handler, service)
         else:
-            io_handler.write("Invalid input. Please enter '0', '1', '2', '3', 'b' or 's'.")
+            io_handler.write(
+                "Invalid input. Please enter '0', '1', '2', '3', 'b' or 's'.")
             sleep(2)
             self.welcome(io_handler, service)
 
@@ -181,13 +185,22 @@ class References:
     def view_references(self, io_handler, service):
         self.display_book_references(self.service.get_all_books())
         self.display_article_references(self.service.get_all_articles())
-        self.display_inproceedings_references(self.service.get_all_inproceedings())
+        self.display_inproceedings_references(
+            self.service.get_all_inproceedings())
         sleep(2)
         self.welcome(io_handler, service)
 
+    def get_month_name(self, month_number):
+        month_names = ["", "Jan", "Feb", "Mar", "Apr", "May",
+                       "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        try:
+            return month_names[int(month_number)]
+        except (ValueError, IndexError):
+            return ""
+
     def export_bibtex_file(self, io_handler, service):
         with open("file.bib", "w", encoding="utf-8") as file:
-            all_book_refs=self.service.get_all_books()
+            all_book_refs = self.service.get_all_books()
             for i in all_book_refs:
                 file.write("@book{" + i[0] + ",\n")
                 file.write("   author = {" + i[1] + "},\n")
@@ -201,12 +214,13 @@ class References:
                 if i[7] != "":
                     file.write("   pages = {" + i[7] + "},\n")
                 if i[8] != "":
-                    file.write("   month = {" + str(i[8]) +"- },\n")
+                    month_name = self.get_month_name(i[8])
+                    file.write("   month = {" + month_name + "},\n")
                 if i[9] != "":
                     file.write("   note = {" + i[9] + "},\n")
                 file.write("}\n\n")
 
-            all_article_refs=self.service.get_all_articles()
+            all_article_refs = self.service.get_all_articles()
             for j in all_article_refs:
                 file.write("@article{" + j[0] + ",\n")
                 file.write("   author = {" + j[1] + "},\n")
@@ -220,12 +234,14 @@ class References:
                 if j[7] != "":
                     file.write("   pages = {" + j[7] + "},\n")
                 if j[8] != "":
-                    file.write("   month = {" + str(j[8]) + "},\n")
+                    month_name = self.get_month_name(j[8])
+                    print(month_name)
+                    file.write("   month = {" + month_name + "},\n")
                 if j[9] != "":
                     file.write("   note = {" + j[9] + "},\n")
                 file.write("}\n\n")
 
-            all_inproceeding_refs=self.service.get_all_inproceedings()
+            all_inproceeding_refs = self.service.get_all_inproceedings()
             for j in all_inproceeding_refs:
                 file.write("@inproceedings{" + j[0] + ",\n")
                 file.write("   author = {" + j[1] + "},\n")
@@ -245,7 +261,9 @@ class References:
                 if j[10] != "":
                     file.write("   address = {" + j[10] + "},\n")
                 if j[11] != "":
-                    file.write("   month = {" + str(j[11]) +"- },\n")
+                    month_name = self.get_month_name(j[11])
+                    print(month_name)
+                    file.write("   month = {" + month_name + "},\n")
                 if j[12] != "":
                     file.write("   organization = {" + j[12] + "},\n")
                 if j[13] != "":
@@ -254,6 +272,11 @@ class References:
                     file.write("   note = {" + j[14] + "},\n")
                 file.write("}\n\n")
         sleep(2)
+        print("BibTeX file created successfully: file.bib")
+        print("You can access the file via this link: file://" +
+              os.path.abspath("file.bib"))
+
+        # sleep(5)
         self.welcome(io_handler, service)
 
     def display_book_references(self, references):
@@ -341,11 +364,11 @@ class References:
 
     def reference_search(self):
         self.io_handler.write("Type author's name, title or both")
-        author = self.ask_for_input("Author", optional = True)["Author"]
+        author = self.ask_for_input("Author", optional=True)["Author"]
         if not author:
-            title = self.ask_for_input("Title", optional = False)["Title"]
+            title = self.ask_for_input("Title", optional=False)["Title"]
         else:
-            title = self.ask_for_input("Title", optional = True)["Title"]
+            title = self.ask_for_input("Title", optional=True)["Title"]
 
         reference_dict = self.service.search_reference(author, title)
 
@@ -353,9 +376,9 @@ class References:
         article_refs = reference_dict["article"]
         inpro_refs = reference_dict["inproceedings"]
         self.io_handler.write(f"\nWith author <{author}> and title <{title}> found "
-                            f"{len(book_refs)} book references,\n {len(article_refs)} "
-                            f"article references and {len(inpro_refs)} inproceedings "
-                            f"references")
+                              f"{len(book_refs)} book references,\n {len(article_refs)} "
+                              f"article references and {len(inpro_refs)} inproceedings "
+                              f"references")
         self.display_book_references(book_refs)
         self.display_article_references(article_refs)
         self.display_inproceedings_references(inpro_refs)

@@ -83,3 +83,6 @@ class Services:
         }
 
         return ref_dict
+
+    def delete_all(self):
+        self.database_interface.delete_all_references()

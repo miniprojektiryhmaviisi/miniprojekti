@@ -1,11 +1,6 @@
 from time import sleep
 from sqlite3 import IntegrityError
 import os
-# ainostaan book toimii. haluammeko kodakoodata bookform-metodin niin kuin on tehty alhaalla,
-# eli mitkä fieldit on pakollisia jne
-# (vai halutaanko me hakea tämä tieto jostain tiedostosta esim mitkä fieldit
-# paikollisia dokumenttilähteille, mitkä kirjoille).
-
 
 class References:
     def __init__(self, io_handler, service):
@@ -25,9 +20,11 @@ class References:
         io_handler.write(
             "Type 3 to Make your existing references into bibtex form")
         # sleep(1)
-        io_handler.write("Type 4 to Exit")
+        io_handler.write("Type 4 to Delete all references")
         # sleep(1)
-
+        io_handler.write("Type 5 to Exit")
+        # sleep(1)
+        io_handler.write("---------------")
         command = io_handler.read("What do you want to do? ")
         if command == "0":
             self.add(io_handler, service)
@@ -40,12 +37,19 @@ class References:
         elif command == "3":
             self.export_bibtex_file(io_handler, service)
         elif command == "4":
+            action = io_handler.read("Confirm action by typing delete: ")
+            if action == "delete":
+                self.reset_all()
+                io_handler.write("All references deleted!")
+                io_handler.write("---------------")
+            self.welcome(io_handler, service)
+        elif command == "5":
             io_handler.write("Exiting...")
             sleep(1)
             return
         else:
             io_handler.write(
-                "Invalid input. Please enter '0', '1', '2', '3' or '4'.")
+                "Invalid input. Please enter '0', '1', '2', '3', '4' or '5'.")
             sleep(2)
             self.welcome(io_handler, service)
 
@@ -377,3 +381,6 @@ class References:
         self.display_book_references(book_refs)
         self.display_article_references(article_refs)
         self.display_inproceedings_references(inpro_refs)
+
+    def reset_all(self):
+        self.service.delete_all()

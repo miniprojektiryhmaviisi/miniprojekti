@@ -1,6 +1,7 @@
 from database_connection import get_bookref_connection
 from database_connection import get_aref_connection
 from database_connection import get_iref_connection
+from db_build import build
 
 class StorageInterface:
     def __init__(self, connection1,connection2,connection3):
@@ -129,6 +130,12 @@ class StorageInterface:
                              (author, title))
         res = db_connection.fetchall()
         return res
+
+    def delete_all_references(self):
+        self._connection1.cursor().execute("DROP TABLE BReferences")
+        self._connection2.cursor().execute("DROP TABLE AReferences")
+        self._connection3.cursor().execute("DROP TABLE IReferences")
+        build()
 
 refe_interface=StorageInterface(
     get_bookref_connection(),get_aref_connection(),get_iref_connection()

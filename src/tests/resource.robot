@@ -16,7 +16,7 @@ Input Inproceedings Command
     Input    C
 
 Input Exit Command
-    Input    4
+    Input    5
 
 Book Input Details
     [Arguments]

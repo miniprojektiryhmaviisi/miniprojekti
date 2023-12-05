@@ -12,37 +12,6 @@ Search Nonexistent Reference Both
     Output Should Contain  No references found!
 
 Search Existing Book Reference Both
-    Add Book Reference
-    Input Search Command
-    Input Both Search Details
-    ...    Book Author
-    ...    Book Title
-    Input Exit Command
-    Ask Form
-    Output Should Contain  Book references
-
-Search Existing Article Reference Both
-    Add Article Reference
-    Input Search Command
-    Input Both Search Details
-    ...    Article Author
-    ...    Article Title
-    Input Exit Command
-    Ask Form
-    Output Should Contain  Article references
-
-Search Existing Inproceedings Reference Both
-    Add Inproceedings Reference
-    Input Search Command
-    Input Both Search Details
-    ...    Inproceedings Author
-    ...    Inproceedings Title
-    Input Exit Command
-    Ask Form
-    Output Should Contain  Inproceedings references
-
-*** Keywords ***
-Add Book Reference
     Input Add Reference Command
     ${key}=    Get Time    epoch
     Log    Generated key: ${key}
@@ -58,8 +27,15 @@ Add Book Reference
     ...    100-108
     ...    12
     ...    ${EMPTY}
+    Input Search Command
+    Input Both Search Details
+    ...    Book Author
+    ...    Book Title
+    Input Exit Command
+    Ask Form
+    Output Should Contain  Cite Key${SPACE*5}: ${key}
 
-Add Article Reference
+Search Existing Article Reference Both
     Input Add Reference Command
     ${key}=    Get Time    epoch
     Log    Generated key: ${key}
@@ -75,8 +51,15 @@ Add Article Reference
     ...    100-108
     ...    12
     ...    ${EMPTY}
+    Input Search Command
+    Input Both Search Details
+    ...    Article Author
+    ...    Article Title
+    Input Exit Command
+    Ask Form
+    Output Should Contain  Cite Key${SPACE*5}: ${key}
 
-Add Inproceedings Reference
+Search Existing Inproceedings Reference Both
     Input Add Reference Command
     ${key}=    Get Time    epoch
     Log    Generated key: ${key}
@@ -97,3 +80,10 @@ Add Inproceedings Reference
     ...    12
     ...    org1
     ...    note1
+    Input Search Command
+    Input Both Search Details
+    ...    Inproceedings Author
+    ...    Inproceedings Title
+    Input Exit Command
+    Ask Form
+    Output Should Contain  Cite Key${SPACE*5}: ${key}

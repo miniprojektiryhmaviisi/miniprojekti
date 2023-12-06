@@ -1,8 +1,17 @@
 *** Settings ***
 Resource        resource.robot
+Test Setup    Prepare DB
 
 *** Test Cases ***
 Export all references
+    Input Bibtex Command
+    Input Exit Command
+    Execute App
+    Parse And Check Bibfile
+
+
+*** Keywords ***
+Prepare DB
     Input Delete Command
     Input    delete
     Input Add Reference Command
@@ -18,7 +27,3 @@ Export all references
     ...    100-108
     ...    12
     ...    ${EMPTY}
-    Input Bibtex Command
-    Input Exit Command
-    Ask Form
-    Parse And Check Bibfile

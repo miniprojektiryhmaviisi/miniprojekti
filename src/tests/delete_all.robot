@@ -8,7 +8,7 @@ Export all references
     Input    delete
     Input View Command
     Input Exit Command
-    Ask Form
+    Execute App
     Output Should Contain    No references
 
 *** Keywords ***

@@ -15,14 +15,8 @@ class ReferencesLibrary:
     def get_random_key(self):
         return secrets.token_hex(16)
 
-    def ask_form(self):
+    def execute_app(self):
         self._references = References(self._io, self.reference_service)
-
-    #def ask_articleform(self):
-        #self._references.articleform()
-
-    #def ask_inproceedingsform(self):
-        #self._references.inproceedingsform()
 
     def input(self, value):
         self._io.add_input(value)

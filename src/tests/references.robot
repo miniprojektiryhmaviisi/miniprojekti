@@ -21,7 +21,7 @@ Add Book Reference With Valid Input
     ...    12
     ...    ${EMPTY}
     Input Exit Command
-    Ask Form
+    Execute App
     Output Should Contain    New reference added!
 
 Add Article Reference With Valid Input
@@ -40,7 +40,7 @@ Add Article Reference With Valid Input
     ...    12
     ...    ${EMPTY}
     Input Exit Command
-    Ask Form
+    Execute App
     Output Should Contain    New reference added!
 
 Add Inproceedings Reference With Valid Input
@@ -64,7 +64,7 @@ Add Inproceedings Reference With Valid Input
     ...    org1
     ...    note1
     Input Exit Command
-    Ask Form
+    Execute App
     Output Should Contain    New reference added!
 
 Add Empty Reference For Non-Optional Fields
@@ -83,7 +83,7 @@ Add Empty Reference For Non-Optional Fields
     ...    12
     ...    ${EMPTY}
     Input Exit Command
-    Ask Form
+    Execute App
     Output Should Contain    Field cannot be empty. Please provide a valid input.
 
 Add Book Reference with already used cite key
@@ -116,5 +116,5 @@ Add Book Reference with already used cite key
    ...    12
    ...    ${EMPTY}
    Input Exit Command
-   Ask Form
+   Execute App
    Output Should Contain    Failed to save new reference: UNIQUE constraint failed: BReferences.dbkey

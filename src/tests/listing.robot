@@ -22,7 +22,7 @@ List all references
     ...    ${EMPTY}
     Input View Command
     Input Exit Command
-    Ask Form
+    Execute App
     Output Should Contain    ---------------
     Output Should Contain    Book references
     Output Should Contain    ---------------\n

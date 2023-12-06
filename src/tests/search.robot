@@ -8,7 +8,7 @@ Search Nonexistent Reference Both
     ...    No one
     ...    Blank
     Input Exit Command
-    Ask Form
+    Execute App
     Output Should Contain  No references found!
 
 Search Existing Book Reference Both
@@ -32,7 +32,7 @@ Search Existing Book Reference Both
     ...    Book Author
     ...    Book Title
     Input Exit Command
-    Ask Form
+    Execute App
     Output Should Contain  Cite Key${SPACE*5}: ${key}
 
 Search Existing Article Reference Both
@@ -56,7 +56,7 @@ Search Existing Article Reference Both
     ...    Article Author
     ...    Article Title
     Input Exit Command
-    Ask Form
+    Execute App
     Output Should Contain  Cite Key${SPACE*5}: ${key}
 
 Search Existing Inproceedings Reference Both
@@ -85,5 +85,5 @@ Search Existing Inproceedings Reference Both
     ...    Inproceedings Author
     ...    Inproceedings Title
     Input Exit Command
-    Ask Form
+    Execute App
     Output Should Contain  Cite Key${SPACE*5}: ${key}

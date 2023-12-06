@@ -87,7 +87,7 @@ def parse_and_check_bibfile() -> None:
                                     ('pages', '100-108'),
                                     ('month', 'Dec')],
                                 persons=OrderedCaseInsensitiveDict([('author',
-                                                                    [Person('Author, Article')])]))),
+                                                                   [Person('Author, Article')])]))),
             ('1701866173', Entry('inproceedings',
                                 fields=[
                                     ('title', '{Operating Systems}'),

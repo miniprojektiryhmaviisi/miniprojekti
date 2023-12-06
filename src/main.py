@@ -10,7 +10,6 @@ def init():
     ref_repo = ReferencesRepository()
     refe_services = Services(ref_repo)
     References(console_io, refe_services)
-#    connection.close()
 
 if __name__ == "__main__":
     init()

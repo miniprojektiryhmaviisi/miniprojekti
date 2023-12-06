@@ -9,3 +9,4 @@ omit =
     database_initialization.py
     __init__.py
     references_library.py
+    customer_viewing.py

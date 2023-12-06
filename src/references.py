@@ -57,8 +57,9 @@ class References:
     def add(self, io_handler, service):
         # sleep(1)
         io_handler.write(
-            "What type of reference? (1. For the pages field, please use '--' as a separator, e.g., 2--7.\n"
-            "2. For the month field, please enter an integer between 1-12)"
+            "What type of reference? \n"
+            "1. For the pages field, please use '--' as a separator, e.g., 2--7.\n"
+            "2. For the month field, please enter an integer between 1-12"
         )
         # sleep(1)
         io_handler.write("Type A to Add a book")

@@ -283,7 +283,7 @@ class References:
         io_handler.write("")
         io_handler.write("---------------")
         io_handler.write("Book references")
-        io_handler.write("---------------\n ")
+        io_handler.write("---------------\n")
         for entry in references:
             io_handler.write("Cite Key     : " + entry[0])
             io_handler.write("Author       : " + entry[1])
@@ -307,7 +307,7 @@ class References:
         io_handler = self.io_handler
         io_handler.write("---------------")
         io_handler.write("Article references")
-        io_handler.write("---------------\n ")
+        io_handler.write("---------------\n")
         for entry in references:
             io_handler.write("Cite Key     : " + entry[0])
             io_handler.write("Author       : " + entry[1])
@@ -331,7 +331,7 @@ class References:
         io_handler = self.io_handler
         io_handler.write("---------------")
         io_handler.write("Inproceedings references")
-        io_handler.write("---------------\n ")
+        io_handler.write("---------------\n")
         for entry in references:
             io_handler.write("Cite Key     : " + entry[0])
             io_handler.write("Author       : " + entry[1])

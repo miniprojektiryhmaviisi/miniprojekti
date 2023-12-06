@@ -13,7 +13,7 @@ Export all references
 *** Keywords ***
 Prepare DB
     Input Delete Command
-    Input    delete
+    Input Delete Confirmation
     Input Add Reference Command
     Input Book Command
     Book Input Details

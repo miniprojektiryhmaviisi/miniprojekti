@@ -5,7 +5,7 @@ Test Setup    Prepare DB
 *** Test Cases ***
 Export all references
     Input Delete Command
-    Input    delete
+    Input Delete Confirmation
     Input View Command
     Input Exit Command
     Execute App

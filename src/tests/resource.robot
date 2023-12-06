@@ -31,6 +31,9 @@ Input Article Command
 Input Inproceedings Command
     Input    C
 
+Input Delete Confirmation
+    Input    delete
+
 Book Input Details
     [Arguments]
     ...    ${key}

@@ -2,6 +2,7 @@ from time import sleep
 from sqlite3 import IntegrityError
 import os
 
+
 class References:
     def __init__(self, io_handler, service):
         self.io_handler = io_handler
@@ -55,7 +56,10 @@ class References:
 
     def add(self, io_handler, service):
         # sleep(1)
-        io_handler.write("What type of reference?")
+        io_handler.write(
+            "What type of reference? (1. For the pages field, please use '--' as a separator, e.g., 2--7.\n"
+            "2. For the month field, please enter an integer between 1-12)"
+        )
         # sleep(1)
         io_handler.write("Type A to Add a book")
         # sleep(1)
@@ -234,7 +238,7 @@ class References:
                     file.write("   pages = {" + j[7] + "},\n")
                 if j[8] != "":
                     month_name = self.get_month_name(j[8])
-                    #print(month_name)
+                    # print(month_name)
                     file.write("   month = {" + month_name + "},\n")
                 if j[9] != "":
                     file.write("   note = {" + j[9] + "},\n")
@@ -261,7 +265,7 @@ class References:
                     file.write("   address = {" + j[10] + "},\n")
                 if j[11] != "":
                     month_name = self.get_month_name(j[11])
-                    #print(month_name)
+                    # print(month_name)
                     file.write("   month = {" + month_name + "},\n")
                 if j[12] != "":
                     file.write("   organization = {" + j[12] + "},\n")

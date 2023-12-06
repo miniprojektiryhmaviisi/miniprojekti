@@ -1,5 +1,5 @@
 *** Settings ***
-Library     ../ReferencesLibrary.py
+Library    ../ReferencesLibrary.py
 Library    ../BibLibrary.py
 
 

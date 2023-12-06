@@ -1,5 +1,6 @@
 *** Settings ***
-Resource        resource.robot
+Resource       resource.robot
+Suite Setup    Prepare DB
 
 *** Test Cases  ***
 Search Nonexistent Reference Both
@@ -12,60 +13,67 @@ Search Nonexistent Reference Both
     Output Should Contain  No references found!
 
 Search Existing Book Reference Both
-    Input Add Reference Command
-    ${key}=    Get Time    epoch
-    Log    Generated key: ${key}
-    Input Book Command
-    Book Input Details
-    ...    ${key}
-    ...    Book Title
-    ...    Book Author
-    ...    MacMillan
-    ...    1991
-    ...    682
-    ...    1
-    ...    100-108
-    ...    12
-    ...    ${EMPTY}
     Input Search Command
     Input Both Search Details
     ...    Book Author
     ...    Book Title
     Input Exit Command
     Execute App
-    Output Should Contain  Cite Key${SPACE*5}: ${key}
+    Output Should Contain  Cite Key${SPACE*5}: TestKey1
 
-Search Existing Article Reference Both
-    Input Add Reference Command
-    ${key}=    Get Time    epoch
-    Log    Generated key: ${key}
-    Input Article Command
-    Article Input Details
-    ...    ${key}
-    ...    Article Title
-    ...    Article Author
-    ...    MacMillan
-    ...    1991
-    ...    682
-    ...    1
-    ...    100-108
-    ...    12
-    ...    ${EMPTY}
+Search Existing Article Reference Both   
     Input Search Command
     Input Both Search Details
     ...    Article Author
     ...    Article Title
     Input Exit Command
     Execute App
-    Output Should Contain  Cite Key${SPACE*5}: ${key}
+    Output Should Contain  Cite Key${SPACE*5}: TestKey2
 
 Search Existing Inproceedings Reference Both
+    Input Search Command
+    Input Both Search Details
+    ...    Inproceedings Author
+    ...    Inproceedings Title
+    Input Exit Command
+    Execute App
+    Output Should Contain  Cite Key${SPACE*5}: TestKey3
+
+
+*** Keywords ***
+Prepare DB
+    Input Delete Command
+    Input Delete Confirmation
     Input Add Reference Command
-    ${key}=    Get Time    epoch
-    Log    Generated key: ${key}
+    Input Book Command
+    Book Input Details
+    ...    TestKey1
+    ...    Book Title
+    ...    Book Author
+    ...    MacMillan
+    ...    1991
+    ...    682
+    ...    1
+    ...    100-108
+    ...    12
+    ...    ${EMPTY}
+    Input Add Reference Command
+    Input Article Command
+    Article Input Details
+    ...    TestKey2
+    ...    Article Title
+    ...    Article Author
+    ...    MacMillan
+    ...    1991
+    ...    682
+    ...    1
+    ...    100-108
+    ...    12
+    ...    ${EMPTY}
+    Input Add Reference Command
     Input Inproceedings Command
     Inproceedings Input Details
-    ...    ${key}
+    ...    TestKey3
     ...    Inproceedings Title
     ...    Inproceedings Author
     ...    MacMillan
@@ -80,10 +88,3 @@ Search Existing Inproceedings Reference Both
     ...    12
     ...    org1
     ...    note1
-    Input Search Command
-    Input Both Search Details
-    ...    Inproceedings Author
-    ...    Inproceedings Title
-    Input Exit Command
-    Execute App
-    Output Should Contain  Cite Key${SPACE*5}: ${key}

@@ -1,16 +1,34 @@
 *** Settings ***
-Resource        resource.robot
-
-Test Setup      Input Add Reference Command
-
+Resource      resource.robot
+Test Setup    Prepare DB   
 
 *** Test Cases ***
 List all references
-    ${key}=    Get Time    epoch
-    Log    Generated key: ${key}
+    Input View Command
+    Input Exit Command
+    Execute App
+    Output Should Contain    ---------------
+    Output Should Contain    Book references
+    Output Should Contain    ---------------
+    Output Should Contain    Cite Key\ \ \ \ \ : TestKey
+    Output Should Contain    Author\ \ \ \ \ \ \ : Stallings
+    Output Should Contain    Title\ \ \ \ \ \ \ \ : Operating Systems
+    Output Should Contain    Publisher\ \ \ \ : MacMillan
+    Output Should Contain    Year\ \ \ \ \ \ \ \ \ : 1991
+    Output Should Contain    Volume\ \ \ \ \ \ \ : 682
+    Output Should Contain    Number\ \ \ \ \ \ \ : 1
+    Output Should Contain    Pages\ \ \ \ \ \ \ \ : 100-108
+    Output Should Contain    Month\ \ \ \ \ \ \ \ : 12
+    Output Should Contain    ---------------
+
+*** Keywords ***
+Prepare DB
+    Input Delete Command
+    Input Delete Confirmation
+    Input Add Reference Command
     Input Book Command
     Book Input Details
-    ...    ${key}
+    ...    TestKey
     ...    Operating Systems
     ...    Stallings
     ...    MacMillan
@@ -20,9 +38,3 @@ List all references
     ...    100-108
     ...    12
     ...    ${EMPTY}
-    Input View Command
-    Input Exit Command
-    Execute App
-    Output Should Contain    ---------------
-    Output Should Contain    Book references
-    Output Should Contain    ---------------\n

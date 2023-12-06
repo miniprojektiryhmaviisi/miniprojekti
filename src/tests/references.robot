@@ -1,6 +1,5 @@
 *** Settings ***
 Resource        resource.robot
-
 Test Setup      Input Add Reference Command
 
 

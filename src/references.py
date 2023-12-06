@@ -276,8 +276,11 @@ class References:
                     file.write("   note = {" + j[14] + "},\n")
                 file.write("}\n\n")
         sleep(2)
-        print("BibTeX file created successfully: file.bib")
-        print("You can access the file via this link: file://" +
+        #print("BibTeX file created successfully: file.bib")
+        #print("You can access the file via this link: file://" +
+        #      os.path.abspath("file.bib"))
+        self.io_handler.write("BibTeX file created successfully: file.bib")
+        self.io_handler.write("You can access the file via this link: file://" +
               os.path.abspath("file.bib"))
 
         # sleep(5)

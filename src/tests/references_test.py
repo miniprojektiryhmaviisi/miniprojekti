@@ -207,3 +207,15 @@ class TestReferences(unittest.TestCase):
         References(io_handler, refservice)
         self.assertNotIn("Cite Key     : somekey", io_handler.outputs)
 
+    @patch('references.sleep')
+    def test_user_can_create_a_bibtex_file(self, mock_sleep):
+        mock_sleep.return_value = None
+        self.add_test_book_reference()
+        io_handler = StubIO(
+            ["3", "5"]
+        )
+        build()
+        refservice = Services(self.refrepo)
+        References(io_handler, refservice)
+        self.assertIn("BibTeX file created successfully: file.bib", io_handler.outputs)
+

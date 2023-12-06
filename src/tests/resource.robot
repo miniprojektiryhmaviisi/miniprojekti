@@ -1,5 +1,6 @@
 *** Settings ***
 Library     ../ReferencesLibrary.py
+Library    ../BibLibrary.py
 
 
 *** Keywords ***

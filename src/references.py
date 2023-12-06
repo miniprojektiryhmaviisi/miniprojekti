@@ -187,10 +187,18 @@ class References:
             sleep(2)
 
     def view_references(self, io_handler, service):
-        self.display_book_references(self.service.get_all_books())
-        self.display_article_references(self.service.get_all_articles())
-        self.display_inproceedings_references(
-            self.service.get_all_inproceedings())
+        books = self.service.get_all_books()
+        articles = self.service.get_all_articles()
+        inproceedings = self.service.get_all_inproceedings()
+        if not any([books, articles, inproceedings]):
+            self.io_handler.write("No references")
+        else:
+            if books:
+                self.display_book_references(books)
+            if articles:
+                self.display_article_references(articles)
+            if inproceedings:
+                self.display_inproceedings_references(inproceedings)
         sleep(2)
         self.welcome(io_handler, service)
 

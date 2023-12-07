@@ -1,6 +1,7 @@
 from database_connection import get_bookref_connection
 from database_connection import get_aref_connection
 from database_connection import get_iref_connection
+from db_build import build
 
 class StorageInterface:
     def __init__(self, connection1,connection2,connection3):
@@ -65,13 +66,76 @@ class StorageInterface:
         res = db_connection.execute(query).fetchall()
         return res
 
-    def find_key_from_bookref(self,key):
+    def find_key_from_bookref(self, key):
         db_connection=self._connection1.cursor()
         query = f"SELECT dbkey FROM BReferences WHERE dbkey={key}"
         exist=db_connection.execute(query).fetchall()
         if len(exist)!=0:
             return False
         return True
+
+    def search_book_by_title(self, title):
+        db_connection=self._connection1.cursor()
+        db_connection.execute("SELECT * FROM BReferences WHERE title=?", (title,))
+        res = db_connection.fetchall()
+        return res
+
+    def search_article_by_title(self, title):
+        db_connection=self._connection2.cursor()
+        db_connection.execute("SELECT * FROM AReferences WHERE title=?", (title,))
+        res = db_connection.fetchall()
+        return res
+
+    def search_inpro_by_title(self, title):
+        db_connection=self._connection3.cursor()
+        db_connection.execute("SELECT * FROM IReferences WHERE title=?", (title,))
+        res = db_connection.fetchall()
+        return res
+
+    def search_book_by_author(self, author):
+        db_connection=self._connection1.cursor()
+        db_connection.execute("SELECT * FROM BReferences WHERE author=?", (author,))
+        res = db_connection.fetchall()
+        return res
+
+    def search_article_by_author(self, author):
+        db_connection=self._connection2.cursor()
+        db_connection.execute("SELECT * FROM AReferences WHERE author=?", (author,))
+        res = db_connection.fetchall()
+        return res
+
+    def search_inpro_by_author(self, author):
+        db_connection=self._connection3.cursor()
+        db_connection.execute("SELECT * FROM IReferences WHERE author=?", (author,))
+        res = db_connection.fetchall()
+        return res
+
+    def search_book_by_author_and_title(self, author, title):
+        db_connection=self._connection1.cursor()
+        db_connection.execute("SELECT * FROM BReferences WHERE author=? AND title=?", \
+                             (author, title))
+        res = db_connection.fetchall()
+        return res
+
+    def search_article_by_author_and_title(self, author, title):
+        db_connection=self._connection2.cursor()
+        db_connection.execute("SELECT * FROM AReferences WHERE author=? AND title=?", \
+                             (author, title))
+        res = db_connection.fetchall()
+        return res
+
+    def search_inpro_by_author_and_title(self, author, title):
+        db_connection=self._connection3.cursor()
+        db_connection.execute("SELECT * FROM IReferences WHERE author=? AND title=?", \
+                             (author, title))
+        res = db_connection.fetchall()
+        return res
+
+    def delete_all_references(self):
+        self._connection1.cursor().execute("DROP TABLE BReferences")
+        self._connection2.cursor().execute("DROP TABLE AReferences")
+        self._connection3.cursor().execute("DROP TABLE IReferences")
+        build()
 
 refe_interface=StorageInterface(
     get_bookref_connection(),get_aref_connection(),get_iref_connection()

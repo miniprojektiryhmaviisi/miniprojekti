@@ -26,13 +26,15 @@
   python3 src/main.py
   ```
   
-- Select 0 to add a new reference, 1 to view your references.
+- Select 0 to add a new reference, 1 to view your references, 2 to search for a specific reference, 3 to create .bib file and 4 to delete all references
 - Select the format of the reference by entering A, B or C for book, article or inproceedings reference.
 - Answer the asked fields. 
-- Press 2 to close the application.
+- Press 5 to close the application.
 
 ## Feature list
 - *User can store book, article and inproceedings references*
 - *Programs informs the user of invalid inputs*
 - *User can view their saved references in a list*
-
+- *User can create a .bib file in BibTex format containig all the references added*
+- *User can search for a reference with author/title or both*
+- *User can delete all saved references*

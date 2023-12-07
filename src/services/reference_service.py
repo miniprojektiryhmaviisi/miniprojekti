@@ -61,3 +61,28 @@ class Services:
 
     def get_all_inproceedings(self):
         return self.database_interface.get_all_from_inproref()
+
+    def search_reference(self, author, title):
+        if not author:
+            book_search = self.database_interface.search_book_by_title(title)
+            art_search = self.database_interface.search_article_by_title(title)
+            inpro_search = self.database_interface.search_inpro_by_title(title)
+        elif not title:
+            book_search = self.database_interface.search_book_by_author(author)
+            art_search = self.database_interface.search_article_by_author(author)
+            inpro_search = self.database_interface.search_inpro_by_author(author)
+        else:
+            book_search = self.database_interface.search_book_by_author_and_title(author, title)
+            art_search = self.database_interface.search_article_by_author_and_title(author, title)
+            inpro_search = self.database_interface.search_inpro_by_author_and_title(author, title)
+
+        ref_dict = {
+            "book": book_search,
+            "article" : art_search,
+            "inproceedings" : inpro_search
+        }
+
+        return ref_dict
+
+    def delete_all(self):
+        self.database_interface.delete_all_references()

@@ -1,2 +1,3 @@
 ignore:
   - "src/ReferencesLibrary.py"
+  - "src/customer_viewing.py"

@@ -3,14 +3,19 @@ from sqlite3 import IntegrityError
 import os
 
 
+
+
 class References:
     def __init__(self, io_handler, service):
         self.io_handler = io_handler
         self.service = service
         self.welcome(io_handler, service)
 
+
+
+
     def welcome(self, io_handler, service):
-        io_handler.write("Welcome to MyReferences!")
+        io_handler.write("\033[38;5;18;48;5;189;2mWelcome to MyReferences!")
         # sleep(1)
         io_handler.write("Type 0 to Add a reference")
         # sleep(1)
@@ -25,7 +30,7 @@ class References:
         # sleep(1)
         io_handler.write("Type 5 to Exit")
         # sleep(1)
-        io_handler.write("---------------")
+        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
         command = io_handler.read("What do you want to do? ")
         if command == "0":
             self.add(io_handler, service)
@@ -42,15 +47,15 @@ class References:
             if action == "delete":
                 self.reset_all()
                 io_handler.write("All references deleted!")
-                io_handler.write("---------------")
+                io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
             self.welcome(io_handler, service)
         elif command == "5":
-            io_handler.write("Exiting...")
+            io_handler.write("Exiting...\033[0m")
             sleep(1)
             return
         else:
             io_handler.write(
-                "Invalid input. Please enter '0', '1', '2', '3', '4' or '5'.")
+                "\033[91mInvalid input\033[38;5;18;48;5;189;2m. Please enter '0', '1', '2', '3', '4' or '5'.")
             sleep(2)
             self.welcome(io_handler, service)
 
@@ -297,9 +302,9 @@ class References:
     def display_book_references(self, references):
         io_handler = self.io_handler
         io_handler.write("")
-        io_handler.write("---------------")
+        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
         io_handler.write("Book references")
-        io_handler.write("---------------\n")
+        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         for entry in references:
             io_handler.write("Cite Key     : " + entry[0])
             io_handler.write("Author       : " + entry[1])
@@ -317,13 +322,13 @@ class References:
             if entry[9] != "":
                 io_handler.write("Notes        : " + entry[9])
             io_handler.write("")
-            io_handler.write("---------------")
+            io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
 
     def display_article_references(self, references):
         io_handler = self.io_handler
-        io_handler.write("---------------")
+        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
         io_handler.write("Article references")
-        io_handler.write("---------------\n")
+        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         for entry in references:
             io_handler.write("Cite Key     : " + entry[0])
             io_handler.write("Author       : " + entry[1])
@@ -341,13 +346,13 @@ class References:
             if entry[9] != "":
                 io_handler.write("Notes        : " + entry[9])
             io_handler.write("")
-            io_handler.write("---------------")
+            io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
 
     def display_inproceedings_references(self, references):
         io_handler = self.io_handler
-        io_handler.write("---------------")
+        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
         io_handler.write("Inproceedings references")
-        io_handler.write("---------------\n")
+        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         for entry in references:
             io_handler.write("Cite Key     : " + entry[0])
             io_handler.write("Author       : " + entry[1])
@@ -375,7 +380,7 @@ class References:
             if entry[14] != "":
                 io_handler.write("Note         : " + entry[14])
             io_handler.write("")
-            io_handler.write("---------------")
+            io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
 
     def reference_search(self):
         self.io_handler.write("Type author's name, title or both")

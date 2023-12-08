@@ -38,3 +38,9 @@ Prepare DB
     ...    100-108
     ...    12
     ...    ${EMPTY}
+    Input View Command
+    Input Exit Command
+    Ask Form
+    Output Should Contain    *・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*
+    Output Should Contain    Book references
+    Output Should Contain    *・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n

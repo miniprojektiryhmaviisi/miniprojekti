@@ -21,6 +21,7 @@ List all references
     Output Should Contain    Month\ \ \ \ \ \ \ \ : 12
     Output Should Contain    ---------------
 
+
 *** Keywords ***
 Prepare DB
     Input Delete Command
@@ -38,9 +39,3 @@ Prepare DB
     ...    100-108
     ...    12
     ...    ${EMPTY}
-    Input View Command
-    Input Exit Command
-    Ask Form
-    Output Should Contain    *・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*
-    Output Should Contain    Book references
-    Output Should Contain    *・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n

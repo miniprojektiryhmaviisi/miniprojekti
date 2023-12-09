@@ -138,9 +138,15 @@ class StorageInterface:
         build()
 
     def get_all_citekeys(self):
-        book_keys = self._connection1.cursor().execute("SELECT dbkey from BReferences").fetchall()
-        art_keys = self._connection2.cursor().execute("SELECT dbkey from AReferences").fetchall()
-        inpro_keys = self._connection3.cursor().execute("SELECT dbkey from IReferences").fetchall()
+        book_keys = []
+        for i in self._connection1.cursor().execute("SELECT dbkey from BReferences").fetchall():
+            book_keys.append(i[0])
+        art_keys = []
+        for i in self._connection2.cursor().execute("SELECT dbkey from AReferences").fetchall():
+            art_keys.append(i[0])
+        inpro_keys = []
+        for i in self._connection3.cursor().execute("SELECT dbkey from IReferences").fetchall():
+            inpro_keys.append(i[0])
 
         return {
             "book": book_keys,
@@ -149,13 +155,13 @@ class StorageInterface:
         }
 
     def delete_book_reference(self, key):
-        self._connection1.cursor().execute("DELETE FROM BReferences WHERE dbkey=?", key)
+        self._connection1.cursor().execute("DELETE FROM BReferences WHERE dbkey=(?)", (key,))
 
     def delete_article_reference(self, key):
-        self._connection1.cursor().execute("DELETE FROM AReferences WHERE dbkey=?", key)
+        self._connection1.cursor().execute("DELETE FROM AReferences WHERE dbkey=(?)", (key,))
 
     def delete_inproceedings_reference(self, key):
-        self._connection1.cursor().execute("DELETE FROM IReferences WHERE dbkey=?", key)
+        self._connection1.cursor().execute("DELETE FROM IReferences WHERE dbkey=(?)", (key,))
 
 
 refe_interface=StorageInterface(

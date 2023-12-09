@@ -48,6 +48,9 @@ class References:
             io_handler.write("Exiting...\033[0m")
             sleep(1)
             return
+        elif command == "d":
+            self.delete_by_cite_key()
+            self.welcome(io_handler, service)
         else:
             io_handler.write(
                 "\033[91mInvalid input\033[38;5;18;48;5;189;2m. Please enter '0', '1', '2', '3', '4' or '5'.")
@@ -410,3 +413,18 @@ class References:
 
     def reset_all(self):
         self.service.delete_all()
+
+    def delete_by_cite_key(self):
+        list_of_keys = []
+        self.io_handler.write("Type the cite key(s) of the references you want to delete")
+        self.io_handler.write("You can find the cite keys by viewing the references from main menu")
+
+        key = self.io_handler.read("Cite key: ")
+        list_of_keys.append(key)
+        while True:
+            #print(list_of_keys)
+            next_key = self.io_handler.read("Next Cite Key (empty stops and deletes): ")
+            if next_key == "":
+                self.io_handler.write(self.service.delete_reference(list_of_keys))
+                return
+            list_of_keys.append(next_key)

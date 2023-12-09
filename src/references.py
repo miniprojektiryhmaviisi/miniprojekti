@@ -3,16 +3,11 @@ from sqlite3 import IntegrityError
 import os
 
 
-
-
 class References:
     def __init__(self, io_handler, service):
         self.io_handler = io_handler
         self.service = service
         self.welcome(io_handler, service)
-
-
-
 
     def welcome(self, io_handler, service):
         io_handler.write("\033[38;5;18;48;5;189;2mWelcome to MyReferences!")

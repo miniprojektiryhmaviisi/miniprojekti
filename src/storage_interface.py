@@ -137,6 +137,27 @@ class StorageInterface:
         self._connection3.cursor().execute("DROP TABLE IReferences")
         build()
 
+    def get_all_citekeys(self):
+        book_keys = self._connection1.cursor().execute("SELECT dbkey from BReferences").fetchall()
+        art_keys = self._connection2.cursor().execute("SELECT dbkey from AReferences").fetchall()
+        inpro_keys = self._connection3.cursor().execute("SELECT dbkey from IReferences").fetchall()
+
+        return {
+            "book": book_keys,
+            "article": art_keys,
+            "inproceedings": inpro_keys
+        }
+
+    def delete_book_reference(self, key):
+        self._connection1.cursor().execute("DELETE FROM BReferences WHERE dbkey=?", key)
+
+    def delete_article_reference(self, key):
+        self._connection1.cursor().execute("DELETE FROM AReferences WHERE dbkey=?", key)
+
+    def delete_inproceedings_reference(self, key):
+        self._connection1.cursor().execute("DELETE FROM IReferences WHERE dbkey=?", key)
+
+
 refe_interface=StorageInterface(
     get_bookref_connection(),get_aref_connection(),get_iref_connection()
 )

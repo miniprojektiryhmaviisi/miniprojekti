@@ -30,8 +30,37 @@ class TestReferences(unittest.TestCase):
     def add_test_book_reference(self):
         io_handler = StubIO(
             ["0", "A", "somekey", "Operating Systems", "Stallings", "", "MacMillan", "1991", "", "",
-             "", "", "", "5"]
-            )
+             "", "", "", "5"
+            ]
+        )
+        try:
+            build()
+            refservice = Services(self.refrepo)
+            References(io_handler, refservice)
+        except:
+            pass
+
+    def add_test_article_reference(self):
+        io_handler = StubIO(
+            ["0", "B", "article", "How artificial intelligence is transforming the world",
+            "Darrel. M West", "", "Brookings", "2018", "", "", "", "4", "", "5"
+            ]
+        )
+        try:
+            build()
+            refservice = Services(self.refrepo)
+            References(io_handler, refservice)
+        except:
+            pass
+
+    def add_test_inproceedings_reference(self):
+        io_handler = StubIO(
+            ["0", "C", "inproceeding", "Augmenting Robot Software Development Process with Flexbot",
+            "2023 IEEE/ACM 5th International Workshop on Robotics Software Engineering (RoSE)",
+            "Paulius Daubaris", "", "2023", "", "", "", "", "69--72", "United States", "7", "", "",
+            "", "5"
+            ]
+        )
         try:
             build()
             refservice = Services(self.refrepo)
@@ -219,3 +248,22 @@ class TestReferences(unittest.TestCase):
         References(io_handler, refservice)
         self.assertIn("BibTeX file created successfully: file.bib", io_handler.outputs)
 
+    # @patch('references.sleep')
+    # def test_user_can_delete_references_with_cite_keys(self, mock_sleep):
+    #     mock_sleep.return_value = None
+    #     self.add_test_book_reference()
+    #     self.add_test_article_reference()
+    #     self.add_test_inproceedings_reference()
+
+    #     io_handler = StubIO(
+    #         [
+    #             "<tuleva komento>", "somekey", "article", "inproceeding", "5"
+    #         ]
+    #     )
+
+    #     build()
+    #     refservice = Services(self.refrepo)
+    #     References(io_handler, refservice)
+    #     self.assertNotIn("Cite Key     : somekey", io_handler.outputs)
+    #     self.assertNotIn("Cite Key     : article", io_handler.outputs)
+    #     self.assertNotIn("Cite Key     : inproceeding", io_handler.outputs)

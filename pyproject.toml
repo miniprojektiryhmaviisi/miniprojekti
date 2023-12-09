@@ -2,7 +2,7 @@
 name = "miniprojekti"
 version = "0.1.0"
 description = ""
-authors = ["Ville Salmela <villesalmela@users.noreply.github.com>", "Antti Hyytiäinen <hyytant@gmail.com>"]
+authors = ["Ville Salmela <villesalmela@users.noreply.github.com>", "Antti Hyytiäinen <hyytant@gmail.com>", "Maxim Egorov <maxim.egorov@helsinki.fi>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]

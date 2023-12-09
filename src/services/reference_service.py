@@ -86,3 +86,19 @@ class Services:
 
     def delete_all(self):
         self.database_interface.delete_all_references()
+
+    def delete_reference(self, cite_keys):
+        db_keys = self.database_interface.get_all_citekeys()
+        message = "Reference(s) with cite key(s)\n ----\n"
+        for key in cite_keys:
+            if key in db_keys["book"]:
+                self.database_interface.delete_book_reference(key)
+                message += f"- {key}\n"
+            elif key in db_keys["article"]:
+                self.database_interface.delete_article_reference(key)
+                message += f"- {key}\n"
+            elif key in db_keys["inproceedings"]:
+                self.database_interface.delete_inproceedings_reference(key)
+                message += f"- {key}\n"
+        message += "deleted."
+        return message

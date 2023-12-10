@@ -20,7 +20,7 @@ Input Delete Command
     Input    4
 
 Input Exit Command
-    Input    5
+    Input    9
 
 Input Book Command
     Input    A

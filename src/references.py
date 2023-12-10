@@ -24,7 +24,7 @@ class References:
         # sleep(1)
         io_handler.write("Type 4 to Delete all references")
         # sleep(1)
-        io_handler.write("Type 5 to Exit")
+        io_handler.write("Type 9 to Exit")
         # sleep(1)
         io_handler.write("\033[0m*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\033[38;5;18;2m")
         command = io_handler.read("What do you want to do? ")
@@ -47,7 +47,7 @@ class References:
                 io_handler.write("\033[0m*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\033[38;5;18;2m")
             io_handler.write("\033[38;5;18;2m")
             self.welcome(io_handler, service)
-        elif command == "5":
+        elif command == "9":
             io_handler.write("Exiting...\033[0m")
             sleep(1)
             return
@@ -56,7 +56,7 @@ class References:
             self.welcome(io_handler, service)
         else:
             io_handler.write(
-                "\033[91mInvalid input\033[38;5;18;2m. Please enter '0', '1', '2', '3', '4' or '5'.")
+                "\033[91mInvalid input\033[38;5;18;2m. Please enter '0', '1', '2', '3', '4', '5' or 9.")
             sleep(2)
             self.welcome(io_handler, service)
 

@@ -135,6 +135,9 @@ class StorageInterface:
         self._connection1.cursor().execute("DROP TABLE BReferences")
         self._connection2.cursor().execute("DROP TABLE AReferences")
         self._connection3.cursor().execute("DROP TABLE IReferences")
+        self._connection1.commit()
+        self._connection2.commit()
+        self._connection3.commit()
         build()
 
     def get_all_citekeys(self):
@@ -156,13 +159,15 @@ class StorageInterface:
 
     def delete_book_reference(self, key):
         self._connection1.cursor().execute("DELETE FROM BReferences WHERE dbkey=(?)", (key,))
+        self._connection1.commit()
 
     def delete_article_reference(self, key):
-        self._connection1.cursor().execute("DELETE FROM AReferences WHERE dbkey=(?)", (key,))
+        self._connection2.cursor().execute("DELETE FROM AReferences WHERE dbkey=(?)", (key,))
+        self._connection2.commit()
 
     def delete_inproceedings_reference(self, key):
-        self._connection1.cursor().execute("DELETE FROM IReferences WHERE dbkey=(?)", (key,))
-
+        self._connection3.cursor().execute("DELETE FROM IReferences WHERE dbkey=(?)", (key,))
+        self._connection3.commit()
 
 refe_interface=StorageInterface(
     get_bookref_connection(),get_aref_connection(),get_iref_connection()

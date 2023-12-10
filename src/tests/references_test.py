@@ -248,22 +248,22 @@ class TestReferences(unittest.TestCase):
         References(io_handler, refservice)
         self.assertIn("BibTeX file created successfully: file.bib", io_handler.outputs)
 
-    # @patch('references.sleep')
-    # def test_user_can_delete_references_with_cite_keys(self, mock_sleep):
-    #     mock_sleep.return_value = None
-    #     self.add_test_book_reference()
-    #     self.add_test_article_reference()
-    #     self.add_test_inproceedings_reference()
+    @patch('references.sleep')
+    def test_user_can_delete_references_with_cite_keys(self, mock_sleep):
+        mock_sleep.return_value = None
+        self.add_test_book_reference()
+        self.add_test_article_reference()
+        self.add_test_inproceedings_reference()
 
-    #     io_handler = StubIO(
-    #         [
-    #             "<tuleva komento>", "somekey", "article", "inproceeding", "5"
-    #         ]
-    #     )
+        io_handler = StubIO(
+            [
+                "d", "somekey", "article", "inproceeding", "", "5"
+            ]
+        )
 
-    #     build()
-    #     refservice = Services(self.refrepo)
-    #     References(io_handler, refservice)
-    #     self.assertNotIn("Cite Key     : somekey", io_handler.outputs)
-    #     self.assertNotIn("Cite Key     : article", io_handler.outputs)
-    #     self.assertNotIn("Cite Key     : inproceeding", io_handler.outputs)
+        build()
+        refservice = Services(self.refrepo)
+        References(io_handler, refservice)
+        self.assertNotIn("Cite Key     : somekey", io_handler.outputs)
+        self.assertNotIn("Cite Key     : article", io_handler.outputs)
+        self.assertNotIn("Cite Key     : inproceeding", io_handler.outputs)

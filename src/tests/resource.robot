@@ -35,7 +35,7 @@ Input Delete Confirmation
     Input    delete
 
 Input Single Reference Deletion Command
-    Input    d
+    Input    5
 
 Book Input Details
     [Arguments]

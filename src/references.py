@@ -24,6 +24,7 @@ class References:
         # sleep(1)
         io_handler.write("Type 4 to Delete all references")
         # sleep(1)
+        io_handler.write("Type 5 to Delete individual references")
         io_handler.write("Type 9 to Exit")
         # sleep(1)
         io_handler.write("\033[0m*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\033[38;5;18;2m")
@@ -51,7 +52,7 @@ class References:
             io_handler.write("Exiting...\033[0m")
             sleep(1)
             return
-        elif command == "d":
+        elif command == "5":
             self.delete_by_cite_key()
             self.welcome(io_handler, service)
         else:

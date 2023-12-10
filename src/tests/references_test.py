@@ -113,7 +113,7 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         io_handler = StubIO(
             ["0", "A", "somekey", "", "Operating Systems", "", "Stallings", "", "", "MacMillan", "",
-             "1991", "", "", "", "", "", "5", "9"]
+             "1991", "", "", "", "", "", "9", "9"]
             )
         References(io_handler, self.reference_service)
         
@@ -257,7 +257,7 @@ class TestReferences(unittest.TestCase):
 
         io_handler = StubIO(
             [
-                "d", "somekey", "article", "inproceeding", "", "9"
+                "5", "somekey", "article", "inproceeding", "", "9"
             ]
         )
 
@@ -267,3 +267,22 @@ class TestReferences(unittest.TestCase):
         self.assertNotIn("Cite Key     : somekey", io_handler.outputs)
         self.assertNotIn("Cite Key     : article", io_handler.outputs)
         self.assertNotIn("Cite Key     : inproceeding", io_handler.outputs)
+
+    @patch('references.sleep')
+    def test_user_can_access_reference_deletion(self, mock_sleep):
+        mock_sleep.return_value = None
+        self.add_test_book_reference()
+        self.add_test_article_reference()
+        self.add_test_inproceedings_reference()
+
+        io_handler = StubIO(
+            [
+                "5", "somekey", "article", "inproceeding", "", "9"
+            ]
+        )
+
+        build()
+        refservice = Services(self.refrepo)
+        References(io_handler, refservice)
+        self.assertIn("Type the cite key(s) of the references you want to delete", \
+                       io_handler.outputs)

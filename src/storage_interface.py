@@ -129,7 +129,7 @@ class StorageInterface:
 
     def search_inpro_by_author_and_title(self, author, title):
         db_connection=self._connection3.cursor()
-        db_connection.execute("SELECT * FROM IReferences WHERE author=? AND title=?", \
+        db_connection.execute("SELECT * FROM IReferences WHERE author LIKE ? AND title LIKE ?", \
                              ('%' + author + '%', '%' + title + '%'))
         res = db_connection.fetchall()
         return res

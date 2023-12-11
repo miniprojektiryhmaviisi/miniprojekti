@@ -11,10 +11,11 @@ class StorageInterface:
 
     def store_bookref(self, bookref):
         db_connection=self._connection1.cursor()
+        author_field = self.stringify_list(bookref.author)
         try:
             db_connection.execute("INSERT INTO BReferences\
             (dbkey,author,title,publisher,year,volume,number,pages,month,note) \
-            VALUES (?,?,?,?,?,?,?,?,?,?)",(bookref.key,bookref.author[0],\
+            VALUES (?,?,?,?,?,?,?,?,?,?)",(bookref.key,author_field,\
             bookref.title,bookref.publisher,bookref.year,bookref.volume,\
             bookref.number,bookref.pages,bookref.month,bookref.note))
         except Exception as exc:
@@ -23,10 +24,11 @@ class StorageInterface:
 
     def store_articleref(self, articleref):
         db_connection=self._connection2.cursor()
+        author_field = self.stringify_list(articleref.author)
         try:
             db_connection.execute("INSERT INTO AReferences\
             (dbkey,author,title,journal,year,volume,number,pages,month,note) \
-            VALUES (?,?,?,?,?,?,?,?,?,?)",(articleref.key,articleref.author[0],\
+            VALUES (?,?,?,?,?,?,?,?,?,?)",(articleref.key,author_field,\
             articleref.title,articleref.journal,articleref.year,articleref.volume,\
             articleref.number,articleref.pages,articleref.month,articleref.note))
         except Exception as exc:
@@ -35,11 +37,12 @@ class StorageInterface:
 
     def store_inproref(self, inproref):
         db_connection=self._connection3.cursor()
+        author_field = self.stringify_list(inproref.author)
         try:
             db_connection.execute("INSERT INTO IReferences\
             (dbkey,author,title,booktitle,year,editor,volume,number,series,pages,\
             address,month,organization,publisher,note)\
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(inproref.key,inproref.author[0],\
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(inproref.key,author_field,\
             inproref.title,inproref.booktitle,inproref.year,inproref.editor,\
             inproref.volume,inproref.number,inproref.series,inproref.pages,\
             inproref.address,inproref.month,inproref.organization,\
@@ -168,6 +171,18 @@ class StorageInterface:
     def delete_inproceedings_reference(self, key):
         self._connection3.cursor().execute("DELETE FROM IReferences WHERE dbkey=(?)", (key,))
         self._connection3.commit()
+
+    def stringify_list(self, list):
+        last_index = len(list) - 1
+        if len(list) == 1:
+            return list[0]
+        returning_string = list[0]
+        index = 1
+        while True:
+            returning_string += " and " + list[index]
+            if index == last_index:
+                return returning_string
+            index += 1
 
 refe_interface=StorageInterface(
     get_bookref_connection(),get_aref_connection(),get_iref_connection()

@@ -172,14 +172,14 @@ class StorageInterface:
         self._connection3.cursor().execute("DELETE FROM IReferences WHERE dbkey=(?)", (key,))
         self._connection3.commit()
 
-    def stringify_list(self, list):
-        last_index = len(list) - 1
-        if len(list) == 1:
-            return list[0]
-        returning_string = list[0]
+    def stringify_list(self, author_list):
+        last_index = len(author_list) - 1
+        if len(author_list) == 1:
+            return author_list[0]
+        returning_string = author_list[0]
         index = 1
         while True:
-            returning_string += " and " + list[index]
+            returning_string += " and " + author_list[index]
             if index == last_index:
                 return returning_string
             index += 1

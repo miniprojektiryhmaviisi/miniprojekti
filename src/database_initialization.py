@@ -6,18 +6,18 @@ def create_book_references(get):
     db_connection=get.cursor()
 
     db_connection.execute(
-        f"CREATE TABLE IF NOT EXISTS BReferences ("
-        f"    dbkey TEXT PRIMARY KEY,"
-        f"    author TEXT,"
-        f"    title TEXT,"
-        f"    publisher TEXT,"
-        f"    year INTEGER,"
-        f"    volume INTEGER,"
-        f"    number INTEGER,"
-        f"    pages TEXT,"
-        f"    month INTEGER   ,"
-        f"    note TEXT"
-        f");"
+        """CREATE TABLE IF NOT EXISTS BReferences (
+            dbkey TEXT PRIMARY KEY,
+            author TEXT,
+            title TEXT,
+            publisher TEXT,
+            year INTEGER,
+            volume INTEGER,
+            number INTEGER,
+            pages TEXT,
+            month INTEGER,
+            note TEXT
+        );"""
     )
     get.commit()
 
@@ -25,41 +25,41 @@ def create_article_references(get):
     db_connection=get.cursor()
 
     db_connection.execute(
-        f"CREATE TABLE IF NOT EXISTS AReferences ("
-        f"dbkey TEXT PRIMARY KEY,"
-        f"author TEXT,"
-        f"title TEXT,"
-        f"journal TEXT,"
-        f"year INTEGER,"
-        f"volume INTEGER,"
-        f"number INTEGER,"
-        f"pages TEXT,"
-        f"month INTEGER   ,"
-        f"note TEXT"
-        f");"
+        """CREATE TABLE IF NOT EXISTS AReferences (
+            dbkey TEXT PRIMARY KEY,
+            author TEXT,
+            title TEXT,
+            journal TEXT,
+            year INTEGER,
+            volume INTEGER,
+            number INTEGER,
+            pages TEXT,
+            month INTEGER,
+            note TEXT
+        );"""
     )
     get.commit()
 
 def create_inproceedings_references(get):
     db_connection=get.cursor()
     db_connection.execute(
-        f"CREATE TABLE IF NOT EXISTS IReferences ("
-        f"dbkey TEXT PRIMARY KEY,"
-        f"author TEXT,"
-        f"title TEXT,"
-        f"booktitle TEXT,"
-        f"year INTEGER,"
-        f"editor TEXT,"
-        f"volume INTEGER,"
-        f"number INTEGER,"
-        f"series TEXT,"
-        f"pages TEXT,"
-        f"address TEXT,"
-        f"month INTEGER,"
-        f"organization TEXT,"
-        f"publisher TEXT,"
-        f"note TEXT"
-        f");"
+        """CREATE TABLE IF NOT EXISTS IReferences (
+            dbkey TEXT PRIMARY KEY,
+            author TEXT,
+            title TEXT,
+            booktitle TEXT,
+            year INTEGER,
+            editor TEXT,
+            volume INTEGER,
+            number INTEGER,
+            series TEXT,
+            pages TEXT,
+            address TEXT,
+            month INTEGER,
+            organization TEXT,
+            publisher TEXT,
+            note TEXT
+        );"""
     )
     get.commit()
 

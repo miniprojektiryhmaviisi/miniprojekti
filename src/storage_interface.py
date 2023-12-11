@@ -53,19 +53,19 @@ class StorageInterface:
 
     def get_all_from_bookref(self):
         db_connection=self._connection1.cursor()
-        query = "SELECT * FROM BReferences"
+        query = "SELECT * FROM BReferences ORDER BY author ASC"
         res = db_connection.execute(query).fetchall()
         return res
 
     def get_all_from_articleref(self):
         db_connection=self._connection2.cursor()
-        query = "SELECT * FROM AReferences"
+        query = "SELECT * FROM AReferences ORDER BY author ASC"
         res = db_connection.execute(query).fetchall()
         return res
 
     def get_all_from_inproref(self):
         db_connection=self._connection3.cursor()
-        query = "SELECT * FROM IReferences"
+        query = "SELECT * FROM IReferences ORDER BY author ASC"
         res = db_connection.execute(query).fetchall()
         return res
 

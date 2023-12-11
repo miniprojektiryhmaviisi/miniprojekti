@@ -11,18 +11,18 @@ class References:
 
     def welcome(self, io_handler, service):
         io_handler.write("Welcome to MyReferences!")
-        # sleep(1)
+        # sleep(0)
         io_handler.write("Type 0 to Add a reference")
-        # sleep(1)
+        # sleep(0)
         io_handler.write("Type 1 to View my references")
-        # sleep(1)
+        # sleep(0)
         io_handler.write("Type 2 to Search")
-        # sleep(1)
+        # sleep(0)
         io_handler.write(
             "Type 3 to Make your existing references into bibtex form")
-        # sleep(1)
+        # sleep(0)
         io_handler.write("Type 4 to Delete all references")
-        # sleep(1)
+        # sleep(0)
         io_handler.write("Type 5 to Delete individual references")
         io_handler.write("Type 9 to Exit")
         # sleep(1)
@@ -47,7 +47,7 @@ class References:
             self.welcome(io_handler, service)
         elif command == "9":
             io_handler.write("Exiting...\033[0m")
-            sleep(1)
+            sleep(0)
             return
         elif command == "5":
             self.delete_by_cite_key()
@@ -59,21 +59,21 @@ class References:
             self.welcome(io_handler, service)
 
     def add(self, io_handler, service):
-        # sleep(1)
+        # sleep(0)
         io_handler.write(
             "What type of reference? \n"
             "1. For the pages field, please use '--' as a separator, e.g., 2--7.\n"
             "2. For the month field, please enter an integer between 1-12"
         )
-        # sleep(1)
+        # sleep(0)
         io_handler.write("Type A to Add a book")
-        # sleep(1)
+        # sleep(0)
         io_handler.write("Type B to Add an article")
-        # sleep(1)
+        # sleep(0)
         io_handler.write("Type C to Add inproceedings")
-        # sleep(1)
+        # sleep(0)
         io_handler.write("Type Q to Return")
-        # sleep(1)
+        # sleep(0)
         while True:
             command = io_handler.read("Input: ")
             if command in ["A", "B", "C"]:
@@ -185,10 +185,10 @@ class References:
                 raise NotImplementedError
         except IntegrityError as e:
             self.io_handler.write(f"Failed to save new reference: {e}")
-            sleep(2)
+            sleep(0)
         else:
             self.io_handler.write("New reference added!")
-            sleep(2)
+            sleep(0)
 
     def view_references(self, io_handler, service):
         books = self.service.get_all_books()
@@ -203,7 +203,7 @@ class References:
                 self.display_article_references(articles)
             if inproceedings:
                 self.display_inproceedings_references(inproceedings)
-        sleep(2)
+        sleep(0)
         self.welcome(io_handler, service)
 
     def get_month_name(self, month_number):
@@ -287,7 +287,7 @@ class References:
                 if j[14] != "":
                     file.write("   note = {" + j[14] + "},\n")
                 file.write("}\n\n")
-        sleep(2)
+        sleep(0)
         #print("BibTeX file created successfully: file.bib")
         #print("You can access the file via this link: file://" +
         #      os.path.abspath("file.bib"))
@@ -295,7 +295,7 @@ class References:
         self.io_handler.write("You can access the file via this link: file://" +
               os.path.abspath("file.bib"))
 
-        # sleep(5)
+        # sleep(0)
         self.welcome(io_handler, service)
 
     def display_book_references(self, references):

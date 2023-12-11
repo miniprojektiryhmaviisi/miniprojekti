@@ -45,7 +45,7 @@ class References:
                 io_handler.write("All references deleted!")
                 io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
             self.welcome(io_handler, service)
-        elif command == "5":
+        elif command == "9":
             io_handler.write("Exiting...\033[0m")
             sleep(1)
             return

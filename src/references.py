@@ -11,21 +11,13 @@ class References:
 
     def welcome(self, io_handler, service):
         io_handler.write("Welcome to MyReferences!")
-        
         io_handler.write("Type 0 to Add a reference")
-        
         io_handler.write("Type 1 to View my references")
-        
         io_handler.write("Type 2 to Search")
-        
-        io_handler.write(
-            "Type 3 to Make your existing references into bibtex form")
-        
+        io_handler.write("Type 3 to Make your existing references into bibtex form")
         io_handler.write("Type 4 to Delete all references")
-        
         io_handler.write("Type 5 to Delete individual references")
         io_handler.write("Type 9 to Exit")
-        
         io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
         command = io_handler.read("What do you want to do? ")
         if command == "0":
@@ -58,21 +50,15 @@ class References:
             self.welcome(io_handler, service)
 
     def add(self, io_handler, service):
-        
         io_handler.write(
             "What type of reference? \n"
             "1. For the pages field, please use '--' as a separator, e.g., 2--7.\n"
             "2. For the month field, please enter an integer between 1-12"
         )
-        
         io_handler.write("Type A to Add a book")
-        
         io_handler.write("Type B to Add an article")
-        
         io_handler.write("Type C to Add inproceedings")
-        
         io_handler.write("Type Q to Return")
-        
         while True:
             command = io_handler.read("Input: ")
             if command in ["A", "B", "C"]:
@@ -292,8 +278,6 @@ class References:
         self.io_handler.write("BibTeX file created successfully: file.bib")
         self.io_handler.write("You can access the file via this link: file://" +
               os.path.abspath("file.bib"))
-
-        
         self.welcome(io_handler, service)
 
     def display_book_references(self, references):

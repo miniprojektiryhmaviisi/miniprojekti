@@ -10,7 +10,6 @@ class References:
         self.welcome(io_handler, service)
 
     def welcome(self, io_handler, service):
-        io_handler.write("\033[38;5;18;2m")
         io_handler.write("Welcome to MyReferences!")
         # sleep(1)
         io_handler.write("Type 0 to Add a reference")
@@ -27,7 +26,7 @@ class References:
         io_handler.write("Type 5 to Delete individual references")
         io_handler.write("Type 9 to Exit")
         # sleep(1)
-        io_handler.write("\033[0m*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\033[38;5;18;2m")
+        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
         command = io_handler.read("What do you want to do? ")
         if command == "0":
             self.add(io_handler, service)
@@ -43,13 +42,11 @@ class References:
             action = io_handler.read("\033[4mConfirm action by typing delete: ")
             if action == "delete":
                 self.reset_all()
-                io_handler.write("\033[38;5;18;2m")
                 io_handler.write("All references deleted!")
-                io_handler.write("\033[0m*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\033[38;5;18;2m")
-            io_handler.write("\033[38;5;18;2m")
+                io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
             self.welcome(io_handler, service)
-        elif command == "9":
-            io_handler.write("Exiting...\033[0m")
+        elif command == "5":
+            io_handler.write("Exiting...")
             sleep(1)
             return
         elif command == "5":
@@ -57,7 +54,7 @@ class References:
             self.welcome(io_handler, service)
         else:
             io_handler.write(
-                "\033[91mInvalid input\033[38;5;18;2m. Please enter '0', '1', '2', '3', '4', '5' or 9.")
+                "\033[91mInvalid input\033[0m. Please enter '0', '1', '2', '3', '4', '5' or 9.")
             sleep(2)
             self.welcome(io_handler, service)
 
@@ -304,9 +301,9 @@ class References:
     def display_book_references(self, references):
         io_handler = self.io_handler
         io_handler.write("")
-        io_handler.write("\033[0m*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\033[38;5;18;2m")
+        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
         io_handler.write("Book references")
-        io_handler.write("\033[0m*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\033[38;5;18;2m\n")
+        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         for entry in references:
             io_handler.write("Cite Key     : " + entry[0])
             io_handler.write("Author       : " + entry[1])
@@ -324,13 +321,13 @@ class References:
             if entry[9] != "":
                 io_handler.write("Notes        : " + entry[9])
             io_handler.write("")
-            io_handler.write("\033[0m*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\033[38;5;18;2m")
+            io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
 
     def display_article_references(self, references):
         io_handler = self.io_handler
-        io_handler.write("\033[0m*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\033[38;5;18;2m")
+        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
         io_handler.write("Article references")
-        io_handler.write("\033[0m*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\033[38;5;18;2m\n")
+        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         for entry in references:
             io_handler.write("Cite Key     : " + entry[0])
             io_handler.write("Author       : " + entry[1])
@@ -348,13 +345,13 @@ class References:
             if entry[9] != "":
                 io_handler.write("Notes        : " + entry[9])
             io_handler.write("")
-            io_handler.write("\033[0m*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\033[38;5;18;2m")
+            io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
 
     def display_inproceedings_references(self, references):
         io_handler = self.io_handler
-        io_handler.write("\033[0m*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\033[38;5;18;2m")
+        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
         io_handler.write("Inproceedings references")
-        io_handler.write("\033[0m*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\033[38;5;18;2m\n")
+        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         for entry in references:
             io_handler.write("Cite Key     : " + entry[0])
             io_handler.write("Author       : " + entry[1])
@@ -382,7 +379,7 @@ class References:
             if entry[14] != "":
                 io_handler.write("Note         : " + entry[14])
             io_handler.write("")
-            io_handler.write("\033[0m*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\033[38;5;18;2m")
+            io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
 
     def reference_search(self):
         self.io_handler.write("Type author's name, title or both")

@@ -79,58 +79,58 @@ class StorageInterface:
 
     def search_book_by_title(self, title):
         db_connection=self._connection1.cursor()
-        db_connection.execute("SELECT * FROM BReferences WHERE title=?", (title,))
+        db_connection.execute("SELECT * FROM BReferences WHERE title LIKE ?", ('%' + title + '%',))
         res = db_connection.fetchall()
         return res
 
     def search_article_by_title(self, title):
         db_connection=self._connection2.cursor()
-        db_connection.execute("SELECT * FROM AReferences WHERE title=?", (title,))
+        db_connection.execute("SELECT * FROM AReferences WHERE title LIKE ?", ('%' + title + '%',))
         res = db_connection.fetchall()
         return res
 
     def search_inpro_by_title(self, title):
         db_connection=self._connection3.cursor()
-        db_connection.execute("SELECT * FROM IReferences WHERE title=?", (title,))
+        db_connection.execute("SELECT * FROM IReferences WHERE title LIKE ?", ('%' + title + '%',))
         res = db_connection.fetchall()
         return res
 
     def search_book_by_author(self, author):
         db_connection=self._connection1.cursor()
-        db_connection.execute("SELECT * FROM BReferences WHERE author=?", (author,))
+        db_connection.execute("SELECT * FROM BReferences WHERE author LIKE ?", ('%' + author + '%',))
         res = db_connection.fetchall()
         return res
 
     def search_article_by_author(self, author):
         db_connection=self._connection2.cursor()
-        db_connection.execute("SELECT * FROM AReferences WHERE author=?", (author,))
+        db_connection.execute("SELECT * FROM AReferences WHERE author LIKE ?", ('%' + author + '%',))
         res = db_connection.fetchall()
         return res
 
     def search_inpro_by_author(self, author):
         db_connection=self._connection3.cursor()
-        db_connection.execute("SELECT * FROM IReferences WHERE author=?", (author,))
+        db_connection.execute("SELECT * FROM IReferences WHERE author LIKE ?", ('%' + author + '%',))
         res = db_connection.fetchall()
         return res
 
     def search_book_by_author_and_title(self, author, title):
         db_connection=self._connection1.cursor()
-        db_connection.execute("SELECT * FROM BReferences WHERE author=? AND title=?", \
-                             (author, title))
+        db_connection.execute("SELECT * FROM BReferences WHERE author LIKE ? AND title LIKE ?", \
+                             ('%' + author + '%', '%' + title + '%'))
         res = db_connection.fetchall()
         return res
 
     def search_article_by_author_and_title(self, author, title):
         db_connection=self._connection2.cursor()
-        db_connection.execute("SELECT * FROM AReferences WHERE author=? AND title=?", \
-                             (author, title))
+        db_connection.execute("SELECT * FROM AReferences WHERE author LIKE ? AND title LIKE ?", \
+                             ('%' + author + '%', '%' + title + '%'))
         res = db_connection.fetchall()
         return res
 
     def search_inpro_by_author_and_title(self, author, title):
         db_connection=self._connection3.cursor()
         db_connection.execute("SELECT * FROM IReferences WHERE author=? AND title=?", \
-                             (author, title))
+                             ('%' + author + '%', '%' + title + '%'))
         res = db_connection.fetchall()
         return res
 

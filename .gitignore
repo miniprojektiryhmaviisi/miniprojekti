@@ -14,3 +14,4 @@ coverage.xml
 /src/*.xml
 /src/tests/*.html
 src/tests/*.xml
+file.bib

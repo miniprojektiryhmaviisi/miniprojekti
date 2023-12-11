@@ -54,7 +54,7 @@ class References:
             self.welcome(io_handler, service)
         else:
             io_handler.write(
-                "\033[91mInvalid input\033[0m. Please enter '0', '1', '2', '3', '4' or '5'.")
+                "\033[91mInvalid input\033[0m. Please enter '0', '1', '2', '3', '4', '5' or '9'.")
             sleep(2)
             self.welcome(io_handler, service)
 

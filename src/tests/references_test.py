@@ -168,7 +168,7 @@ class TestReferences(unittest.TestCase):
             )
         References(io_handler, self.reference_service)
 
-        self.assertIn("\033[91mInvalid input\033[38;5;18;2m. Please enter '0', '1', '2', '3', '4', '5' or 9.", io_handler.outputs)
+        self.assertIn("\x1b[91mInvalid input\x1b[0m. Please enter '0', '1', '2', '3', '4', '5' or '9'.", io_handler.outputs)
     
     @patch('references.sleep')
     def test_user_can_return_to_start(self, mock_sleep):

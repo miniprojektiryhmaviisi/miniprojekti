@@ -178,7 +178,7 @@ class TestReferences(unittest.TestCase):
             )
         References(io_handler, self.reference_service)
 
-        self.assertEqual("Type 9 to Exit", io_handler.outputs[-3])
+        self.assertEqual("Type 9 to Exit\n", io_handler.outputs[-3])
 
     @patch('references.sleep')
     def test_user_can_search_for_existing_references_by_author(self, mock_sleep):

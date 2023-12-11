@@ -10,16 +10,23 @@ class References:
         self.welcome(io_handler, service)
 
     def welcome(self, io_handler, service):
-        io_handler.write("Welcome to MyReferences!")
-        io_handler.write("Type 0 to Add a reference")
+        io_handler.write("\nWelcome to MyReferences!\n")
+        # sleep(1)
+        io_handler.write("Type 0 to \033[92mAdd a reference\033[0m")
+        # sleep(1)
         io_handler.write("Type 1 to View my references")
         io_handler.write("Type 2 to Search")
-        io_handler.write("Type 3 to Make your existing references into bibtex form")
-        io_handler.write("Type 4 to Delete all references")
-        io_handler.write("Type 5 to Delete individual references")
-        io_handler.write("Type 9 to Exit")
+        # sleep(1)
+        io_handler.write(
+            "Type 3 to Make your existing references into bibtex form")
+        # sleep(1)
+        io_handler.write("Type 4 to \033[91mDelete all\033[0m references")
+        # sleep(1)
+        io_handler.write("Type 5 to \033[91mDelete\033[0m individual references")
+        io_handler.write("Type 9 to Exit\n")
+        # sleep(1)
         io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
-        command = io_handler.read("What do you want to do? ")
+        command = io_handler.read("What do you want to do? \n")
         if command == "0":
             self.add(io_handler, service)
             self.welcome(io_handler, service)
@@ -51,14 +58,16 @@ class References:
 
     def add(self, io_handler, service):
         io_handler.write(
-            "What type of reference? \n"
-            "1. For the pages field, please use '--' as a separator, e.g., 2--7.\n"
-            "2. For the month field, please enter an integer between 1-12"
+            "\nWhat type of reference? \n"
+            "\n\033[4m1. For the pages field, please use '--' as a separator, e.g., 2--7.\n"
+            "2. For the month field, please enter an integer between 1-12\033[0m\n"
         )
         io_handler.write("Type A to Add a book")
         io_handler.write("Type B to Add an article")
         io_handler.write("Type C to Add inproceedings")
-        io_handler.write("Type Q to Return")
+        # sleep(1)
+        io_handler.write("Type Q to Return\n")
+        # sleep(1)
         while True:
             command = io_handler.read("Input: ")
             if command in ["A", "B", "C"]:
@@ -169,11 +178,11 @@ class References:
             else:
                 raise NotImplementedError
         except IntegrityError as e:
-            self.io_handler.write(f"Failed to save new reference: {e}")
-            sleep(1)
+            self.io_handler.write(f"\033[91mFailed to save new reference: {e}\033[0m")
+            sleep(2)
         else:
-            self.io_handler.write("New reference added!")
-            sleep(1)
+            self.io_handler.write("\033[92mNew reference added!\033[0m")
+            sleep(2)
 
     def view_references(self, io_handler, service):
         books = self.service.get_all_books()
@@ -283,9 +292,9 @@ class References:
     def display_book_references(self, references):
         io_handler = self.io_handler
         io_handler.write("")
-        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
+        io_handler.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         io_handler.write("Book references")
-        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
+        io_handler.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         for entry in references:
             io_handler.write("Cite Key     : " + entry[0])
             io_handler.write("Author       : " + entry[1])
@@ -303,13 +312,12 @@ class References:
             if entry[9] != "":
                 io_handler.write("Notes        : " + entry[9])
             io_handler.write("")
-            io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
 
     def display_article_references(self, references):
         io_handler = self.io_handler
-        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
+        io_handler.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         io_handler.write("Article references")
-        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
+        io_handler.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         for entry in references:
             io_handler.write("Cite Key     : " + entry[0])
             io_handler.write("Author       : " + entry[1])
@@ -327,11 +335,11 @@ class References:
             if entry[9] != "":
                 io_handler.write("Notes        : " + entry[9])
             io_handler.write("")
-            io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
+
 
     def display_inproceedings_references(self, references):
         io_handler = self.io_handler
-        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
+        io_handler.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         io_handler.write("Inproceedings references")
         io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         for entry in references:
@@ -361,7 +369,7 @@ class References:
             if entry[14] != "":
                 io_handler.write("Note         : " + entry[14])
             io_handler.write("")
-            io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
+            io_handler.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
 
     def reference_search(self):
         self.io_handler.write("Type author's name, title or both")

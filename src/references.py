@@ -39,14 +39,14 @@ class References:
         elif command == "3":
             self.export_bibtex_file(io_handler, service)
         elif command == "4":
-            action = io_handler.read("\033[4mConfirm action by typing delete: ")
+            action = io_handler.read("\033[4mConfirm action by typing delete: \033[0m")
             if action == "delete":
                 self.reset_all()
                 io_handler.write("All references deleted!")
                 io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
             self.welcome(io_handler, service)
         elif command == "5":
-            io_handler.write("Exiting...")
+            io_handler.write("Exiting...\033[0m")
             sleep(1)
             return
         elif command == "5":

@@ -33,8 +33,6 @@ class ReferencesLibrary:
         outputs = self._io.outputs
 
         if not (value1 in outputs and value2 in outputs):
-            with open("debug.txt", "wt", encoding="utf-8") as file:
-                file.writelines(outputs)
             raise AssertionError("Both expected values were not present")
 
         index1 = outputs.index(value1)

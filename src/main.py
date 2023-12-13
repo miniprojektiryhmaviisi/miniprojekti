@@ -3,10 +3,12 @@ from console_io import ConsoleIO
 from repositories.referencesrepository import ReferencesRepository
 from services.reference_service import Services
 
+demo = True
+
 def init():
     console_io = ConsoleIO()
     ref_repo = ReferencesRepository()
-    refe_services = Services(ref_repo)
+    refe_services = Services(ref_repo, demo=demo)
     References(console_io, refe_services)
 
 if __name__ == "__main__":

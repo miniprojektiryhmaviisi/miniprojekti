@@ -1,9 +1,11 @@
 from storage_interface import get_interface
 
 class Services:
-    def __init__(self, ref_repo):
+    def __init__(self, ref_repo, demo=False):
         self.ref_repo=ref_repo
         self.database_interface=get_interface()
+        if demo:
+            self.database_interface.reset_test_data()
 
     def config_book_reference(self, key, title, author, publisher, year, volume="", number="",
                               pages="", month="", notes=""):

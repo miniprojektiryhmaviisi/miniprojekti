@@ -3,7 +3,6 @@ from repositories.referencesrepository import ReferencesRepository
 from services.reference_service import Services
 from references import References
 from unittest.mock import Mock, ANY, patch
-from db_build import build
 
 
 class StubIO:
@@ -34,7 +33,6 @@ class TestReferences(unittest.TestCase):
             ]
         )
         try:
-            build()
             refservice = Services(self.refrepo)
             References(io_handler, refservice)
         except:
@@ -47,7 +45,6 @@ class TestReferences(unittest.TestCase):
             ]
         )
         try:
-            build()
             refservice = Services(self.refrepo)
             References(io_handler, refservice)
         except:
@@ -62,7 +59,6 @@ class TestReferences(unittest.TestCase):
             ]
         )
         try:
-            build()
             refservice = Services(self.refrepo)
             References(io_handler, refservice)
         except:
@@ -188,7 +184,6 @@ class TestReferences(unittest.TestCase):
             ["2", "Stallings", "", "9"]
         )
 
-        build()
         refservice = Services(self.refrepo)
         References(io_handler, refservice)
         self.assertIn("Cite Key     : somekey", io_handler.outputs)
@@ -203,7 +198,6 @@ class TestReferences(unittest.TestCase):
             ["2", "", "Operating Systems", "9"]
         )
 
-        build()
         refservice = Services(self.refrepo)
         References(io_handler, refservice)
         self.assertIn("Cite Key     : somekey", io_handler.outputs)
@@ -218,7 +212,6 @@ class TestReferences(unittest.TestCase):
             ["2", "Stallings", "Operating Systems", "9"]
         )
 
-        build()
         refservice = Services(self.refrepo)
         References(io_handler, refservice)
         self.assertIn("Cite Key     : somekey", io_handler.outputs)
@@ -243,7 +236,6 @@ class TestReferences(unittest.TestCase):
         io_handler = StubIO(
             ["3", "9"]
         )
-        build()
         refservice = Services(self.refrepo)
         References(io_handler, refservice)
         self.assertIn("BibTeX file created successfully: file.bib", io_handler.outputs)
@@ -261,7 +253,6 @@ class TestReferences(unittest.TestCase):
             ]
         )
 
-        build()
         refservice = Services(self.refrepo)
         References(io_handler, refservice)
         self.assertNotIn("Cite Key     : somekey", io_handler.outputs)
@@ -281,7 +272,6 @@ class TestReferences(unittest.TestCase):
             ]
         )
 
-        build()
         refservice = Services(self.refrepo)
         References(io_handler, refservice)
         self.assertIn("Type the cite key(s) of the references you want to delete", \

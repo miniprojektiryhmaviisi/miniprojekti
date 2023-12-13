@@ -2,10 +2,8 @@ from references import References
 from console_io import ConsoleIO
 from repositories.referencesrepository import ReferencesRepository
 from services.reference_service import Services
-from db_build import build
 
 def init():
-    build()
     console_io = ConsoleIO()
     ref_repo = ReferencesRepository()
     refe_services = Services(ref_repo)

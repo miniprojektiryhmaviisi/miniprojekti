@@ -1,7 +1,7 @@
 from database_connection import get_bookref_connection
 from database_connection import get_aref_connection
 from database_connection import get_iref_connection
-from db_build import build
+from database_initialization import initialize_database
 
 class StorageInterface:
     def __init__(self, connection1,connection2,connection3):
@@ -141,7 +141,7 @@ class StorageInterface:
         self._connection1.commit()
         self._connection2.commit()
         self._connection3.commit()
-        build()
+        initialize_database()
 
     def get_all_citekeys(self):
         book_keys = []
@@ -184,6 +184,9 @@ class StorageInterface:
                 return returning_string
             index += 1
 
-refe_interface=StorageInterface(
-    get_bookref_connection(),get_aref_connection(),get_iref_connection()
-)
+
+def get_interface():
+    initialize_database()
+    return StorageInterface(
+        get_bookref_connection(),get_aref_connection(),get_iref_connection()
+    )

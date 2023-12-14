@@ -9,16 +9,16 @@ from services.reference_service import Services
 # launch demo-mode: 'python src/main.py demo'
 ##   demo mode initializes database with test data
 
-def init(demo: bool):
+def init(use_demo_data: bool):
     console_io = ConsoleIO()
     ref_repo = ReferencesRepository()
-    refe_services = Services(ref_repo, demo=demo)
+    refe_services = Services(ref_repo, demo=use_demo_data)
     References(console_io, refe_services)
 
 if __name__ == "__main__":
     if len(sys.argv) >= 2:
         mode = sys.argv[1]
     else:
-        mode = "normal"   
+        mode = "normal"
     demo = mode == "demo"
-    init(demo=demo)
+    init(use_demo_data=demo)

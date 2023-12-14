@@ -1,9 +1,9 @@
-from database_connection import (create_db_dirs,
+from .database_connection import (create_db_dirs,
                                  get_bookref_connection,
                                  get_aref_connection,
                                  get_iref_connection)
 
-from config import (DATABASE_FILE_PATH,
+from .config import (DATABASE_FILE_PATH,
                     DATABASE_FILE_PATH1,
                     DATABASE_FILE_PATH2)
 
@@ -73,7 +73,7 @@ def initialize_database():
     create_db_dirs(DATABASE_FILE_PATH, DATABASE_FILE_PATH1, DATABASE_FILE_PATH2)
     get = get_bookref_connection()
     get1 = get_aref_connection()
-    get2=get_iref_connection()
+    get2 = get_iref_connection()
     create_book_references(get)
     create_article_references(get1)
     create_inproceedings_references(get2)

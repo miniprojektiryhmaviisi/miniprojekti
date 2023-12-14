@@ -2,8 +2,7 @@ import unittest
 from repositories.referencesrepository import ReferencesRepository
 from services.reference_service import Services
 from references import References
-from unittest.mock import Mock, ANY, patch
-
+from unittest.mock import Mock, patch
 
 class StubIO:
     def __init__(self, inputs=[]):

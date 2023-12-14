@@ -1,6 +1,5 @@
 from pybtex.database import parse_file, BibliographyData, Person, Entry, OrderedCaseInsensitiveDict
 
-
 def parse_and_check_bibfile(debug=False) -> None:
     bibfile = parse_file("file.bib")
     bibobj = BibliographyData(
@@ -21,7 +20,6 @@ def parse_and_check_bibfile(debug=False) -> None:
         print(bibfile)
     if not bibfile == bibobj:
         raise AssertionError("Bibtex file is not as expected")
-
 
 if __name__ == "__main__":
     parse_and_check_bibfile(debug=True)

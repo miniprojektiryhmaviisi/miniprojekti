@@ -1,8 +1,8 @@
 from pathlib import Path
 import sqlite3
-from config import DATABASE_FILE_PATH
-from config import DATABASE_FILE_PATH1
-from config import DATABASE_FILE_PATH2
+from .config import DATABASE_FILE_PATH
+from .config import DATABASE_FILE_PATH1
+from .config import DATABASE_FILE_PATH2
 
 def create_db_dirs(*paths):
     for path in paths:

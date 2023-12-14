@@ -2,7 +2,6 @@
 Library    ../ReferencesLibrary.py
 Library    ../BibLibrary.py
 
-
 *** Keywords ***
 Input Add Reference Command
     Input    0

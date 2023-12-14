@@ -1,7 +1,7 @@
-from database_connection import get_bookref_connection
-from database_connection import get_aref_connection
-from database_connection import get_iref_connection
-from database_initialization import initialize_database
+from db_config.database_connection import get_bookref_connection
+from db_config.database_connection import get_aref_connection
+from db_config.database_connection import get_iref_connection
+from db_config.database_initialization import initialize_database
 
 class StorageInterface:
     def __init__(self, connection1,connection2,connection3):

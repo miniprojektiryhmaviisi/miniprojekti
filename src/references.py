@@ -2,95 +2,88 @@ from time import sleep
 from sqlite3 import IntegrityError
 import os
 
-
 class References:
     def __init__(self, io_handler, service):
         self.io_handler = io_handler
         self.service = service
-        self.welcome(io_handler, service)
+        self.welcome()
 
-    def welcome(self, io_handler, service):
-        io_handler.write("\nWelcome to MyReferences!\n")
-        # sleep(1)
-        io_handler.write("Type 0 to \033[92mAdd a reference\033[0m")
-        # sleep(1)
-        io_handler.write("Type 1 to View my references")
-        io_handler.write("Type 2 to Search")
-        # sleep(1)
-        io_handler.write(
+    def welcome(self):
+        io = self.io_handler
+        io.write("\nWelcome to MyReferences!\n")
+        io.write("Type 0 to \033[92mAdd a reference\033[0m")
+        io.write("Type 1 to View my references")
+        io.write("Type 2 to Search")
+        io.write(
             "Type 3 to Make your existing references into bibtex form")
-        # sleep(1)
-        io_handler.write("Type 4 to \033[91mDelete all\033[0m references")
-        # sleep(1)
-        io_handler.write("Type 5 to \033[91mDelete\033[0m individual references")
-        io_handler.write("Type 9 to Exit\n")
-        # sleep(1)
-        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
-        command = io_handler.read("What do you want to do? \n")
+        io.write("Type 4 to \033[91mDelete all\033[0m references")
+        io.write("Type 5 to \033[91mDelete\033[0m individual references")
+        io.write("Type 9 to Exit\n")
+        io.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
+        command = io.read("What do you want to do? \n")
         if command == "0":
-            self.add(io_handler, service)
-            self.welcome(io_handler, service)
+            self.add()
+            self.welcome()
         elif command == "1":
-            self.view_references(io_handler, service)
+            self.view_references()
         elif command == "2":
             self.reference_search()
-            self.welcome(io_handler, service)
+            self.welcome()
         elif command == "3":
-            self.export_bibtex_file(io_handler, service)
+            self.export_bibtex_file()
         elif command == "4":
-            action = io_handler.read("\033[4mConfirm action by typing delete: \033[0m")
+            action = io.read("\033[4mConfirm action by typing delete: \033[0m")
             if action == "delete":
                 self.reset_all()
-                io_handler.write("All references deleted!")
-                io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
-            self.welcome(io_handler, service)
+                io.write("All references deleted!")
+                io.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*")
+            self.welcome()
         elif command == "9":
-            io_handler.write("Exiting...\033[0m")
+            io.write("Exiting...\033[0m")
             return
         elif command == "5":
             self.delete_by_cite_key()
-            self.welcome(io_handler, service)
+            self.welcome()
         else:
-            io_handler.write(
+            io.write(
                 "\033[91mInvalid input\033[0m. Please enter '0', '1', '2', '3', '4', '5' or '9'.")
             sleep(2)
-            self.welcome(io_handler, service)
+            self.welcome()
 
-    def add(self, io_handler, service):
-        io_handler.write(
+    def add(self):
+        io = self.io_handler
+        io.write(
             "\nWhat type of reference? \n"
             "\n\033[4m1. For the pages field, please use '--' as a separator, e.g., 2--7.\n"
             "2. For the month field, please enter an integer between 1-12\033[0m\n"
         )
-        io_handler.write("Type A to Add a book")
-        io_handler.write("Type B to Add an article")
-        io_handler.write("Type C to Add inproceedings")
-        # sleep(1)
-        io_handler.write("Type Q to Return\n")
-        # sleep(1)
+        io.write("Type A to Add a book")
+        io.write("Type B to Add an article")
+        io.write("Type C to Add inproceedings")
+        io.write("Type Q to Return\n")
         while True:
-            command = io_handler.read("Input: ")
+            command = io.read("Input: ")
             if command in ["A", "B", "C"]:
-                self.form(service, command)
+                self.form(command)
                 break
             if command == "Q":
                 break
-            io_handler.write("Invalid input.")
+            io.write("Invalid input.")
 
     def ask_for_input(self, prompt, optional=False, input_type=str):
+        io = self.io_handler
         while True:
             prefix = "(Optional) " if optional else ""
-            user_input = self.io_handler.read(prefix + prompt + ": ")
+            user_input = io.read(prefix + prompt + ": ")
             if not user_input and not optional:
-                self.io_handler.write(
+                io.write(
                     "Field cannot be empty. Please provide a valid input.")
             elif user_input and input_type:
                 try:
                     return {prompt: input_type(user_input)}
                 except ValueError:
-                    self.io_handler.write("Please enter a valid interger.")
+                    io.write("Please enter a valid interger.")
             else:
-
                 return {prompt: user_input}
 
     def ask_for_multiple_inputs(self, prompt):
@@ -149,8 +142,8 @@ class References:
 
         return form
 
-    def form(self, service, ref_type):
-
+    def form(self, ref_type):
+        service = self.service
         form = self.get_form_data(ref_type)
 
         ref_items = {}
@@ -184,7 +177,7 @@ class References:
             self.io_handler.write("\033[92mNew reference added!\033[0m")
             sleep(2)
 
-    def view_references(self, io_handler, service):
+    def view_references(self):
         books = self.service.get_all_books()
         articles = self.service.get_all_articles()
         inproceedings = self.service.get_all_inproceedings()
@@ -198,7 +191,7 @@ class References:
             if inproceedings:
                 self.display_inproceedings_references(inproceedings)
         sleep(2)
-        self.welcome(io_handler, service)
+        self.welcome()
 
     def get_month_name(self, month_number):
         month_names = ["", "Jan", "Feb", "Mar", "Apr", "May",
@@ -208,7 +201,7 @@ class References:
         except (ValueError, IndexError):
             return ""
 
-    def export_bibtex_file(self, io_handler, service):
+    def export_bibtex_file(self):
         with open("file.bib", "w", encoding="utf-8") as file:
             all_book_refs = self.service.get_all_books()
             for i in all_book_refs:
@@ -245,7 +238,6 @@ class References:
                     file.write("   pages = {" + j[7] + "},\n")
                 if j[8] != "":
                     month_name = self.get_month_name(j[8])
-                    # print(month_name)
                     file.write("   month = {" + month_name + "},\n")
                 if j[9] != "":
                     file.write("   note = {" + j[9] + "},\n")
@@ -272,7 +264,6 @@ class References:
                     file.write("   address = {" + j[10] + "},\n")
                 if j[11] != "":
                     month_name = self.get_month_name(j[11])
-                    # print(month_name)
                     file.write("   month = {" + month_name + "},\n")
                 if j[12] != "":
                     file.write("   organization = {" + j[12] + "},\n")
@@ -281,98 +272,97 @@ class References:
                 if j[14] != "":
                     file.write("   note = {" + j[14] + "},\n")
                 file.write("}\n\n")
-        #print("BibTeX file created successfully: file.bib")
-        #print("You can access the file via this link: file://" +
-        #      os.path.abspath("file.bib"))
+
         self.io_handler.write("BibTeX file created successfully: file.bib")
         self.io_handler.write("You can access the file via this link: file://" +
               os.path.abspath("file.bib"))
-        self.welcome(io_handler, service)
+        self.welcome()
 
     def display_book_references(self, references):
-        io_handler = self.io_handler
-        io_handler.write("")
-        io_handler.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
-        io_handler.write("Book references")
-        io_handler.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
+        io = self.io_handler
+        io.write("")
+        io.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
+        io.write("Book references")
+        io.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         for entry in references:
-            io_handler.write("Cite Key     : " + entry[0])
-            io_handler.write("Author       : " + entry[1])
-            io_handler.write("Title        : " + entry[2])
-            io_handler.write("Publisher    : " + entry[3])
-            io_handler.write("Year         : " + str(entry[4]))
+            io.write("Cite Key     : " + entry[0])
+            io.write("Author       : " + entry[1])
+            io.write("Title        : " + entry[2])
+            io.write("Publisher    : " + entry[3])
+            io.write("Year         : " + str(entry[4]))
             if entry[5] != "":
-                io_handler.write("Volume       : " + str(entry[5]))
+                io.write("Volume       : " + str(entry[5]))
             if entry[6] != "":
-                io_handler.write("Number       : " + str(entry[6]))
+                io.write("Number       : " + str(entry[6]))
             if entry[7] != "":
-                io_handler.write("Pages        : " + entry[7])
+                io.write("Pages        : " + entry[7])
             if entry[8] != "":
-                io_handler.write("Month        : " + str(entry[8]))
+                io.write("Month        : " + str(entry[8]))
             if entry[9] != "":
-                io_handler.write("Notes        : " + entry[9])
-            io_handler.write("")
+                io.write("Notes        : " + entry[9])
+            io.write("")
 
     def display_article_references(self, references):
-        io_handler = self.io_handler
-        io_handler.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
-        io_handler.write("Article references")
-        io_handler.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
+        io = self.io_handler
+        io.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
+        io.write("Article references")
+        io.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         for entry in references:
-            io_handler.write("Cite Key     : " + entry[0])
-            io_handler.write("Author       : " + entry[1])
-            io_handler.write("Title        : " + entry[2])
-            io_handler.write("Journal      : " + entry[3])
-            io_handler.write("Year         : " + str(entry[4]))
+            io.write("Cite Key     : " + entry[0])
+            io.write("Author       : " + entry[1])
+            io.write("Title        : " + entry[2])
+            io.write("Journal      : " + entry[3])
+            io.write("Year         : " + str(entry[4]))
             if entry[5] != "":
-                io_handler.write("Volume       : " + str(entry[5]))
+                io.write("Volume       : " + str(entry[5]))
             if entry[6] != "":
-                io_handler.write("Number       : " + str(entry[6]))
+                io.write("Number       : " + str(entry[6]))
             if entry[7] != "":
-                io_handler.write("Pages        : " + entry[7])
+                io.write("Pages        : " + entry[7])
             if entry[8] != "":
-                io_handler.write("Month        : " + str(entry[8]))
+                io.write("Month        : " + str(entry[8]))
             if entry[9] != "":
-                io_handler.write("Notes        : " + entry[9])
-            io_handler.write("")
+                io.write("Notes        : " + entry[9])
+            io.write("")
 
 
     def display_inproceedings_references(self, references):
-        io_handler = self.io_handler
-        io_handler.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
-        io_handler.write("Inproceedings references")
-        io_handler.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
+        io = self.io_handler
+        io.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
+        io.write("Inproceedings references")
+        io.write("*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
         for entry in references:
-            io_handler.write("Cite Key     : " + entry[0])
-            io_handler.write("Author       : " + entry[1])
-            io_handler.write("Title        : " + entry[2])
-            io_handler.write("Book Title   : " + entry[3])
-            io_handler.write("Year         : " + str(entry[4]))
+            io.write("Cite Key     : " + entry[0])
+            io.write("Author       : " + entry[1])
+            io.write("Title        : " + entry[2])
+            io.write("Book Title   : " + entry[3])
+            io.write("Year         : " + str(entry[4]))
             if entry[5] != "":
-                io_handler.write("Editor       : " + entry[5])
+                io.write("Editor       : " + entry[5])
             if entry[6] != "":
-                io_handler.write("Volume       : " + str(entry[6]))
+                io.write("Volume       : " + str(entry[6]))
             if entry[7] != "":
-                io_handler.write("Number       : " + str(entry[7]))
+                io.write("Number       : " + str(entry[7]))
             if entry[8] != "":
-                io_handler.write("Series       : " + str(entry[8]))
+                io.write("Series       : " + str(entry[8]))
             if entry[9] != "":
-                io_handler.write("Pages        : " + entry[9])
+                io.write("Pages        : " + entry[9])
             if entry[10] != "":
-                io_handler.write("Address      : " + entry[10])
+                io.write("Address      : " + entry[10])
             if entry[11] != "":
-                io_handler.write("Month        : " + str(entry[11]))
+                io.write("Month        : " + str(entry[11]))
             if entry[12] != "":
-                io_handler.write("Organization : " + entry[12])
+                io.write("Organization : " + entry[12])
             if entry[13] != "":
-                io_handler.write("Publisher    : " + entry[13])
+                io.write("Publisher    : " + entry[13])
             if entry[14] != "":
-                io_handler.write("Note         : " + entry[14])
-            io_handler.write("")
-            io_handler.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
+                io.write("Note         : " + entry[14])
+            io.write("")
+            io.write("\n*・゜゜・*:.。..。.:*・゜・*:.。. .。.:*・゜゜・*\n")
 
     def reference_search(self):
-        self.io_handler.write("Type author's name, title or both")
+        io = self.io_handler
+        io.write("Type author's name, title or both")
         author = self.ask_for_input("Author", optional=True)["Author"]
         if not author:
             title = self.ask_for_input("Title", optional=False)["Title"]
@@ -386,12 +376,12 @@ class References:
         inpro_refs = reference_dict["inproceedings"]
 
         if len(book_refs) == 0 and len(article_refs) == 0 and len(inpro_refs) == 0:
-            self.io_handler.write("")
-            self.io_handler.write("No references found!")
-            self.io_handler.write("")
+            io.write("")
+            io.write("No references found!")
+            io.write("")
             return
 
-        self.io_handler.write(f"\nWith author <{author}> and title <{title}> found "
+        io.write(f"\nWith author <{author}> and title <{title}> found "
                               f"{len(book_refs)} book references,\n {len(article_refs)} "
                               f"article references and {len(inpro_refs)} inproceedings "
                               f"references")
@@ -406,16 +396,16 @@ class References:
         self.service.delete_all()
 
     def delete_by_cite_key(self):
+        io = self.io_handler
         list_of_keys = []
-        self.io_handler.write("Type the cite key(s) of the references you want to delete")
-        self.io_handler.write("You can find the cite keys by viewing the references from main menu")
+        io.write("Type the cite key(s) of the references you want to delete")
+        io.write("You can find the cite keys by viewing the references from main menu")
 
-        key = self.io_handler.read("Cite key: ")
+        key = io.read("Cite key: ")
         list_of_keys.append(key)
         while True:
-            #print(list_of_keys)
-            next_key = self.io_handler.read("Next Cite Key (empty stops and deletes): ")
+            next_key = io.read("Next Cite Key (empty stops and deletes): ")
             if next_key == "":
-                self.io_handler.write(self.service.delete_reference(list_of_keys))
+                io.write(self.service.delete_reference(list_of_keys))
                 return
             list_of_keys.append(next_key)

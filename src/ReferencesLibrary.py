@@ -28,3 +28,26 @@ class ReferencesLibrary:
             raise AssertionError(
                 f"Output \"{value}\" is not in {str(outputs)}"
             )
+
+    def order_should_be(self, value1, value2):
+        outputs = self._io.outputs
+
+        if not (value1 in outputs and value2 in outputs):
+            raise AssertionError("Both expected values were not present")
+
+        index1 = outputs.index(value1)
+        index2 = outputs.index(value2)
+
+        if not index1 < index2:
+            print(outputs)
+            raise AssertionError("The values were not in correct order")
+
+    def order_in_file_should_be(self, filepath, value1, value2):
+        with open(filepath, "rt", encoding="utf-8") as file:
+            outputs = [line.strip() for line in file.readlines()]
+
+        index1 = outputs.index(value1)
+        index2 = outputs.index(value2)
+
+        if not index1 < index2:
+            raise AssertionError("The values were not in correct order")

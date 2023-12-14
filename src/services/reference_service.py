@@ -1,9 +1,11 @@
-from storage_interface import refe_interface
+from storage_interface import get_interface
 
 class Services:
-    def __init__(self, ref_repo):
+    def __init__(self, ref_repo, demo=False):
         self.ref_repo=ref_repo
-        self.database_interface=refe_interface
+        self.database_interface=get_interface()
+        if demo:
+            self.database_interface.reset_test_data()
 
     def config_book_reference(self, key, title, author, publisher, year, volume="", number="",
                               pages="", month="", notes=""):
@@ -86,3 +88,19 @@ class Services:
 
     def delete_all(self):
         self.database_interface.delete_all_references()
+
+    def delete_reference(self, cite_keys):
+        db_keys = self.database_interface.get_all_citekeys()
+        message = "Reference(s) with cite key(s)\n ----\n"
+        for key in cite_keys:
+            if key in db_keys["book"]:
+                self.database_interface.delete_book_reference(key)
+                message += f"- {key}\n"
+            elif key in db_keys["article"]:
+                self.database_interface.delete_article_reference(key)
+                message += f"- {key}\n"
+            elif key in db_keys["inproceedings"]:
+                self.database_interface.delete_inproceedings_reference(key)
+                message += f"- {key}\n"
+        message += "deleted."
+        return message

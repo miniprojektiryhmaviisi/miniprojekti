@@ -2,9 +2,7 @@ import unittest
 from repositories.referencesrepository import ReferencesRepository
 from services.reference_service import Services
 from references import References
-from unittest.mock import Mock, ANY, patch
-from db_build import build
-
+from unittest.mock import Mock, patch
 
 class StubIO:
     def __init__(self, inputs=[]):
@@ -30,10 +28,36 @@ class TestReferences(unittest.TestCase):
     def add_test_book_reference(self):
         io_handler = StubIO(
             ["0", "A", "somekey", "Operating Systems", "Stallings", "", "MacMillan", "1991", "", "",
-             "", "", "", "5"]
-            )
+             "", "", "", "9"
+            ]
+        )
         try:
-            build()
+            refservice = Services(self.refrepo)
+            References(io_handler, refservice)
+        except:
+            pass
+
+    def add_test_article_reference(self):
+        io_handler = StubIO(
+            ["0", "B", "article", "How artificial intelligence is transforming the world",
+            "Darrel. M West", "", "Brookings", "2018", "", "", "", "4", "", "9"
+            ]
+        )
+        try:
+            refservice = Services(self.refrepo)
+            References(io_handler, refservice)
+        except:
+            pass
+
+    def add_test_inproceedings_reference(self):
+        io_handler = StubIO(
+            ["0", "C", "inproceeding", "Augmenting Robot Software Development Process with Flexbot",
+            "2023 IEEE/ACM 5th International Workshop on Robotics Software Engineering (RoSE)",
+            "Paulius Daubaris", "", "2023", "", "", "", "", "69--72", "United States", "7", "", "",
+            "", "9"
+            ]
+        )
+        try:
             refservice = Services(self.refrepo)
             References(io_handler, refservice)
         except:
@@ -44,7 +68,7 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         io_handler = StubIO(
             ["0", "A", "somekey", "Operating Systems", "Stallings", "", "MacMillan", "1991", "", "",
-             "", "", "", "5"]
+             "", "", "", "9"]
             )
         reference_service_mock = Mock()
 
@@ -57,7 +81,7 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         io_handler = StubIO(
             ["0", "B", "somekey", "testtitle", "testauthor", "", "testjournal", "1991", "700", "1",
-             "105-108", "10", "testnote", "5"]
+             "105-108", "10", "testnote", "9"]
             )
         reference_service_mock = Mock()
 
@@ -71,7 +95,7 @@ class TestReferences(unittest.TestCase):
         io_handler = StubIO(
             ["0", "C", "somekey", "testtitle", "testbooktitle", "testauthor", "", "2023", "testeditor",
              "700", "1", "1", "105-108", "testaddress", "2", "testorganization", "testpublisher",
-             "testnote", "5"]
+             "testnote", "9"]
             )
         reference_service_mock = Mock()
 
@@ -84,7 +108,7 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         io_handler = StubIO(
             ["0", "A", "somekey", "", "Operating Systems", "", "Stallings", "", "", "MacMillan", "",
-             "1991", "", "", "", "", "", "5", "5"]
+             "1991", "", "", "", "", "", "9", "9"]
             )
         References(io_handler, self.reference_service)
         
@@ -98,7 +122,7 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         io_handler = StubIO(
             ["0", "A", "somekey", "Operating Systems", "Stallings", "William", "Jarmo", "",
-             "MacMillan", "1991", "", "", "", "", "", "5"]
+             "MacMillan", "1991", "", "", "", "", "", "9"]
             )
         References(io_handler, self.reference_service)
 
@@ -123,7 +147,7 @@ class TestReferences(unittest.TestCase):
             "inproaddress", 7, "inproorganization", "inpropublisher", "inpronote"
         ]]
         io_handler = StubIO(
-            ["1", "5"]
+            ["1", "9"]
             )
         References(io_handler, self.reference_service)
         print(io_handler.outputs)
@@ -135,31 +159,30 @@ class TestReferences(unittest.TestCase):
     def test_user_gets_error_message_if_wrong_input_on_start(self, mock_sleep):
         mock_sleep.return_value = None
         io_handler = StubIO(
-            ["INVALID", "5"]
+            ["INVALID", "9"]
             )
         References(io_handler, self.reference_service)
 
-        self.assertIn("Invalid input. Please enter '0', '1', '2', '3', '4' or '5'.", io_handler.outputs)
+        self.assertIn("\x1b[91mInvalid input\x1b[0m. Please enter '0', '1', '2', '3', '4', '5' or '9'.", io_handler.outputs)
     
     @patch('references.sleep')
     def test_user_can_return_to_start(self, mock_sleep):
         mock_sleep.return_value = None
         io_handler = StubIO(
-            ["0", "Q", "5"]
+            ["0", "Q", "9"]
             )
         References(io_handler, self.reference_service)
 
-        self.assertEqual("Type 5 to Exit", io_handler.outputs[-3])
+        self.assertEqual("Type 9 to Exit\n", io_handler.outputs[-3])
 
     @patch('references.sleep')
     def test_user_can_search_for_existing_references_by_author(self, mock_sleep):
         mock_sleep.return_value = None
         self.add_test_book_reference()
         io_handler = StubIO(
-            ["2", "Stallings", "", "5"]
+            ["2", "Stallings", "", "9"]
         )
 
-        build()
         refservice = Services(self.refrepo)
         References(io_handler, refservice)
         self.assertIn("Cite Key     : somekey", io_handler.outputs)
@@ -171,10 +194,9 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         self.add_test_book_reference()
         io_handler = StubIO(
-            ["2", "", "Operating Systems", "5"]
+            ["2", "", "Operating Systems", "9"]
         )
 
-        build()
         refservice = Services(self.refrepo)
         References(io_handler, refservice)
         self.assertIn("Cite Key     : somekey", io_handler.outputs)
@@ -186,10 +208,9 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         self.add_test_book_reference()
         io_handler = StubIO(
-            ["2", "Stallings", "Operating Systems", "5"]
+            ["2", "Stallings", "Operating Systems", "9"]
         )
 
-        build()
         refservice = Services(self.refrepo)
         References(io_handler, refservice)
         self.assertIn("Cite Key     : somekey", io_handler.outputs)
@@ -201,7 +222,7 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         self.add_test_book_reference()
         io_handler = StubIO(
-            ["4", "delete", "1", "5"]
+            ["4", "delete", "1", "9"]
         )
         refservice = Services(self.refrepo)
         References(io_handler, refservice)
@@ -212,10 +233,45 @@ class TestReferences(unittest.TestCase):
         mock_sleep.return_value = None
         self.add_test_book_reference()
         io_handler = StubIO(
-            ["3", "5"]
+            ["3", "9"]
         )
-        build()
         refservice = Services(self.refrepo)
         References(io_handler, refservice)
         self.assertIn("BibTeX file created successfully: file.bib", io_handler.outputs)
 
+    @patch('references.sleep')
+    def test_user_can_delete_references_with_cite_keys(self, mock_sleep):
+        mock_sleep.return_value = None
+        self.add_test_book_reference()
+        self.add_test_article_reference()
+        self.add_test_inproceedings_reference()
+
+        io_handler = StubIO(
+            [
+                "5", "somekey", "article", "inproceeding", "", "9"
+            ]
+        )
+
+        refservice = Services(self.refrepo)
+        References(io_handler, refservice)
+        self.assertNotIn("Cite Key     : somekey", io_handler.outputs)
+        self.assertNotIn("Cite Key     : article", io_handler.outputs)
+        self.assertNotIn("Cite Key     : inproceeding", io_handler.outputs)
+
+    @patch('references.sleep')
+    def test_user_can_access_reference_deletion(self, mock_sleep):
+        mock_sleep.return_value = None
+        self.add_test_book_reference()
+        self.add_test_article_reference()
+        self.add_test_inproceedings_reference()
+
+        io_handler = StubIO(
+            [
+                "5", "somekey", "article", "inproceeding", "", "9"
+            ]
+        )
+
+        refservice = Services(self.refrepo)
+        References(io_handler, refservice)
+        self.assertIn("Type the cite key(s) of the references you want to delete", \
+                       io_handler.outputs)

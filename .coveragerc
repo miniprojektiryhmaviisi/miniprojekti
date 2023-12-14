@@ -8,5 +8,6 @@ omit =
     db_build.py
     database_initialization.py
     __init__.py
-    references_library.py
     customer_viewing.py
+    BibLibrary.py
+    ReferencesLibrary.py

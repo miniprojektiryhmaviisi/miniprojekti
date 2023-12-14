@@ -2,7 +2,6 @@
 Library    ../ReferencesLibrary.py
 Library    ../BibLibrary.py
 
-
 *** Keywords ***
 Input Add Reference Command
     Input    0
@@ -20,7 +19,7 @@ Input Delete Command
     Input    4
 
 Input Exit Command
-    Input    5
+    Input    9
 
 Input Book Command
     Input    A
@@ -33,6 +32,9 @@ Input Inproceedings Command
 
 Input Delete Confirmation
     Input    delete
+
+Input Single Reference Deletion Command
+    Input    5
 
 Book Input Details
     [Arguments]
@@ -174,3 +176,67 @@ Input Both Search Details
     ...    ${title}
     Input    ${author}
     Input    ${title}
+
+Input Book Key
+    [Arguments]
+    ...    ${book_key}
+    Input    ${book_key}
+    Input    ${EMPTY}
+
+Input All Keys
+    [Arguments]
+    ...    ${book_key}
+    ...    ${article_key}
+    ...    ${inproceedings_key}
+    Input    ${book_key}
+    Input    ${article_key}
+    Input    ${inproceedings_key}
+    Input    ${EMPTY}
+
+Prepare DB
+    Input Delete Command
+    Input Delete Confirmation
+    Input Add Reference Command
+    Input Book Command
+    Book Input Details
+    ...    TestKey1
+    ...    Book Title
+    ...    Book Author
+    ...    MacMillan
+    ...    1991
+    ...    682
+    ...    1
+    ...    100-108
+    ...    12
+    ...    ${EMPTY}
+    Input Add Reference Command
+    Input Article Command
+    Article Input Details
+    ...    TestKey2
+    ...    Article Title
+    ...    Article Author
+    ...    MacMillan
+    ...    1991
+    ...    682
+    ...    1
+    ...    100-108
+    ...    12
+    ...    ${EMPTY}
+    Input Add Reference Command
+    Input Inproceedings Command
+    Inproceedings Input Details
+    ...    TestKey3
+    ...    Inproceedings Title
+    ...    Inproceedings Author
+    ...    MacMillan
+    ...    Booktitle1
+    ...    1991
+    ...    editor1
+    ...    682
+    ...    1
+    ...    6
+    ...    100-108
+    ...    address
+    ...    12
+    ...    org1
+    ...    note1

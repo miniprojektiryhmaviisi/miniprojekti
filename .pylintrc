@@ -25,3 +25,5 @@ disable=raw-checker-failed,
 max-attributes=16
 max-args=16
 max-locals=16
+max-line-length=110
+max-public-methods=30

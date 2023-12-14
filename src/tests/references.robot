@@ -21,7 +21,7 @@ Add Book Reference With Valid Input
     ...    ${EMPTY}
     Input Exit Command
     Execute App
-    Output Should Contain    New reference added!
+    Output Should Contain    \x1b[92mNew reference added!\x1b[0m
 
 Add Article Reference With Valid Input
     ${key}=    Get Time    epoch
@@ -40,7 +40,7 @@ Add Article Reference With Valid Input
     ...    ${EMPTY}
     Input Exit Command
     Execute App
-    Output Should Contain    New reference added!
+    Output Should Contain    \x1b[92mNew reference added!\x1b[0m
 
 Add Inproceedings Reference With Valid Input
     ${key}=    Get Time    epoch
@@ -64,7 +64,7 @@ Add Inproceedings Reference With Valid Input
     ...    note1
     Input Exit Command
     Execute App
-    Output Should Contain    New reference added!
+    Output Should Contain    \x1b[92mNew reference added!\x1b[0m
 
 Add Empty Reference For Non-Optional Fields
     ${key}=    Get Time    epoch
@@ -116,4 +116,4 @@ Add Book Reference with already used cite key
    ...    ${EMPTY}
    Input Exit Command
    Execute App
-   Output Should Contain    Failed to save new reference: UNIQUE constraint failed: BReferences.dbkey
+   Output Should Contain    \x1b[91mFailed to save new reference: UNIQUE constraint failed: BReferences.dbkey\x1b[0m
